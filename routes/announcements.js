@@ -1,31 +1,42 @@
 var express = require('express');
 var Announcement = require('../models/announcement');
+var Cluborg = require('../models/cluborg');
 var middleware = require('../middleware');
 var router = express.Router({mergeParams: true});
 
-//index
-router.get("/", function(req, res) {
-    Announcement.find({}, function(err, allAnnouncements) {
+//new
+router.get("/new", middleware.isLoggedIn, function(req, res) {
+    Cluborg.findById(req.params.club_id, function(err, cluborg) {
         if (err) {
             console.log(err);
         } else {
-            res.render("announcements/index", {announcements: allAnnouncements});
+            res.render("announcements/new", {cluborg: cluborg});
         }
     });
 });
 
-//new
-router.get("/new", function(req, res) {
-    res.render("announcements/new") ;
-});
-
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    Announcement.create(req.body.announcement, function(err, newlyCreatedAnnouncement) {
+    Cluborg.findById(req.params.club_id, function(err, cluborg) {
         if (err) {
             console.log(err);
+            res.redirect("/schools/" + req.params.id + "/cluborgs" + req.params.club_id);
         } else {
-            res.redirect("/schools/:id/announcements");
+            Announcement.create(req.body.announcement, function(err, announcement) {
+                if (err) {
+                    req.flash("error", "Something went wrong");
+                } else {
+                    announcement.author.id = req.user._id;
+                    announcement.author.username = req.user.username;
+                    announcement.save();
+                    
+                    cluborg.announcements.push(announcement);
+                    cluborg.save();
+                    
+                    req.flash("success", "Successfully created announcement");
+                    res.redirect("/schools/" + req.params.id + "/announcements");
+                }
+            });
         }
     });
 });
@@ -56,10 +67,11 @@ router.get("/:ann_id/edit", middleware.checkAnnouncementOwnership, function(req,
 router.put("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res) {
     Announcement.findByIdAndUpdate(req.params.ann_id, req.body.announcement, function(err, updatedCampground) {
         if (err) {
-            res.redirect("schools/:id/announcements");
+            req.flash("error", "Something went wrong");
+            res.redirect("schools/" + req.params.id + "/announcements");
         } else {
             req.flash("success", "Announcement successfully updated.");
-            res.redirect("/schools/:id/announcements/" + req.params.ann_id);
+            res.redirect("/schools/" + req.params.id + "/announcements/" + req.params.ann_id);
         }
     });    
 });
@@ -68,9 +80,9 @@ router.put("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res)
 router.delete("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res) {
     Announcement.findByIdAndRemove(req.params.ann_id, function(err) {
         if (err) {
-            res.redirect("/schools/:id/announcements");
+            res.redirect("/schools/" + req.params.id + "/announcements");
         } else {
-            res.redirect("/schools/:id/announcements");
+            res.redirect("/schools/" + req.params.id + "/announcements");
         }
     });
 });

@@ -1,6 +1,7 @@
 var middlewareObj = {};
 var Announcement = require('../models/announcement');
 var Cluborg = require('../models/cluborg');
+var School = require('../models/cluborg');
 
 middlewareObj.isLoggedIn = function(req, res, next) {
     if (req.isAuthenticated()) {
@@ -54,6 +55,27 @@ middlewareObj.checkCluborgOwnership = function(req, res, next) {
         req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
     }
+};
+
+middlewareObj.checkSchoolOwnership = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        School.findById(req.params.id, function(err, foundSchool) {
+            if (err) {
+                req.flash("error", "School not found");
+                res.redirect("/schools");
+            } else {
+                if (foundSchool.author.id.equals(req.user._id)) {
+                    next();
+                } else {
+                    req.flash("error", "You don't have permission to do that");
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+    }  
 };
 
 module.exports = middlewareObj;

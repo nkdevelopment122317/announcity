@@ -44,8 +44,8 @@ app.use(function(req, res, next) {
 
 app.use("/", indexRoutes);
 app.use("/schools", schoolRoutes);
-app.use("/schools/:id/announcements", announcementRoutes); //:id is the school
 app.use("/schools/:id/cluborgs", cluborgRoutes);
+app.use("/schools/:id/cluborgs/:club_id/announcements", announcementRoutes); //:id is the school
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Announcity Server has started");

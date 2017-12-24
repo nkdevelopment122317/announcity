@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
 var middleware = require('../middleware');
+var School = require('../models/school');
 
 var Cluborg = require('../models/cluborg.js');
 
@@ -16,23 +17,45 @@ router.get("/", function(req, res) {
 });
 
 //new
-router.get("/new", function(req, res) {
-    res.render("cluborgs/new");
+router.get("/new", middleware.isLoggedIn, function(req, res) {
+    School.findById(req.params.id, function(err, school) {
+        if (err) {
+            req.flash("error", "Club not found");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
+        } else {
+            res.render("cluborgs/new", {school: school});
+        }
+    });
 });
 
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    Cluborg.create(req.body.cluborg, middleware.isLoggedIn, function(err, newlyCreated) {
+    School.findById(req.params.id, function(err, school) {
         if (err) {
-            console.log(err);
+            req.flash("error", "School not found");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
-            res.redirect("/schools/:id/cluborgs");
+            Cluborg.create(req.body.cluborg, middleware.isLoggedIn, function(err, cluborg) {
+                if (err) {
+                    req.flash("error", "Something went wrong");
+                } else {
+                    cluborg.author.id = req.user._id;
+                    cluborg.author.username = req.user.username;
+                    cluborg.save();
+                    
+                    school.cluborgs.push(cluborg);
+                    school.save();
+                    
+                    req.flash("success", "Successfully created club");
+                    res.redirect("/schools/" + req.params.id + "/cluborgs/" + cluborg._id);
+                }
+            });
         }
     });
 });
 
 //show
-router.get("/:club_id", function(req, res) {
+router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
     Cluborg.findById(req.params.club_id)
         .populate("members")
         .populate("announcements")
@@ -60,10 +83,10 @@ router.get("/:club_id/edit", middleware.checkCluborgOwnership, function(req, res
 router.put("/:club_id", middleware.checkCluborgOwnership, function(req, res) {
     Cluborg.findByIdAndUpdate(req.params.club_id, req.body.cluborg, function(err, updatedCluborg) {
         if (err) {
-            res.redirect("/schools/:id/cluborgs");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
             req.flash("success", "Successfully updated.");
-            res.redirect("/schools/:id/cluborgs/" + req.params.club_id);
+            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
         }
     });
 });
@@ -72,9 +95,9 @@ router.put("/:club_id", middleware.checkCluborgOwnership, function(req, res) {
 router.delete("/:club_id", middleware.checkCluborgOwnership, function(req, res) {
     Cluborg.findByIdAndRemove(req.params.club_id, function(err) {
         if (err) {
-            res.redirect("/schools/:id/cluborgs");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
-            res.redirect("/schools/:id/cluborgs");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
         }
     });    
 });

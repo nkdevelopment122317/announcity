@@ -10,7 +10,7 @@ var schoolSchema = new mongoose.Schema({
             }
         }
     ],
-    clubs: [
+    cluborgs: [
         {
             id: {
                 type: mongoose.Schema.Types.ObjectId,
