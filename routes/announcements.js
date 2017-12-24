@@ -1,7 +1,7 @@
 var express = require('express');
 var Announcement = require('../models/announcement');
 var middleware = require('../middleware');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 
 //index
 router.get("/", function(req, res) {
