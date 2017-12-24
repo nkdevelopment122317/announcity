@@ -2,4 +2,11 @@
 
 <h1>SCHOOL INDEX</h1>
 
+<% schools.forEach(function(school) { %>
+    <p><%= school.name %></p>
+    <p><%= school.location %></p>
+    <p><%= school.code %></p>
+    <a href="/schools/<%= school._id %>">More Info</a>
+<% }); %>
+
 <% include ../partials/footer %>

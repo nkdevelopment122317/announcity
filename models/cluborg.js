@@ -7,18 +7,14 @@ var cluborgSchema = new mongoose.Schema({
    image: String,
    members: [
         {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User"
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }    
    ],
    announcements: [
         {
-            id: {
-                type: mongoose.Schema.Types.Id,
-                ref: "Announcement"
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Announcement"
         }
    ],
    date_created: {type: Date, default: Date.now}

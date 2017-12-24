@@ -21,11 +21,22 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    School.create(req.body.school, function(err, newlyCreated) {
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    
+    var school = {
+        name: req.body.school.name,
+        location: req.body.school.location,
+        author: author,
+        code: req.body.school.code
+    };
+    School.create(school, function(err, newlyCreated) {
         if (err) {
             console.log(err);
         } else {
-            req.flash("success", "Successfully created school.");
+            req.flash("success", "Successfully created " + newlyCreated.name);
             res.redirect("/schools");
         }
     });    

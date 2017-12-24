@@ -2,23 +2,28 @@ var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var schoolSchema = new mongoose.Schema({
+    name: String,
+    location: String,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
+    code: Number,
     members: [
         {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User"
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
     cluborgs: [
         {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "cluborg"
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cluborg"
         }
     ],
-    school_code: Number,
     date_joined: {type: Date, default: Date.now}
 });
 
