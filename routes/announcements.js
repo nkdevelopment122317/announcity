@@ -21,24 +21,7 @@ router.get("/new", function(req, res) {
 
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    var date = req.body.date;
-    var title = req.body.title;
-    var text = req.body.text;
-    var cluborg = req.body.cluborg;
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    };
-    
-    var newAnnouncement = {
-        author:author, 
-        date:date, 
-        title:title, 
-        text:text,
-        cluborg:cluborg
-    };
-    
-    Announcement.create(newAnnouncement, function(err, newlyCreatedAnnouncement) {
+    Announcement.create(req.body.announcement, function(err, newlyCreatedAnnouncement) {
         if (err) {
             console.log(err);
         } else {

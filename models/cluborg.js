@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var cluborgSchema = new mongoose.Schema({
+   name: String,
+   description: String,
+   image: String,
    members: [
         {
             id: {
