@@ -5,6 +5,13 @@ var cluborgSchema = new mongoose.Schema({
    name: String,
    description: String,
    image: String,
+   author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+   },
    members: [
         {
             type: mongoose.Schema.Types.ObjectId,

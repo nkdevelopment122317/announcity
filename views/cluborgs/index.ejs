@@ -2,4 +2,12 @@
 
 <h1>CLUBORG INDEX</h1>
 
+<a href="/schools/<%= school_id %>/cluborgs/new">New Club</a>
+
+<% cluborgs.forEach(function(cluborg) { %>
+    <p><%= cluborg.name %></p>
+    <p><%= cluborg.description %></p>
+    <img src="<%= cluborg.image %>">
+<% }); %>
+
 <% include ../partials/footer %>

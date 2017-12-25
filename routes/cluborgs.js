@@ -11,7 +11,7 @@ router.get("/", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("cluborgs/index", {cluborgs: allCluborgs});
+            res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
         }
     });
 });
@@ -23,7 +23,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
             req.flash("error", "Club not found");
             res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
-            res.render("cluborgs/new", {school: school});
+            res.render("cluborgs/new", {school_id: req.params.id});
         }
     });
 });
@@ -37,7 +37,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         } else {
             Cluborg.create(req.body.cluborg, middleware.isLoggedIn, function(err, cluborg) {
                 if (err) {
+                    console.log(err);
                     req.flash("error", "Something went wrong");
+                    res.redirect("/schools/" + req.params.id + "/cluborgs");
                 } else {
                     cluborg.author.id = req.user._id;
                     cluborg.author.username = req.user.username;

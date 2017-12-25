@@ -2,4 +2,11 @@
 
 <h1>CLUBORG NEW</h1>
 
+<form action="/schools/<%= school_id %>/cluborgs" method="POST">
+    <input type="text" name="cluborg[name]" placeholder="Name">
+    <input type="text" name="cluborg[description]" placeholder="Description">
+    <input type="text" name="cluborg[image]" placeholder="Image URL">
+    <input type="submit">
+</form>
+
 <% include ../partials/footer %>
