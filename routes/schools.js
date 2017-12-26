@@ -32,9 +32,15 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         author: author,
         code: req.body.school.code
     };
+    
+    console.log(school);
+    
     School.create(school, function(err, newlyCreated) {
         if (err) {
             console.log(err);
+            console.log(newlyCreated);
+            req.flash("error", "Something went wrong");
+            res.redirect("/schools");
         } else {
             req.flash("success", "Successfully created " + newlyCreated.name);
             res.redirect("/schools");

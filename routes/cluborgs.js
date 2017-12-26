@@ -7,11 +7,21 @@ var Cluborg = require('../models/cluborg.js');
 
 //get
 router.get("/", function(req, res) {
-    Cluborg.find({}, function(err, allCluborgs) {
+    // Cluborg.find({}, function(err, allCluborgs) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
+    //     }
+    // });
+    
+    School.findById(req.params.id).populate("cluborgs").exec(function(err, school) { //populate() gets the cluborgs from its ids and attaches them to the school
         if (err) {
             console.log(err);
+            req.flash("error", "Something went wrong");
+            res.redirect("/schools/" + school._id);
         } else {
-            res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
+            res.render("cluborgs/index", {cluborgs: school.cluborgs, school_id: req.params.id});
         }
     });
 });
@@ -65,7 +75,7 @@ router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.render("cluborgs/show", {cluborg: foundCluborg});
+                res.render("cluborgs/show", {cluborg: foundCluborg, school_id: req.params.id});
             }
     });
 });

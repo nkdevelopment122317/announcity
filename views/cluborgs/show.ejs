@@ -2,4 +2,21 @@
 
 <h1>CLUBORG SHOW</h1>
 
+<p><%= cluborg.name %></p>
+<p><%= cluborg.description %></p>
+<img src="<%= cluborg.image %>">
+
+<hr>
+
+<h3>Announcements</h3>
+
+<a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
+
+<% cluborg.announcements.forEach(function(announcement) { %>
+    <p><%= announcement.title %></p>
+    <p><%= announcement.text %></p>
+    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
+    <hr>
+<% }); %>
+
 <% include ../partials/footer %>

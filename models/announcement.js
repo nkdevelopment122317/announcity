@@ -20,6 +20,6 @@ var announcementSchema = new mongoose.Schema({
     }
 });
 
-announcementSchema.plugin(passportLocalMongoose);
+//DO NOT PLUGIN PASSPORT TO THIS SCHEMA. THAT CAUSED THE DUPLICATE KEY ERROR!!!!!!!
 
 module.exports = mongoose.model("Announcement", announcementSchema);

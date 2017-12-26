@@ -10,7 +10,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("announcements/new", {cluborg: cluborg});
+            res.render("announcements/new", {club_id: req.params.club_id, school_id: req.params.id});
         }
     });
 });
@@ -34,7 +34,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                     cluborg.save();
                     
                     req.flash("success", "Successfully created announcement");
-                    res.redirect("/schools/" + req.params.id + "/announcements");
+                    res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
                 }
             });
         }

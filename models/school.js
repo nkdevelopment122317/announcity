@@ -27,6 +27,6 @@ var schoolSchema = new mongoose.Schema({
     date_joined: {type: Date, default: Date.now}
 });
 
-schoolSchema.plugin(passportLocalMongoose);
+//DO NOT PLUGIN PASSPORT TO THIS SCHEMA. THAT CAUSED THE DUPLICATE KEY ERROR!!!!!!!
 
 module.exports = mongoose.model("School", schoolSchema);

@@ -27,6 +27,6 @@ var cluborgSchema = new mongoose.Schema({
    date_created: {type: Date, default: Date.now}
 });
 
-cluborgSchema.plugin(passportLocalMongoose);
+//DO NOT PLUGIN PASSPORT TO THIS SCHEMA. THAT CAUSED THE DUPLICATE KEY ERROR!!!!!!!
 
 module.exports = mongoose.model("Cluborg", cluborgSchema);

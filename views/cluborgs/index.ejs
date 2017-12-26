@@ -4,10 +4,14 @@
 
 <a href="/schools/<%= school_id %>/cluborgs/new">New Club</a>
 
+<hr>
 <% cluborgs.forEach(function(cluborg) { %>
     <p><%= cluborg.name %></p>
     <p><%= cluborg.description %></p>
     <img src="<%= cluborg.image %>">
+    <br>
+    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>">More Info</a>
+    <hr>
 <% }); %>
 
 <% include ../partials/footer %>
