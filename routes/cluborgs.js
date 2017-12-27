@@ -86,7 +86,7 @@ router.get("/:club_id/edit", middleware.checkCluborgOwnership, function(req, res
         if (err) {
             console.log(err);
         } else {
-            res.render("cluborgs/edit", {cluborg: foundCluborg});
+            res.render("cluborgs/edit", {school_id: req.params.id, cluborg: foundCluborg});
         }
     });   
 });

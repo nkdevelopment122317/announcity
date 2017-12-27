@@ -6,17 +6,44 @@
 <p><%= cluborg.description %></p>
 <img src="<%= cluborg.image %>">
 
+<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/edit" method="GET">
+        <input type="submit" value="Edit">
+    </form>
+    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+<% } %>
+
 <hr>
 
 <h3>Announcements</h3>
 
-<a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
+<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+       <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
+       <hr>     
+<% } %> 
 
-<% cluborg.announcements.forEach(function(announcement) { %>
-    <p><%= announcement.title %></p>
-    <p><%= announcement.text %></p>
-    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
-    <hr>
-<% }); %>
+<% if (cluborg.announcements.length === 0) { %>
+        <p>No announcements</p> 
+<% } else { %>
+        <% cluborg.announcements.forEach(function(announcement) { %>
+        <p><%= announcement.title %></p>
+        <p><%= announcement.text %></p>
+        <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
+        
+        <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
+                <input type="submit" value="Edit">
+            </form>
+            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        <% } %>
+        
+        <hr>
+<% }); %> 
+
+<% } %>
 
 <% include ../partials/footer %>

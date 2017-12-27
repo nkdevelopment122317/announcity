@@ -58,7 +58,7 @@ router.get("/:ann_id/edit", middleware.checkAnnouncementOwnership, function(req,
         if (err) {
             console.log(err);
         } else {
-            res.render("announcements/edit", {announcement: foundAnnouncement});
+            res.render("announcements/edit", {school_id: req.params.id, club_id: req.params.club_id, announcement: foundAnnouncement});
         }
     });
 });
@@ -71,7 +71,7 @@ router.put("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res)
             res.redirect("schools/" + req.params.id + "/announcements");
         } else {
             req.flash("success", "Announcement successfully updated.");
-            res.redirect("/schools/" + req.params.id + "/announcements/" + req.params.ann_id);
+            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id + "/announcements/" + req.params.ann_id);
         }
     });    
 });
@@ -80,9 +80,10 @@ router.put("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res)
 router.delete("/:ann_id", middleware.checkAnnouncementOwnership, function(req, res) {
     Announcement.findByIdAndRemove(req.params.ann_id, function(err) {
         if (err) {
-            res.redirect("/schools/" + req.params.id + "/announcements");
+            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
         } else {
-            res.redirect("/schools/" + req.params.id + "/announcements");
+            req.flash("success", "Successfully removed announcement.");
+            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
         }
     });
 });

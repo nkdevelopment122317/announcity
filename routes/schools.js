@@ -67,7 +67,7 @@ router.get("/:id/edit", middleware.checkSchoolOwnership, function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("schools/edit", {schools: foundSchool});
+            res.render("schools/edit", {school: foundSchool});
         }
     });
 });

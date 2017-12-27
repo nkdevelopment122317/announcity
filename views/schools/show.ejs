@@ -7,11 +7,14 @@
 <p><%= school.code %></p>
 
 <% if (currentUser && school.author.id.equals(currentUser._id)) { %>
-    <a href="/schools/<%= school._id %>/edit">Edit</a>
+    <form action="/schools/<%= school._id %>/edit">
+        <input type="submit" value="Edit">
+    </form>
     <form action="/schools/<%= school._id %>?_method=DELETE" method="POST">
         <input type="submit" value="Delete">
     </form>
-    <a href="/schools/<%= school._id %>/cluborgs">View Clubs</a>
 <% } %>
+
+<a href="/schools/<%= school._id %>/cluborgs">View Clubs</a>
 
 <% include ../partials/footer %>

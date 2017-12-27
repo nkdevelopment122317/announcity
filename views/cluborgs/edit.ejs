@@ -2,4 +2,11 @@
 
 <h1>EDIT CLUBORG</h1>
 
-<% include ../partials/footer
+<form action="/schools/<%= school_id %>/cluborgs/<%=cluborg.id %>?_method=PUT" method="POST">
+    <input type="text" name="cluborg[name]" value="<%= cluborg.name %>">
+    <input type="text" name="cluborg[description]" value="<%= cluborg.description %>">
+    <input type="text" name="cluborg[image]" value="<%= cluborg.image %>">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>
