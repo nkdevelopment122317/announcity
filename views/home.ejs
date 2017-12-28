@@ -1,9 +1,18 @@
 <% include ./partials/header %>
 
-<h1>Home</h1>
+<div id="welcome-container">
+    <h1 class="header" id="welcome">Welcome, <%= user.username %></h1>
+</div>
 
-<a href="/logout">Logout</a>
+<div class="color-strip"></div>
+
+<div class="page-header">
+    <h2 class="header">Your Clubs</h2>
+</div>
+
 <br>
+
 <a href="/schools">View Schools</a>
+
 
 <% include ./partials/footer %>

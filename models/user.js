@@ -4,7 +4,10 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    school: String,
+    school: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "School"
+    },
     clubs: [
         {
             type: mongoose.Schema.Types.ObjectId,

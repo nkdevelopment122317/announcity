@@ -1,15 +1,16 @@
 var express = require("express");
 var router = express.Router();
-var passport = require('passport');
+var passport = require("passport");
 var User = require("../models/user");
 var middleware = require("../middleware");
+var School = require("../models/school");
 
 router.get("/", function(req, res) {
     res.render("landing");
 });
 
 router.get("/home", middleware.isLoggedIn, function(req, res) {
-   res.render("home");
+    res.render("home", {user: req.user});
 });
 
 router.get("/register", function(req, res) {
