@@ -24,6 +24,8 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                   <ul class="nav navbar-nav">
                       <li class="active"><a href="/home">Home</a></li>
+                      <li><a href="/schools">Schools</a></li>
+                      <li><a href="#">Clubs</a></li>
                       <!--<li class="dropdown">-->
                       <!--    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>-->
                       <!--    <ul class="dropdown-menu">-->
@@ -40,7 +42,7 @@
                             <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                             <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                       <% } else { %>
-                            <li><a>Signed In As <%= currentUser.username %></a></li>
+                            <li><a href="/profile">Signed In As <%= currentUser.username %></a></li>
                             <li><a href="/logout">Logout</a></li>
                       <% } %>
                   </ul>
@@ -48,7 +50,7 @@
           </div>
         </nav>
         
-        <div class="container">
+        <div class="flash-container">
             <% if (error && error.length > 0) { %> <!--if error was empty, the error flash message would still show up. It is truthy-->
                 <div class="alert alert-danger" role="alert">
                     <%= error %>

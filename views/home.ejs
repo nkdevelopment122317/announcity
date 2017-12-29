@@ -1,18 +1,33 @@
 <% include ./partials/header %>
 
 <div id="welcome-container">
-    <h1 class="header" id="welcome">Welcome, <%= user.username %></h1>
+    <h1 class="header" id="welcome">Welcome, <%= user.firstName %></h1>
 </div>
 
 <div class="color-strip"></div>
 
-<div class="page-header">
-    <h2 class="header">Your Clubs</h2>
-</div>
+<h2 class="header">Your Clubs</h2>
+
 
 <br>
 
-<a href="/schools">View Schools</a>
+<div class="row text-center my-clubs">
+    <% user.cluborgs.forEach(function(cluborg) { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+                <a href="#" class="btn btn-primary more-info">More Info</a>
+                <img src="<%= cluborg.image %>">
+                <div class="caption">
+                    <h3><%= cluborg.name %></h3>
+                </div>
+                <p>
+                </p>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+
 
 
 <% include ./partials/footer %>

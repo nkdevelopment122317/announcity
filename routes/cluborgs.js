@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var middleware = require('../middleware');
 var School = require('../models/school');
+var User = require("../models/user");
 
-var Cluborg = require('../models/cluborg.js');
+var Cluborg = require('../models/cluborg');
 
-//get
+//index
 router.get("/", function(req, res) {
     // Cluborg.find({}, function(err, allCluborgs) {
     //     if (err) {
@@ -21,7 +22,13 @@ router.get("/", function(req, res) {
             req.flash("error", "Something went wrong");
             res.redirect("/schools/" + school._id);
         } else {
-            res.render("cluborgs/index", {cluborgs: school.cluborgs, school_id: req.params.id});
+            User.findById(req.user._id).populate("cluborgs").exec(function(err, user) {
+                if (err) {
+                    req.flash("error", "Something went wrong");
+                } else {
+                    res.render("cluborgs/index", {userCluborgs: user.cluborgs, schoolCluborgs: school.cluborgs, school_id: req.params.id, user: user});
+                }
+            });
         }
     });
 });
@@ -40,21 +47,29 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    School.findById(req.params.id, function(err, school) {
+    School.findById(req.params.id).populate("cluborgs").exec(function(err, school) {
         if (err) {
             req.flash("error", "School not found");
             res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
-            Cluborg.create(req.body.cluborg, middleware.isLoggedIn, function(err, cluborg) {
+            var author = {
+                id: req.user._id,
+                username: req.user.username
+            };
+            
+            var newCluborg = {
+                name: req.body.name,
+                description: req.body.description,
+                image: req.body.image,
+                author: author
+            };
+            
+            Cluborg.create(newCluborg, middleware.isLoggedIn, function(err, cluborg) {
                 if (err) {
                     console.log(err);
                     req.flash("error", "Something went wrong");
                     res.redirect("/schools/" + req.params.id + "/cluborgs");
                 } else {
-                    cluborg.author.id = req.user._id;
-                    cluborg.author.username = req.user.username;
-                    cluborg.save();
-                    
                     school.cluborgs.push(cluborg);
                     school.save();
                     

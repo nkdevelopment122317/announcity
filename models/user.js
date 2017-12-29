@@ -4,17 +4,27 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var userSchema = new mongoose.Schema({
     username: String,
     password: String,
+    firstName: String,
+    lastName: String,
+    email: String,
     school: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "School"
     },
-    clubs: [
+    cluborgs: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Club"
+            ref: "Cluborg"
         }
     ],
-    type: String,
+    isFaculty: {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     join_date: {type: Date, default: Date.now}
 });
 
