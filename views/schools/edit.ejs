@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<h1>EDIT SCHOOL</h1>
+
+<form action="/schools/<%= school._id %>?_method=PUT" method="POST">
+    <input type="text" name="school[name]" value="<%= school.name %>">
+    <input type="text" name="school[location]" value="<%= school.location %>">
+    <input type="text" name="school[code]" value="<%= school.code %>">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>

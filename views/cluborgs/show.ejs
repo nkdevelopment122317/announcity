@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+
+<h1>CLUBORG SHOW</h1>
+
+<p><%= cluborg.name %></p>
+<p><%= cluborg.description %></p>
+<img src="<%= cluborg.image %>">
+
+<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/edit" method="GET">
+        <input type="submit" value="Edit">
+    </form>
+    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+<% } %>
+
+<% if (currentUser) { %>
+        <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
+            <input type="submit" value="Join">
+       </form>
+<% } %>
+
+<hr>
+
+<h3>Announcements</h3>
+
+<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+       <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
+       <hr>
+<% } %>
+
+<% if (cluborg.announcements.length === 0) { %>
+        <p>No announcements</p>
+<% } else { %>
+        <% cluborg.announcements.forEach(function(announcement) { %>
+        <p><%= announcement.title %></p>
+        <p><%= announcement.text %></p>
+        <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
+
+        <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
+                <input type="submit" value="Edit">
+            </form>
+            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        <% } %>
+
+        <hr>
+<% }); %>
+
+<% } %>
+
+<% include ../partials/footer %>

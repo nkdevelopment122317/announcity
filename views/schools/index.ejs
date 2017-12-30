@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+
+<h1>SCHOOL INDEX</h1>
+
+<a href="/schools/new">New School</a>
+
+<hr>
+<% schools.forEach(function(school) { %>
+    <p><%= school.name %></p>
+    <p><%= school.location %></p>
+    <p><%= school.code %></p>
+    <a href="/schools/<%= school._id %>">More Info</a>
+    <hr>
+<% }); %>
+
+<% include ../partials/footer %>

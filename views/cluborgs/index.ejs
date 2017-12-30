@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<h1>CLUBORG INDEX</h1>
+
+<a href="/schools/<%= school_id %>/cluborgs/new">New Club</a>
+
+<hr>
+<% cluborgs.forEach(function(cluborg) { %>
+    <p><%= cluborg.name %></p>
+    <img src="<%= cluborg.image %>">
+
+    <br>
+    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>">More Info</a>
+
+    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
+        <input type="submit" value="Join">
+    </form>
+    <hr>
+
+<% }); %>
+
+<% include ../partials/footer %>

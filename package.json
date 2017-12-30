@@ -1,0 +1,25 @@
+{
+  "name": "announcity",
+  "version": "0.0.0",
+  "description": "A tool to push and view announcements to a kiosk setup to spread the news in your school or organization",
+  "main": "app.js",
+  "author": "Nikhil Kolachalama",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "locus": "^2.0.1",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.13.8",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.4.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "devDependencies": {},
+  "license": "ISC"
+}
