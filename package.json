@@ -12,11 +12,7 @@
     "express-session": "^1.15.6",
     "locus": "^2.0.1",
     "method-override": "^2.3.10",
-<<<<<<< HEAD
     "mongoose": "^4.13.8",
-=======
-    "mongoose": "^4.13.6",
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0"

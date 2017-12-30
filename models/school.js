@@ -25,11 +25,7 @@ var schoolSchema = new mongoose.Schema({
         }
     ],
     date_joined: {type: Date, default: Date.now}
-<<<<<<< HEAD
 }, { usePushEach: true });
-=======
-});
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 
 //DO NOT PLUGIN PASSPORT TO THIS SCHEMA. THAT CAUSED THE DUPLICATE KEY ERROR!!!!!!!
 

@@ -26,11 +26,7 @@ var userSchema = new mongoose.Schema({
         default: false
     },
     join_date: {type: Date, default: Date.now}
-<<<<<<< HEAD
 }, { usePushEach: true });
-=======
-});
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 
 userSchema.plugin(passportLocalMongoose);
 

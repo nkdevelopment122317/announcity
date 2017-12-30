@@ -15,44 +15,29 @@
     </form>
 <% } %>
 
-<<<<<<< HEAD
 <% if (currentUser) { %>
         <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
             <input type="submit" value="Join">
        </form>
 <% } %>
 
-=======
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 <hr>
 
 <h3>Announcements</h3>
 
 <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
        <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
-<<<<<<< HEAD
        <hr>
 <% } %>
 
 <% if (cluborg.announcements.length === 0) { %>
         <p>No announcements</p>
-=======
-       <hr>     
-<% } %> 
-
-<% if (cluborg.announcements.length === 0) { %>
-        <p>No announcements</p> 
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 <% } else { %>
         <% cluborg.announcements.forEach(function(announcement) { %>
         <p><%= announcement.title %></p>
         <p><%= announcement.text %></p>
         <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
         <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
             <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
                 <input type="submit" value="Edit">
@@ -61,15 +46,9 @@
                 <input type="submit" value="Delete">
             </form>
         <% } %>
-<<<<<<< HEAD
 
         <hr>
 <% }); %>
-=======
-        
-        <hr>
-<% }); %> 
->>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 
 <% } %>
 
