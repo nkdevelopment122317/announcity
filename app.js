@@ -13,11 +13,16 @@ var cluborgRoutes = require('./routes/cluborgs');
 var indexRoutes = require('./routes/index');
 var schoolRoutes = require("./routes/schools");
 
+<<<<<<< HEAD
 var databaseUri = "mongodb://localhost/announcity";
 mongoose.connect(databaseUri, {useMongoClient: true})
         .then(() => console.log(`Database connected at ${databaseUri}`))
         .catch(err => console.log(`Database connection error: ${err.message}`));
 mongoose.Promise = global.Promise;
+=======
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/announcity", {useMongoClient: true});
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -50,8 +55,14 @@ app.use("/schools", schoolRoutes);
 app.use("/schools/:id/cluborgs", cluborgRoutes);
 app.use("/schools/:id/cluborgs/:club_id/announcements", announcementRoutes); //:id is the school
 
+<<<<<<< HEAD
 // app.listen(process.env.PORT, process.env.IP, function() {
 //     console.log("Announcity Server has started");
 // });
 
 app.listen(3000);
+=======
+app.listen(process.env.PORT, process.env.IP, function() {
+    console.log("Announcity Server has started");
+});
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2

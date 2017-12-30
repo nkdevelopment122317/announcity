@@ -8,11 +8,35 @@ var Cluborg = require('../models/cluborg');
 
 //index
 router.get("/", function(req, res) {
+<<<<<<< HEAD
     Cluborg.find({}, function(err, allCluborgs) {
         if (err) {
             console.log(err);
         } else {
             res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
+=======
+    // Cluborg.find({}, function(err, allCluborgs) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
+    //     }
+    // });
+    
+    School.findById(req.params.id).populate("cluborgs").exec(function(err, school) { //populate() gets the cluborgs from its ids and attaches them to the school
+        if (err) {
+            console.log(err);
+            req.flash("error", "Something went wrong");
+            res.redirect("/schools/" + school._id);
+        } else {
+            User.findById(req.user._id).populate("cluborgs").exec(function(err, user) {
+                if (err) {
+                    req.flash("error", "Something went wrong");
+                } else {
+                    res.render("cluborgs/index", {userCluborgs: user.cluborgs, schoolCluborgs: school.cluborgs, school_id: req.params.id, user: user});
+                }
+            });
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
         }
     });
 });
@@ -21,8 +45,13 @@ router.get("/", function(req, res) {
 router.get("/new", middleware.isLoggedIn, function(req, res) {
     School.findById(req.params.id, function(err, school) {
         if (err) {
+<<<<<<< HEAD
             req.flash("error", "School not found");
             res.redirect("/home");
+=======
+            req.flash("error", "Club not found");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
         } else {
             res.render("cluborgs/new", {school_id: req.params.id});
         }
@@ -31,17 +60,39 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 //create
 router.post("/", middleware.isLoggedIn, function(req, res) {
+<<<<<<< HEAD
     School.findById(req.params.id, function(err, school) {
         if (err) {
             req.flash("error", "School not found");
             res.redirect("/home");
         } else {
             Cluborg.create(req.body.cluborg, function(err, cluborg) {
+=======
+    School.findById(req.params.id).populate("cluborgs").exec(function(err, school) {
+        if (err) {
+            req.flash("error", "School not found");
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
+        } else {
+            var author = {
+                id: req.user._id,
+                username: req.user.username
+            };
+            
+            var newCluborg = {
+                name: req.body.name,
+                description: req.body.description,
+                image: req.body.image,
+                author: author
+            };
+            
+            Cluborg.create(newCluborg, middleware.isLoggedIn, function(err, cluborg) {
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
                 if (err) {
                     console.log(err);
                     req.flash("error", "Something went wrong");
                     res.redirect("/schools/" + req.params.id + "/cluborgs");
                 } else {
+<<<<<<< HEAD
                     cluborg.author.id = req.user._id;
                     cluborg.author.username = req.user.username;
                     cluborg.save();
@@ -49,6 +100,11 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                     school.cluborgs.push(cluborg);
                     school.save();
 
+=======
+                    school.cluborgs.push(cluborg);
+                    school.save();
+                    
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
                     req.flash("success", "Successfully created club");
                     res.redirect("/schools/" + req.params.id + "/cluborgs/" + cluborg._id);
                 }
@@ -64,8 +120,12 @@ router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
         .populate("announcements")
         .exec(function(err, foundCluborg) {
             if (err) {
+<<<<<<< HEAD
                 req.flash("error", "Something went wrong");
                 res.redirect("/schools/" + req.params.id + "/cluborgs/new");
+=======
+                console.log(err);
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
             } else {
                 res.render("cluborgs/show", {cluborg: foundCluborg, school_id: req.params.id});
             }
@@ -80,7 +140,11 @@ router.get("/:club_id/edit", middleware.checkCluborgOwnership, function(req, res
         } else {
             res.render("cluborgs/edit", {school_id: req.params.id, cluborg: foundCluborg});
         }
+<<<<<<< HEAD
     });
+=======
+    });   
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 });
 
 //update
@@ -103,7 +167,11 @@ router.delete("/:club_id", middleware.checkCluborgOwnership, function(req, res) 
         } else {
             res.redirect("/schools/" + req.params.id + "/cluborgs");
         }
+<<<<<<< HEAD
     });
+=======
+    });    
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 });
 
 module.exports = router; //put this in EVERY single one of your routes file to get rid of router errors

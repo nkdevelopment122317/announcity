@@ -5,6 +5,7 @@
 <a href="/schools/<%= school_id %>/cluborgs/new">New Club</a>
 
 <hr>
+<<<<<<< HEAD
 <% cluborgs.forEach(function(cluborg) { %>
     <p><%= cluborg.name %></p>
     <img src="<%= cluborg.image %>">
@@ -17,6 +18,22 @@
     </form>
     <hr>
 
+=======
+<% schoolCluborgs.forEach(function(cluborg) { %>
+    <p><%= cluborg.name %></p>
+    <img src="<%= cluborg.image %>">
+        
+    <br>
+    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>">More Info</a>
+    
+    <% if (!(schoolCluborgs.includes(cluborg) && userCluborgs.includes(cluborg))) { %> <!-- fix this -->
+           <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
+                <input type="submit" value="Join">
+           </form>
+           <hr> 
+    <% } %>
+    
+>>>>>>> 3c25aa06352e79df03106ce3109c4a82004ed4c2
 <% }); %>
 
 <% include ../partials/footer %>
