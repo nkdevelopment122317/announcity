@@ -4,6 +4,7 @@
 
 html {
     height: 100%;
+    font-family: Roboto, sans-serif;
 }
 
 body {
@@ -190,4 +191,168 @@ h2 {
     -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
     border: 1px solid black;
+}
+
+.alone {
+    width: 90%;
+    font-size: 2em;
+    color: #000000;
+    transition: all 0.3s ease 0s;
+    margin: 1em;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    box-shadow: none;
+}
+
+.div-alone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#form-title {
+    text-align: center;
+    margin: 1.5em auto;
+    font-size: 3em;
+    width: 200px;
+}
+
+.role-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+label {
+    margin-right: 15px;
+    line-height: 32px;
+    margin-left: 10px;
+    font-size: 1.5em;
+}
+
+.role-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
+
+    position: relative;
+    top: 4px;
+}
+
+.role-input:focus {
+    outline: none !important;
+}
+
+input:checked {
+    border: 6px solid black;
+}
+
+.role-legend {
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    width: 150px;
+    background-color: white;
+    padding: 5px 10px;
+    border: 0;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+}
+
+#register-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.textbox {
+    width: 100%;
+    margin-top: 2em;
+}
+
+.regular-register-textbox {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    line-height: 2.5em;
+    border-radius: 10px;
+    border: 2px solid black;
+    transition: all 0.3s ease 0s;
+    font-size: 1.5em;
+    text-indent: 1em;
+    color: black;
+}
+
+.regular-register-textbox:focus {
+    outline: none !important;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+}
+
+.regular-register-textbox::-webkit-input-placeholder {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.regular-register-textbox:-moz-placeholder {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.regular-register-textbox::-moz-placeholder {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.regular-register-textbox::-ms-input-placeholder {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#role-field {
+    margin-bottom: 1em;
+    color: black;
+    background: white;
+    border-color: white;
+    border-width: 3px;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+}
+
+#register-form {
+    border: 5px solid #145fe2;
+    background: #145fe2;
+    /*border-radius: 20px;*/
+    padding: 1em;
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.submit {
+    color: black;
 }

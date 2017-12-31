@@ -13,11 +13,11 @@ var cluborgRoutes = require('./routes/cluborgs');
 var indexRoutes = require('./routes/index');
 var schoolRoutes = require("./routes/schools");
 
+mongoose.Promise = global.Promise;
 var databaseUri = "mongodb://localhost/announcity";
 mongoose.connect(databaseUri, {useMongoClient: true})
         .then(() => console.log(`Database connected at ${databaseUri}`))
         .catch(err => console.log(`Database connection error: ${err.message}`));
-mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));

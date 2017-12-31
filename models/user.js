@@ -17,6 +17,14 @@ var userSchema = new mongoose.Schema({
             ref: "Cluborg"
         }
     ],
+    isSetup: {
+        type: Boolean,
+        default: false
+    },
+    isStudent:{
+        type: Boolean,
+        default: true
+    },
     isFaculty: {
         type: Boolean,
         default: false

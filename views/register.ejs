@@ -1,16 +1,38 @@
 <% include ./partials/header %>
 
-<h1>Register</h1>
+<form id="register-form" action="/register" method="POST">
+    <legend id="form-title" class="role-legend">Register</legend>
 
-<form action="/register" method="POST">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <input type="text" name="firstName" placeholder="First Name">
-    <input type="text" name="lastName" placeholder="Last Name">
-    <input type="email" name="email" placeholder="Email">
-    <button>Register</button>
+    <div id="register-regular-form-area">
+        <input class="regular-register-textbox" type="text" name="username" placeholder="Username">
+        <input class="regular-register-textbox" type="password" name="password" placeholder="Password">
+        <input class="regular-register-textbox" type="text" name="firstName" placeholder="First Name">
+        <input class="regular-register-textbox" type="text" name="lastName" placeholder="Last Name">
+        <input class="regular-register-textbox" type="email" name="email" placeholder="Email">
+    </div>
+
+    <div class="color-strip"></div>
+
+
+    <fieldset id="role-field">
+        <legend class="role-legend">I am a...</legend>
+        <div class="role-container">
+          <input class="role-input" type="radio" id="roleChoice1" name="role" value="student">
+          <label for="roleChoice1">Student</label>
+
+          <input class="role-input" type="radio" id="roleChoice2" name="role" value="faculty">
+          <label for="roleChoice2">Faculty Member</label>
+
+          <input class="role-input" type="radio" id="roleChoice3" name="role" value="administrator">
+          <label for="roleChoice3">Administrator</label>
+        </div>
+    </fieldset>
+
+    <input class="regular-register-textbox textbox no-display" type="text" name="code" placeholder="Enter code">
+
+    <input class="submit no-display" type="submit" value="Register">
 </form>
 
-<a href="/">Back</a>
+<script type="text/javascript" src="/js/register.js"></script>
 
 <% include ./partials/footer %>
