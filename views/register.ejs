@@ -1,36 +1,76 @@
 <% include ./partials/header %>
 
-<form id="register-form" action="/register" method="POST">
-    <legend id="form-title" class="role-legend">Register</legend>
+<style>
+    body {
+        background: #145fe2;
+    }
+</style>
 
-    <div id="register-regular-form-area">
-        <input class="regular-register-textbox" type="text" name="username" placeholder="Username">
-        <input class="regular-register-textbox" type="password" name="password" placeholder="Password">
-        <input class="regular-register-textbox" type="text" name="firstName" placeholder="First Name">
-        <input class="regular-register-textbox" type="text" name="lastName" placeholder="Last Name">
-        <input class="regular-register-textbox" type="email" name="email" placeholder="Email">
+<form class="form" action="/register" method="POST">
+    <div class="form-container">
+        <legend id="form-title">Register</legend>
+
+        <fieldset class="field">
+            <legend class="role-legend">Basic Info</legend>
+            <div class="group">
+                <input class="material-input" name="firstName" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">First Name</label>
+            </div>
+
+            <div class="group">
+                <input class="material-input" name="lastName" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Last Name</label>
+            </div>
+
+            <div class="group">
+                <input class="material-input" name="username" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Username</label>
+            </div>
+
+            <div class="group">
+                <input class="material-input" name="password" type="password" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Password</label>
+            </div>
+
+            <div class="group">
+                <input class="material-input" name="email" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Email Address</label>
+            </div>
+        </fieldset>
+
+        <fieldset class="field">
+            <legend class="role-legend">I am</legend>
+            <div class="role-container">
+              <input class="role-input" type="radio" id="roleChoice1" name="role" value="student">
+              <label class="role-label" for="roleChoice1">A Student</label>
+
+              <input class="role-input" type="radio" id="roleChoice2" name="role" value="faculty">
+              <label class="role-label" for="roleChoice2">A Faculty Member</label>
+
+              <input class="role-input" type="radio" id="roleChoice3" name="role" value="administrator">
+              <label class="role-label" for="roleChoice3">An Administrator</label>
+            </div>
+
+            <div id="hidden-textbox" class="group">
+                <input class="material-input" name="code" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label id="code-label" class="material-label">Please select an option above.</label>
+            </div>
+        </fieldset>
+
+        <button class="material-button submit" type="submit">Register</button>
     </div>
-
-    <div class="color-strip"></div>
-
-
-    <fieldset id="role-field">
-        <legend class="role-legend">I am a...</legend>
-        <div class="role-container">
-          <input class="role-input" type="radio" id="roleChoice1" name="role" value="student">
-          <label for="roleChoice1">Student</label>
-
-          <input class="role-input" type="radio" id="roleChoice2" name="role" value="faculty">
-          <label for="roleChoice2">Faculty Member</label>
-
-          <input class="role-input" type="radio" id="roleChoice3" name="role" value="administrator">
-          <label for="roleChoice3">Administrator</label>
-        </div>
-    </fieldset>
-
-    <input class="regular-register-textbox textbox no-display" type="text" name="code" placeholder="Enter code">
-
-    <input class="submit no-display" type="submit" value="Register">
 </form>
 
 <script type="text/javascript" src="/js/register.js"></script>

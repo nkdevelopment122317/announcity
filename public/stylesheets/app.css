@@ -218,7 +218,8 @@ fieldset {
 
 #form-title {
     text-align: center;
-    margin: 1.5em auto;
+    margin: 0 auto;
+    margin-bottom: 1em;
     font-size: 3em;
     width: 200px;
 }
@@ -248,8 +249,12 @@ label {
     height: 16px;
 
     border: 2px solid #999;
-    transition: 0.2s all linear;
-    outline: none;
+
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+
+    /*outline: none;*/
     margin-right: 5px;
 
     position: relative;
@@ -260,99 +265,217 @@ label {
     outline: none !important;
 }
 
-input:checked {
-    border: 6px solid black;
-}
-
 .role-legend {
     border-radius: 10px;
     font-size: 2em;
     text-align: center;
-    width: 150px;
     background-color: white;
+    width: 175px;
     padding: 5px 10px;
     border: 0;
-    font-weight: bold;
-    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
+    /*font-weight: bold;*/
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.3);
 }
 
-#register-form {
-    width: 80%;
-    margin: 0 auto;
+.role-label {
+    font-weight: normal;
 }
 
-.textbox {
-    width: 100%;
-    margin-top: 2em;
-}
-
-.regular-register-textbox {
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 1em;
-    line-height: 2.5em;
-    border-radius: 10px;
-    border: 2px solid black;
-    transition: all 0.3s ease 0s;
-    font-size: 1.5em;
-    text-indent: 1em;
-    color: black;
-}
-
-.regular-register-textbox:focus {
-    outline: none !important;
-    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.3);
-}
-
-.regular-register-textbox::-webkit-input-placeholder {
-    font-size: 1.2em;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.regular-register-textbox:-moz-placeholder {
-    font-size: 1.2em;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.regular-register-textbox::-moz-placeholder {
-    font-size: 1.2em;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.regular-register-textbox::-ms-input-placeholder {
-    font-size: 1.2em;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-#role-field {
+.field {
     margin-bottom: 1em;
     color: black;
     background: white;
     border-color: white;
     border-width: 3px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    padding: 1em;
+}
+
+.elevate {
     -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
 }
 
-#register-form {
-    border: 5px solid #145fe2;
-    background: #145fe2;
+.form {
     /*border-radius: 20px;*/
     padding: 1em;
     color: white;
     width: 100%;
     height: 100%;
+    margin: 0 auto;
+}
+
+
+.form-container {
+    margin-bottom: 3em;
 }
 
 .submit {
     color: black;
+}
+
+.form-container {
+    width: 40%;
+    background: white;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    margin: 0 auto;
+    padding: 2em;
+}
+
+#hidden-textbox {
+    margin-top: 3em;
+}
+
+#roleChoice1:checked, #roleChoice2:checked, #roleChoice3:checked {
+    border: 6px solid #145fe2;
+}
+
+/*nice form styling*/
+
+.group {
+    position:relative;
+    margin-bottom:45px;
+}
+
+.material-input {
+    color: #145fe2;
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width: 100%;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.material-input:focus {
+    outline: none;
+}
+
+/* LABEL ======================================= */
+.material-label {
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.material-input:focus ~ .material-label, .material-input:valid ~ .material-label {
+    top:-20px;
+    font-size:14px;
+    color:#145fe2;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.bar:before, .bar:after {
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:#145fe2;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+
+.bar:before {
+    left:50%;
+}
+
+.bar:after {
+    right:50%;
+}
+
+/* active state */
+.material-input:focus ~ .bar:before, .material-input:focus ~ .bar:after {
+    width:50%;
+}
+
+.highlight {
+    position:absolute;
+    height:60%;
+    width:100px;
+    top:25%;
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+/* active state */
+.material-input:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#145fe2; }
+    to    { width:0; background:transparent; }
+}
+
+@-moz-keyframes inputHighlighter {
+    from { background:#145fe2; }
+    to    { width:0; background:transparent; }
+}
+
+@keyframes inputHighlighter {
+    from { background:#145fe2; }
+    to    { width:0; background:transparent; }
+}
+
+.material-button {
+    width: 100%;
+    height: 3em;
+    border-radius: 10px;
+    border: none;
+    background: #145fe2;
+    color: white;
+    font-family: Roboto, sans-serif;
+    font-size: 2em;
+    margin: 0 auto;
+    margin-top: 1em;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.material-button:hover {
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
+    transform: translateY(-7px);
+}
+
+#login-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-form-container {
+    position: absolute;
+    top: 12%;
+    width: 30%;
 }

@@ -1,11 +1,33 @@
 <% include ./partials/header %>
 
-<h1>Login</h1>
+<style>
+    body {
+        background: #145fe2;
+    }
+</style>
 
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button>Login</button>
+<form id="login-form" class="form" action="/login" method="POST">
+    <div id="login-form-container" class="form-container">
+        <legend id="form-title">Login</legend>
+
+        <fieldset class="field">
+            <div class="group">
+                <input class="material-input" name="username" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Username</label>
+            </div>
+
+            <div class="group">
+                <input class="material-input" name="password" type="password" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material-label">Password</label>
+            </div>
+        </fieldset>
+
+        <button class="material-button submit" type="submit">Login</button>
+    </div>
 </form>
 
 <a href="/">Back</a>
