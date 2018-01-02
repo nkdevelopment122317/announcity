@@ -11,7 +11,6 @@
         <legend id="form-title">Register</legend>
 
         <fieldset class="field">
-            <legend class="role-legend">Basic Info</legend>
             <div class="group">
                 <input class="material-input" name="firstName" type="text" required>
                 <span class="highlight"></span>
@@ -46,27 +45,30 @@
                 <span class="bar"></span>
                 <label class="material-label">Email Address</label>
             </div>
-        </fieldset>
 
-        <fieldset class="field">
-            <legend class="role-legend">I am</legend>
-            <div class="role-container">
-              <input class="role-input" type="radio" id="roleChoice1" name="role" value="student">
-              <label class="role-label" for="roleChoice1">A Student</label>
+            <hr>
 
-              <input class="role-input" type="radio" id="roleChoice2" name="role" value="faculty">
-              <label class="role-label" for="roleChoice2">A Faculty Member</label>
+            <p>Please provide the name of your school and the state that it is in.</p>
 
-              <input class="role-input" type="radio" id="roleChoice3" name="role" value="administrator">
-              <label class="role-label" for="roleChoice3">An Administrator</label>
+            <div class="search-field-container">
+                <div class="group">
+                    <input class="material-input" name="email" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="material-label">School Name</label>
+                </div>
+                <div class="btn-group state-dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        State <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div id="hidden-textbox" class="group">
-                <input class="material-input" name="code" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label id="code-label" class="material-label">Please select an option above.</label>
-            </div>
         </fieldset>
 
         <button class="material-button submit" type="submit">Register</button>

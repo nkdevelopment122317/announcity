@@ -293,6 +293,7 @@ label {
     -moz-transition:0.2s ease all;
     -webkit-transition:0.2s ease all;
     padding: 1em;
+    padding-top: 2em;
 }
 
 .elevate {
@@ -310,17 +311,12 @@ label {
     margin: 0 auto;
 }
 
-
-.form-container {
-    margin-bottom: 3em;
-}
-
 .submit {
     color: black;
 }
 
 .form-container {
-    width: 40%;
+    width: 30%;
     background: white;
     -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
@@ -478,4 +474,36 @@ label {
     position: absolute;
     top: 12%;
     width: 30%;
+}
+
+.subsection-legend {
+    width: 100px;
+    text-align: center;
+}
+
+.search-icon {
+    /*margin-left: 0.5em;*/
+    font-size: 2em;
+    position: absolute;
+}
+
+#search-material-input {
+    text-indent: 2.75em;
+    /*float: left;*/
+}
+
+#search-label {
+    margin-left: 2.75em;
+}
+
+.state-dropdown {
+    /*float: left;*/
+}
+
+.search-field-container {
+    margin-top: 2em;
+}
+
+#search-bar-highlight {
+    margin-left: 2.75em;
 }
