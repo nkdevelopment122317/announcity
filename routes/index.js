@@ -5,6 +5,7 @@ var User = require("../models/user");
 var middleware = require("../middleware");
 var School = require("../models/school");
 var Cluborg = require("../models/cluborg");
+var request = require("request");
 
 router.get("/", function(req, res) {
     res.render("landing");
@@ -28,11 +29,11 @@ router.get("/register", function(req, res) {
 router.post("/register", function(req, res) {
     var newUser = new User({
         username: req.body.username,
+        email: req.body.email,
         firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email
+        lastName: req.body.lastName
     });
-
+    console.log(1);
     //add to update profile
     // if (req.body.adminCode === "codjcxb4745") {
     //     newUser.isAdmin = true;
@@ -44,16 +45,45 @@ router.post("/register", function(req, res) {
 
     // eval(require("locus"));
 
+
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
             console.log(err);
             return res.render("register");
+            console.log(2);
         }
+        console.log(3);
 
         passport.authenticate("local")(req, res, function() {
-            res.redirect("/home");
+            console.log(4);
+            res.redirect("/register/results");
         });
     });
+});
+
+router.get("/register/results", function(req, res) {
+    console.log(5);
+    var schoolName = req.query.schoolName;
+    var state = req.query.state;
+    console.log(6);
+
+    var url = "https://api.schooldigger.com/v1.1/schools?st=" + state + "&q=" + schoolName + "&appID=c55a0c06&appKey=ade9eeaa9708f525d57b4e5cde3056a2";
+    console.log(7);
+    request(url, function(error, response, body) {
+        console.log(8);
+        if (!error && response.statusCode == 200) {
+            console.log(9);
+            var data = JSON.parse(body);
+            console.log(10);
+            res.render("schools/results", {data: data});
+            console.log(11);
+        } else {
+            console.log(14);
+            console.log(error);
+        }
+        console.log(12);
+    });
+    console.log(13);
 });
 
 router.get("/login", function(req, res) {

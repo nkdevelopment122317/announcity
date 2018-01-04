@@ -4,6 +4,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var schoolSchema = new mongoose.Schema({
     name: String,
     location: String,
+    district: String,
+    county: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

@@ -3,10 +3,10 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new mongoose.Schema({
     username: String,
+    email: String,
     password: String,
     firstName: String,
     lastName: String,
-    email: String,
     school: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "School"
@@ -21,7 +21,7 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isStudent:{
+    isRegularUser:{
         type: Boolean,
         default: true
     },
