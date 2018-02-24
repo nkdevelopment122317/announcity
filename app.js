@@ -50,8 +50,8 @@ app.use("/schools", schoolRoutes);
 app.use("/schools/:id/cluborgs", cluborgRoutes);
 app.use("/schools/:id/cluborgs/:club_id/announcements", announcementRoutes); //:id is the school
 
-// app.listen(process.env.PORT, process.env.IP, function() {
-//     console.log("Announcity Server has started");
-// });
+app.listen(process.env.PORT, process.env.IP, function() {
+    console.log("Announcity Server has started");
+});
 
-app.listen(3000);
+// app.listen(3000);
