@@ -12,11 +12,22 @@ router.get("/", function(req, res) {
 });
 
 router.get("/home", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.user._id).populate("cluborgs").exec(function(err, user) {
+    User.findById(req.user._id)
+    .populate("cluborgs")
+    .populate("school")
+    .exec(function(err, user) {
         if (err) {
             req.flash("error", "Something went wrong");
         } else {
-            console.log(user.cluborgs);
+            user.cluborgs.forEach(function(cluborg) {
+                Cluborg.findById(cluborg._id).populate("school").exec(function(err, cluborg) {
+                    if (err) {
+                        req.flash("error", "Something went wrong");
+                    } else {
+                        // ***populate***
+                    }
+                });
+            });
             res.render("home", {user: user, cluborgs: user.cluborgs});
         }
     });
@@ -63,8 +74,10 @@ router.post("/register", function(req, res) {
 
 router.get("/register/results", function(req, res) {
     console.log(5);
-    var schoolName = req.query.schoolName;
-    var state = req.query.state;
+    var schoolName = req.body.schoolName;
+    var state = req.body.state;
+    console.log(state);
+    console.log(schoolName);
     console.log(6);
 
     var url = "https://api.schooldigger.com/v1.1/schools?st=" + state + "&q=" + schoolName + "&appID=c55a0c06&appKey=ade9eeaa9708f525d57b4e5cde3056a2";
@@ -78,6 +91,7 @@ router.get("/register/results", function(req, res) {
             res.render("schools/results", {data: data});
             console.log(11);
         } else {
+            console.log(response.statusCode);
             console.log(14);
             console.log(error);
         }

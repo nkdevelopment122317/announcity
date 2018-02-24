@@ -18,10 +18,11 @@
         <% cluborgs.forEach(function(cluborg) { %>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="#" class="btn more-info">More Info</a>
+                    <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="btn more-info">More Info</a>
                     <img class="cluborg-image" src="<%= cluborg.image %>">
                     <div class="caption">
                         <h3><%= cluborg.name %></h3>
+                        <% console.log(cluborg); %>
                     </div>
                     <p>
                     </p>

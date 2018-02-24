@@ -49,6 +49,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                     school.cluborgs.push(cluborg);
                     school.save();
 
+                    cluborg.school = school;
+                    cluborg.save();
+
                     req.flash("success", "Successfully created club");
                     res.redirect("/schools/" + req.params.id + "/cluborgs/" + cluborg._id);
                 }
