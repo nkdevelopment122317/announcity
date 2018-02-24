@@ -67,38 +67,38 @@ router.post("/register", function(req, res) {
 
         passport.authenticate("local")(req, res, function() {
             console.log(4);
-            res.redirect("/register/results");
+            res.redirect("/home");
         });
     });
 });
 
-router.get("/register/results", function(req, res) {
-    console.log(5);
-    var schoolName = req.body.schoolName;
-    var state = req.body.state;
-    console.log(state);
-    console.log(schoolName);
-    console.log(6);
+// router.get("/register/results", function(req, res) {
+//     console.log(5);
+//     var schoolName = req.body.schoolName;
+//     var state = req.body.state;
+//     console.log(state);
+//     console.log(schoolName);
+//     console.log(6);
 
-    var url = "https://api.schooldigger.com/v1.1/schools?st=" + state + "&q=" + schoolName + "&appID=c55a0c06&appKey=ade9eeaa9708f525d57b4e5cde3056a2";
-    console.log(7);
-    request(url, function(error, response, body) {
-        console.log(8);
-        if (!error && response.statusCode == 200) {
-            console.log(9);
-            var data = JSON.parse(body);
-            console.log(10);
-            res.render("schools/results", {data: data});
-            console.log(11);
-        } else {
-            console.log(response.statusCode);
-            console.log(14);
-            console.log(error);
-        }
-        console.log(12);
-    });
-    console.log(13);
-});
+//     var url = "https://api.schooldigger.com/v1.1/schools?st=" + state + "&q=" + schoolName + "&appID=c55a0c06&appKey=ade9eeaa9708f525d57b4e5cde3056a2";
+//     console.log(7);
+//     request(url, function(error, response, body) {
+//         console.log(8);
+//         if (!error && response.statusCode == 200) {
+//             console.log(9);
+//             var data = JSON.parse(body);
+//             console.log(10);
+//             res.render("schools/results", {data: data});
+//             console.log(11);
+//         } else {
+//             console.log(response.statusCode);
+//             console.log(14);
+//             console.log(error);
+//         }
+//         console.log(12);
+//     });
+//     console.log(13);
+// });
 
 router.get("/login", function(req, res) {
     res.render("login");
