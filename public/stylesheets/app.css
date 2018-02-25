@@ -309,20 +309,11 @@ label {
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    position: relative;
 }
 
 .submit {
     color: black;
-}
-
-.form-container {
-    width: 30%;
-    background: white;
-    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    margin: 0 auto;
-    padding: 2em;
 }
 
 #hidden-textbox {
@@ -333,134 +324,35 @@ label {
     border: 6px solid #145fe2;
 }
 
-/*nice form styling*/
-
-.group {
-    position:relative;
-    margin-bottom:45px;
-}
-
-.material-input {
-    color: #145fe2;
-    font-size:18px;
-    padding:10px 10px 10px 5px;
-    display:block;
-    width: 100%;
-    border:none;
-    border-bottom:1px solid #757575;
-}
-
-.material-input:focus {
-    outline: none;
-}
-
-/* LABEL ======================================= */
-.material-label {
-    color:#999;
-    font-size:18px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:5px;
-    top:10px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-}
-
-/* active state */
-.material-input:focus ~ .material-label, .material-input:valid ~ .material-label {
-    top:-20px;
-    font-size:14px;
-    color:#145fe2;
-}
-
-/* BOTTOM BARS ================================= */
-.bar {
-    position: relative;
-    display: block;
-    width: 100%;
-}
-
-.bar:before, .bar:after {
-    content:'';
-    height:2px;
-    width:0;
-    bottom:1px;
-    position:absolute;
-    background:#145fe2;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-}
-
-.bar:before {
-    left:50%;
-}
-
-.bar:after {
-    right:50%;
-}
-
-/* active state */
-.material-input:focus ~ .bar:before, .material-input:focus ~ .bar:after {
-    width:50%;
-}
-
-.highlight {
-    position:absolute;
-    height:60%;
-    width:100px;
-    top:25%;
-    left:0;
-    pointer-events:none;
-    opacity:0.5;
-}
-
-/* active state */
-.material-input:focus ~ .highlight {
-    -webkit-animation:inputHighlighter 0.3s ease;
-    -moz-animation:inputHighlighter 0.3s ease;
-    animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-    from { background:#145fe2; }
-    to    { width:0; background:transparent; }
-}
-
-@-moz-keyframes inputHighlighter {
-    from { background:#145fe2; }
-    to    { width:0; background:transparent; }
-}
-
-@keyframes inputHighlighter {
-    from { background:#145fe2; }
-    to    { width:0; background:transparent; }
-}
-
 .material-button {
     width: 100%;
     height: 3em;
     border-radius: 10px;
     border: none;
-    background: #145fe2;
+    background: #13b8f1;
     color: white;
     font-family: Roboto, sans-serif;
+    font-weight: 300;
     font-size: 2em;
     margin: 0 auto;
-    margin-top: 1em;
+    /*margin-top: 1em;*/
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
 }
 
 .material-button:hover {
-    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.5);
-    transform: translateY(-7px);
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    background: #13a4f2;
+    /*transform: translateY(-7px);*/
+}
+.material-button:focus {
+    outline: none;
 }
 
 #login-form {
@@ -509,6 +401,8 @@ label {
 }
 
 .text-card {
+    position: absolute;
+    right: 10%;
     border: none;
     background: #ffffff;
     border-radius: 5px;
@@ -519,19 +413,21 @@ label {
 
 .school-name {
     font-family: "Roboto", sans-serif;
-    font-size: 2em;
-    font-weight: 700;
+    font-size: 1.5em;
+    font-weight: 300;
     background: #ffffff;
     align-items: center;
     justify-content: center;
     color: #145fe2;
-    margin-top: 8px;
+    margin-top: 14px;
 }
 
 .fas.fa-check {
-    font-size: 2em;
+    font-size: 1.5em;
     height: 100%;
     padding: 0.5em;
+    margin-top: 14px;
+    margin-left: 10px;
 }
 
 .icon-container {
@@ -539,4 +435,101 @@ label {
     height: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.reg-input {
+    outline: none;
+    /*border-radius: 5px;*/
+    border: 1px solid #dddddd;
+    /*width: 300px;*/
+    width: 100%;
+    height: 50px;
+    margin-bottom: 15px;
+    display: inline-block;
+    text-indent: 1em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 1.5em;
+}
+
+.reg-input::-webkit-input-placeholder {
+   text-align: center;
+   text-indent: 0em;
+   font-size: 1.3em;
+   font-family: "Roboto", sans-serif;
+   font-weight: 300;
+   vertical-align: middle;
+}
+
+.reg-input:-moz-placeholder { /* Firefox 18- */
+   text-align: center;
+   text-indent: 0em;
+   font-size: 1.5em;
+   font-family: "Roboto", sans-serif;
+   font-weight: 300;
+   vertical-align: middle;
+}
+
+.reg-input::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;
+   text-indent: 0em;
+   font-size: 1.5em;
+   font-family: "Roboto", sans-serif;
+   font-weight: 300;
+   vertical-align: middle;
+}
+
+.reg-input:-ms-input-placeholder {
+   text-align: center;
+   text-indent: 0em;
+   font-size: 1.5em;
+   font-family: "Roboto", sans-serif;
+   font-weight: 300;
+   vertical-align: middle;
+}
+
+.form-image {
+    height: 50%;
+}
+
+.form-image-container, .user-info-container {
+    /*float: left;
+    clear: none;
+    width: 200px;*/
+    align-items: center;
+}
+
+.form-image-container {
+    background: url("https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5aaa2a72b49b8dede273d9e35340711c&auto=format&fit=crop&w=1351&q=80");
+}
+
+.form-container {
+    width: 450px;
+    background: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    border-radius: 10px;
+    /*margin: 0 auto;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#register-form-header {
+    width: 100%;;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: 5em;
+    color: #ffffff;
+    margin-top: 1em;
+    position: absolute;
+    text-shadow: 2px 2px #000000;
 }

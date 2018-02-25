@@ -59,13 +59,23 @@ router.post("/register", function(req, res) {
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
             console.log(err);
+            var index = err.toString().indexOf(": ");
+            req.flash("error", err.toString().substring(index + 2));
             return res.render("register");
         }
+
+        School.find({"name": "Steinert High School"}, function(err, school) {
+            user.school = school;
+            user.save();
+            console.log(user);
+        });
 
         passport.authenticate("local")(req, res, function() {
             res.redirect("/home");
         });
     });
+
+
 });
 
 // router.get("/register/results", function(req, res) {

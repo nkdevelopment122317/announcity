@@ -8,13 +8,14 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-repeat: no-repeat;
-    /*background-attachment: fixed;*/
+    background-attachment: fixed;
     /*border: 0.1px solid transparent;*/
 }
 
 .landing-body {
     background: linear-gradient(#1771D7, #3e2b29);
+    /*background: url("/images/blurred_background_1.png");*/
+    background-repeat: no-repeat;
     /*background: #1771D7;*/
 }
 
@@ -311,7 +312,7 @@ body {
         margin-top: 9px;
         margin-bottom: 50px;
     }
-    
+
     .circular.ui.icon.button:hover {
         transform: translateY(-7px);
         box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);

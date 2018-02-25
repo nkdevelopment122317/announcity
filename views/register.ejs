@@ -2,62 +2,48 @@
 
 <style>
     body {
-        background: #145fe2;
+        /*background: url("/images/wavy_background_blue_1.png");*/
+        background: linear-gradient(to top right, #13a4f2, #12e2f0);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 </style>
 
+<h1 id="register-form-header">Sign Up Today to Join Announcity!</h1>
+
 <form class="form" action="/register" method="POST">
     <div class="form-container">
-        <legend id="form-title">Register</legend>
+        <!-- <legend id="form-title">Sign up for an account today!</legend> -->
 
-        <fieldset class="field">
-            <div class="group">
-                <input class="material-input" name="firstName" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="material-label">First Name</label>
-            </div>
+        <!-- <div class="form-image-container">
+            <img class="form-image" src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5aaa2a72b49b8dede273d9e35340711c&auto=format&fit=crop&w=1351&q=80">
+        </div> -->
 
-            <div class="group">
-                <input class="material-input" name="lastName" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="material-label">Last Name</label>
-            </div>
+        <div class="user-info-container">
+            <fieldset class="field">
 
-            <div class="group">
-                <input class="material-input" name="email" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="material-label">Email Address</label>
-            </div>
+                <input class="reg-input" name="firstName" type="text" placeholder="First Name" required>
+                <input class="reg-input" name="lastName" type="text" placeholder="Last Name" required>
+                <input class="reg-input" name="email" type="text" placeholder="Email Address" required>
+                <input class="reg-input" name="username" type="text" placeholder="Username" required>
+                <input class="reg-input" name="password" type="password" placeholder="Password" required>
 
-            <div class="group">
-                <input class="material-input" name="username" type="text" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="material-label">Username</label>
-            </div>
+                <!-- <hr>
 
-            <div class="group">
-                <input class="material-input" name="password" type="password" required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="material-label">Password</label>
-            </div>
+                <div class="text-card">
+                    <div class="icon-container">
 
-            <!-- <hr>
+                    </div>
+                    <p class="school-name"><i class="fas fa-check"></i>Steinert High School</p>
+                </div> -->
 
-            <div class="text-card">
-                <div class="icon-container">
-                    <i class="fas fa-check"></i>
-                </div>
-                <p class="school-name">Steinert High School</p>
-            </div> -->
 
-        </fieldset>
+            </fieldset>
 
-        <button class="material-button submit" type="submit">Register</button>
+            <button class="material-button submit" type="submit">Register</button>
+        </div>
+
+
     </div>
 </form>
 

@@ -1,5 +1,6 @@
 $(document).ready(function() {
     // addEvents();
+    $(".user-info-container").css("height", $(".form-image").height());
 });
 
 function addEvents() {
