@@ -44,7 +44,6 @@ router.post("/register", function(req, res) {
         firstName: req.body.firstName,
         lastName: req.body.lastName
     });
-    console.log(1);
     //add to update profile
     // if (req.body.adminCode === "codjcxb4745") {
     //     newUser.isAdmin = true;
@@ -61,12 +60,9 @@ router.post("/register", function(req, res) {
         if (err) {
             console.log(err);
             return res.render("register");
-            console.log(2);
         }
-        console.log(3);
 
         passport.authenticate("local")(req, res, function() {
-            console.log(4);
             res.redirect("/home");
         });
     });
