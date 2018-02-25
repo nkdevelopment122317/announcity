@@ -507,3 +507,36 @@ label {
 #search-bar-highlight {
     margin-left: 2.75em;
 }
+
+.text-card {
+    border: none;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    color: #0ed125;
+    display: flex;
+}
+
+.school-name {
+    font-family: "Roboto", sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    background: #ffffff;
+    align-items: center;
+    justify-content: center;
+    color: #145fe2;
+    margin-top: 8px;
+}
+
+.fas.fa-check {
+    font-size: 2em;
+    height: 100%;
+    padding: 0.5em;
+}
+
+.icon-container {
+    background: #ffffff;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
