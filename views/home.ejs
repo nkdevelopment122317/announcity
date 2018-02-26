@@ -15,19 +15,33 @@
 
 <div class="content-container">
     <div class="row text-center my-clubs">
-        <% cluborgs.forEach(function(cluborg) { %>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="thumbnail">
-                    <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="btn more-info">More Info</a>
-                    <img class="cluborg-image" src="<%= cluborg.image %>">
-                    <div class="caption">
-                        <h3><%= cluborg.name %></h3>
+        <% if (cluborgs.length !== 0) { %>
+                <% cluborgs.forEach(function(cluborg) { %>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="thumbnail">
+                            <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="btn more-info">More Info</a>
+                            <img class="cluborg-image" src="<%= cluborg.image %>">
+                            <div class="caption">
+                                <h3><%= cluborg.name %></h3>
+                            </div>
+                            <p>
+                            </p>
+                        </div>
                     </div>
-                    <p>
-                    </p>
-                </div>
-            </div>
-        <% }); %>
+                <% }); %>
+        <% } else { %>
+                <h2>You're not in any clubs!</h2>
+        <% } %>
+
+        <% if (user.school == undefined) { %>
+                <h2>Are you in any of these schools?</h2>
+                <ul>
+                    <% schools.forEach(function(school) { %>
+
+                        <a href="/schools/<%= school._id %>"><h3><li><%= school.name %></li></h3></a>
+                    <% }); %>
+                </ul>
+        <% } %>
     </div>
 </div>
 

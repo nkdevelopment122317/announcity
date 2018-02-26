@@ -7,6 +7,9 @@ var LocalStrategy = require('passport-local');
 var User = require('./models/user');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
+// var ejsLint = require('ejs-lint');
+
+// ejsLint.lint("home", {});
 
 var PORT = process.env.PORT || 3000;
 

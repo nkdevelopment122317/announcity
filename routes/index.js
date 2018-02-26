@@ -28,7 +28,14 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                     }
                 });
             });
-            res.render("home", {user: user, cluborgs: user.cluborgs});
+
+            School.find({}, function(err, schools) {
+                if (err) {
+                    req.flash("error", "Something went wrong");
+                } else {
+                    res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools});
+                }
+            });
         }
     });
 });
