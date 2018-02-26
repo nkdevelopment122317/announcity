@@ -454,36 +454,36 @@ label {
 }
 
 .reg-input::-webkit-input-placeholder {
-   text-align: center;
-   text-indent: 0em;
-   font-size: 1.3em;
+   text-align: left;
+   text-indent: 1em;
+   font-size: 1.0em;
    font-family: "Roboto", sans-serif;
    font-weight: 300;
    vertical-align: middle;
 }
 
 .reg-input:-moz-placeholder { /* Firefox 18- */
-   text-align: center;
-   text-indent: 0em;
-   font-size: 1.5em;
+   text-align: left;
+   text-indent: 1em;
+   font-size: 1.0em;
    font-family: "Roboto", sans-serif;
    font-weight: 300;
    vertical-align: middle;
 }
 
 .reg-input::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;
-   text-indent: 0em;
-   font-size: 1.5em;
+   text-align: left;
+   text-indent: 1em;
+   font-size: 1.0em;
    font-family: "Roboto", sans-serif;
    font-weight: 300;
    vertical-align: middle;
 }
 
 .reg-input:-ms-input-placeholder {
-   text-align: center;
-   text-indent: 0em;
-   font-size: 1.5em;
+   text-align: left;
+   text-indent: 1em;
+   font-size: 1.0em;
    font-family: "Roboto", sans-serif;
    font-weight: 300;
    vertical-align: middle;
