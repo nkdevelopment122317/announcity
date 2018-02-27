@@ -19,7 +19,7 @@ var indexRoutes = require('./routes/index');
 var schoolRoutes = require("./routes/schools");
 
 mongoose.Promise = global.Promise;
-var databaseUri =   "mongodb://localhost/announcity" || "mongodb://nikhil2:2nikhil@ds147518.mlab.com:47518/announcity";
+var databaseUri =  "mongodb://nikhil2:2nikhil@ds147518.mlab.com:47518/announcity" || "mongodb://localhost/announcity";
 mongoose.connect(databaseUri, {useMongoClient: true})
         .then(() => console.log(`Database connected at ${databaseUri}`))
         .catch(err => console.log(`Database connection error: ${err.message}`));
