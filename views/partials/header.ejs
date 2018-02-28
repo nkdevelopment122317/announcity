@@ -28,8 +28,10 @@
 
                       <% if (currentUser) { %>
                         <li><a href="/home">Home</a></li>
-                        <li><a href="/schools">Schools</a></li>
-                        <li><a href="#">Clubs</a></li>
+                        <% if (currentUser.school == undefined) { %>
+                            <li><a href="/schools">Schools</a></li>
+                        <% } %>
+                        <li><a href="/schools/<%= currentUser.school %>/cluborgs">Clubs</a></li>
                       <% } %>
 
                   </ul>
