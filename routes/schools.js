@@ -25,16 +25,16 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         id: req.user._id,
         username: req.user.username
     };
-    
+
     var school = {
         name: req.body.school.name,
         location: req.body.school.location,
         author: author,
         code: req.body.school.code
     };
-    
+
     console.log(school);
-    
+
     School.create(school, function(err, newlyCreated) {
         if (err) {
             console.log(err);
@@ -45,7 +45,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
             req.flash("success", "Successfully created " + newlyCreated.name);
             res.redirect("/schools");
         }
-    });    
+    });
 });
 
 //show
@@ -58,7 +58,7 @@ router.get("/:id", middleware.isLoggedIn, function(req, res) {
             } else {
                 res.render("schools/show", {school: foundSchool});
             }
-    });  
+    });
 });
 
 //edit
@@ -86,11 +86,40 @@ router.put("/:id", middleware.checkSchoolOwnership, function(req, res) {
 
 //destroy
 router.delete("/:id", middleware.checkSchoolOwnership, function(req, res) {
+    var schoolName = "";
+
+    School.findById(req.params.id, function(err, foundSchool) {
+        if (err) {
+            req.flash("error", "Something went wrong");
+        } else {
+            schoolName = foundSchool.name;
+        }
+    });
+
     School.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
             res.redirect("/schools");
         } else {
+            req.flash("success", schoolName + " and all its associated data have been deleted");
             res.redirect("/schools");
+        }
+    });
+});
+
+//join
+router.put("/:id/join", middleware.isLoggedIn, function(req, res) {
+    School.findById(req.params.id, function(err, foundSchool) {
+        if (err) {
+            req.flash("error", "Something went wrong");
+        } else {
+            foundSchool.members.push(req.user);
+            foundSchool.save();
+
+            req.user.school = foundSchool;
+            req.user.save();
+
+            req.flash("success", "You have successfully joined " + foundSchool.name);
+            res.redirect("/schools/" + req.params.id + "/cluborgs");
         }
     });
 });

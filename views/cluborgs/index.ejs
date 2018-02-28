@@ -4,6 +4,12 @@
 
 <a href="/schools/<%= school_id %>/cluborgs/new">New Club</a>
 
+<br>
+
+<% if (showAccountTypeMessage == true) { %>
+    <h1>ACCOUNT TYPE MESSAGE</h1>
+<% } %>
+
 <hr>
 <% cluborgs.forEach(function(cluborg) { %>
     <p><%= cluborg.name %></p>

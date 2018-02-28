@@ -33,6 +33,10 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    confirmationTolerance: { // a number indicating the number of times a user skips a confirmation for something
+        type: Number,
+        default: 0
+    },
     join_date: {type: Date, default: Date.now}
 }, { usePushEach: true });
 

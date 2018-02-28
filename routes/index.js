@@ -13,30 +13,30 @@ router.get("/", function(req, res) {
 
 router.get("/home", middleware.isLoggedIn, function(req, res) {
     User.findById(req.user._id)
-    .populate("cluborgs")
-    .populate("school")
-    .exec(function(err, user) {
-        if (err) {
-            req.flash("error", "Something went wrong");
-        } else {
-            user.cluborgs.forEach(function(cluborg) {
-                Cluborg.findById(cluborg._id).populate("school").exec(function(err, cluborg) {
+        .populate("cluborgs")
+        .populate("school")
+        .exec(function(err, user) {
+            if (err) {
+                req.flash("error", "Something went wrong");
+            } else {
+                user.cluborgs.forEach(function(cluborg) {
+                    Cluborg.findById(cluborg._id).populate("school").exec(function(err, cluborg) {
+                        if (err) {
+                            req.flash("error", "Something went wrong");
+                        } else {
+                            // ***populate***
+                        }
+                    });
+                });
+
+                School.find({}, function(err, schools) {
                     if (err) {
                         req.flash("error", "Something went wrong");
                     } else {
-                        // ***populate***
+                        res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools});
                     }
                 });
-            });
-
-            School.find({}, function(err, schools) {
-                if (err) {
-                    req.flash("error", "Something went wrong");
-                } else {
-                    res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools});
-                }
-            });
-        }
+            }
     });
 });
 
@@ -129,24 +129,6 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
-});
-
-//join a club
-router.put("/schools/:id/cluborgs/:club_id/join", middleware.isLoggedIn, function(req, res) {
-    Cluborg.findById(req.params.club_id, function(err, cluborg) {
-        if (err) {
-            req.flash("error", "Something went wrong");
-            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
-        } else {
-            cluborg.members.push(req.user);
-            cluborg.save();
-
-            req.user.cluborgs.push(cluborg);
-            req.user.save();
-
-            res.redirect("/home");
-        }
-    });
 });
 
 module.exports = router; //put this in EVERY single one of your routes file to get rid of router errors

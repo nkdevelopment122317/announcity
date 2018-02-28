@@ -6,10 +6,10 @@
 
 <div class="color-strip"></div>
 
-<div class="btn-group" role="group">
+<!-- <div class="btn-group" role="group">
     <button type="button" class="btn btn-default tab clicked" id="contentTab">Home</button>
     <button type="button" class="btn btn-default tab" id="profileTab">Profile</button>
-</div>
+</div> -->
 
 <br>
 
@@ -37,8 +37,9 @@
                 <h2>Are you in any of these schools?</h2>
                 <ul>
                     <% schools.forEach(function(school) { %>
-
-                        <a href="/schools/<%= school._id %>"><h3><li><%= school.name %></li></h3></a>
+                        <form action="/schools/<%= school._id %>/join?_method=PUT" method="POST">
+                            <li><h3><%= school.name %></h3><input type="submit" value="Join"></li>
+                        </form>
                     <% }); %>
                 </ul>
         <% } %>

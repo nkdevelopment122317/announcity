@@ -8,11 +8,23 @@ var Cluborg = require('../models/cluborg');
 
 //index
 router.get("/", function(req, res) {
+    var showAccountTypeMessage = false;
+
     Cluborg.find({}, function(err, allCluborgs) {
         if (err) {
             console.log(err);
         } else {
-            res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id});
+            if (req.user.confirmationTolerance === 1) {
+                showAccountTypeMessage = true;
+                req.user.confirmationTolerance += 1;
+                req.user.save();
+            } else {
+                showAccountTypeMessage = false;
+                req.user.confirmationTolerance += 1;
+                req.user.save();
+            }
+
+            res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id, showAccountTypeMessage: showAccountTypeMessage});
         }
     });
 });
@@ -105,6 +117,24 @@ router.delete("/:club_id", middleware.checkCluborgOwnership, function(req, res) 
             res.redirect("/schools/" + req.params.id + "/cluborgs");
         } else {
             res.redirect("/schools/" + req.params.id + "/cluborgs");
+        }
+    });
+});
+
+//join a club
+router.put("/:club_id/join", middleware.isInSchool, function(req, res) {
+    Cluborg.findById(req.params.club_id, function(err, cluborg) {
+        if (err) {
+            req.flash("error", "Something went wrong");
+            res.redirect("/schools/" + req.params.id + "/cluborgs/" + req.params.club_id);
+        } else {
+            cluborg.members.push(req.user);
+            cluborg.save();
+
+            req.user.cluborgs.push(cluborg);
+            req.user.save();
+
+            res.redirect("/home");
         }
     });
 });
