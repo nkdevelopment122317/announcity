@@ -26,6 +26,12 @@ var schoolSchema = new mongoose.Schema({
             ref: "Cluborg"
         }
     ],
+    announcements: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Announcement"
+        }
+    ],
     date_joined: {type: Date, default: Date.now}
 }, { usePushEach: true });
 

@@ -15,17 +15,21 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
     User.findById(req.user._id)
         .populate("cluborgs")
         .populate("school")
+        .populate("announcements")
         .exec(function(err, user) {
             if (err) {
                 req.flash("error", "Something went wrong");
             } else {
                 user.cluborgs.forEach(function(cluborg) {
-                    Cluborg.findById(cluborg._id).populate("school").exec(function(err, cluborg) {
-                        if (err) {
-                            req.flash("error", "Something went wrong");
-                        } else {
-                            // ***populate***
-                        }
+                    Cluborg.findById(cluborg._id)
+                        .populate("school")
+                        .populate("announcement")
+                        .exec(function(err, cluborg) {
+                            if (err) {
+                                req.flash("error", "Something went wrong");
+                            } else {
+                                // ***populate***
+                            }
                     });
                 });
 
@@ -33,7 +37,7 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                     if (err) {
                         req.flash("error", "Something went wrong");
                     } else {
-                        res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools});
+                        res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements});
                     }
                 });
             }

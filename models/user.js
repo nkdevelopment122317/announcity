@@ -37,6 +37,12 @@ var userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    announcements: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Announcement"
+        }
+    ],
     join_date: {type: Date, default: Date.now}
 }, { usePushEach: true });
 
