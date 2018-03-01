@@ -33,7 +33,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                         announcement.author.username = req.user.username;
                         announcement.save();
 
+                        // console.log(cluborg);
                         announcement.cluborg = cluborg;
+                        announcement.cluborg.name = cluborg.name;
                         announcement.save();
 
                         cluborg.announcements.push(announcement);

@@ -17,8 +17,9 @@
     <div>
         <h3>Announcements</h3>
         <% announcements.forEach(function(announcement) { %>
-            <h4><%= announcement.title %></h4>
+            <h4><strong><%= announcement.title %></strong></h4>
             <p><%= announcement.text %></p>
+            <p><%= announcement.cluborg.name %></p>
         <% }); %>
     </div>
 

@@ -5,6 +5,7 @@ var User = require("../models/user");
 var middleware = require("../middleware");
 var School = require("../models/school");
 var Cluborg = require("../models/cluborg");
+var Announcement = require("../models/announcement");
 var request = require("request");
 
 router.get("/", function(req, res) {
@@ -30,13 +31,24 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                             } else {
                                 // ***populate***
                             }
-                    });
+                        });
                 });
 
                 School.find({}, function(err, schools) {
                     if (err) {
                         req.flash("error", "Something went wrong");
                     } else {
+                        user.announcements.forEach(function(announcement) {
+                            Announcement.findById(announcement._id)
+                                .populate("cluborg")
+                                .exec(function(err, announcement) {
+                                    if (err) {
+                                        req.flash("error", "Something went wrong");
+                                    } else {
+                                        // ***populate***
+                                    }
+                                });
+                        });
                         res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements});
                     }
                 });
@@ -85,37 +97,7 @@ router.post("/register", function(req, res) {
             res.redirect("/home");
         });
     });
-
-
 });
-
-// router.get("/register/results", function(req, res) {
-//     console.log(5);
-//     var schoolName = req.body.schoolName;
-//     var state = req.body.state;
-//     console.log(state);
-//     console.log(schoolName);
-//     console.log(6);
-
-//     var url = "https://api.schooldigger.com/v1.1/schools?st=" + state + "&q=" + schoolName + "&appID=c55a0c06&appKey=ade9eeaa9708f525d57b4e5cde3056a2";
-//     console.log(7);
-//     request(url, function(error, response, body) {
-//         console.log(8);
-//         if (!error && response.statusCode == 200) {
-//             console.log(9);
-//             var data = JSON.parse(body);
-//             console.log(10);
-//             res.render("schools/results", {data: data});
-//             console.log(11);
-//         } else {
-//             console.log(response.statusCode);
-//             console.log(14);
-//             console.log(error);
-//         }
-//         console.log(12);
-//     });
-//     console.log(13);
-// });
 
 router.get("/login", function(req, res) {
     res.render("login");

@@ -13,8 +13,11 @@ var announcementSchema = new mongoose.Schema({
     title: String,
     text: String,
     cluborg: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Cluborg"
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cluborg"
+        },
+        name: String
     }
 });
 
