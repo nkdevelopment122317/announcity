@@ -35,6 +35,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 
                         // console.log(cluborg);
                         announcement.cluborg = cluborg;
+                        announcement.cluborg.id = cluborg._id;
                         announcement.cluborg.name = cluborg.name;
                         announcement.save();
 

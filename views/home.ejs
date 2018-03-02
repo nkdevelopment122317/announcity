@@ -1,10 +1,10 @@
 <% include ./partials/header %>
 
-<div id="welcome-container">
+<!-- <div id="welcome-container">
     <h1 class="header" id="welcome">Welcome, <%= user.firstName %></h1>
 </div>
 
-<div class="color-strip"></div>
+<div class="color-strip"></div> -->
 
 <!-- <div class="btn-group" role="group">
     <button type="button" class="btn btn-default tab clicked" id="contentTab">Home</button>
@@ -14,19 +14,24 @@
 <br>
 
 <div class="content-container">
-    <div>
-        <h3>Announcements</h3>
-        <% announcements.forEach(function(announcement) { %>
-            <h4><strong><%= announcement.title %></strong></h4>
-            <p><%= announcement.text %></p>
-            <p><%= announcement.cluborg.name %></p>
-        <% }); %>
+    <div class="my-announcement-container">
+        <h3>My Announcements</h3>
+        <% if (announcements.length !== 0) { %>
+            <% announcements.forEach(function(announcement) { %>
+
+                <div class="announcement-home">
+                    <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
+                    <h4><strong><%= announcement.title %></strong></h4>
+                    <p><%= announcement.text %></p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p id="none-for-now">None at this time</p>
+        <% } %>
     </div>
 
-    <hr>
-
     <div class="row text-center my-clubs">
-        <% if (cluborgs.length !== 0) { %>
+        <!-- <% if (cluborgs.length !== 0) { %>
                 <% cluborgs.forEach(function(cluborg) { %>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                         <div class="thumbnail">
@@ -42,7 +47,7 @@
                 <% }); %>
         <% } else { %>
                 <h2>You're not in any clubs!</h2>
-        <% } %>
+        <% } %> -->
 
         <% if (user.school == undefined) { %>
                 <h2>Are you in any of these schools?</h2>
@@ -57,9 +62,11 @@
     </div>
 </div>
 
+<!--
+
 <div class="profile-container no-display">
     <h1>Profile Content</h1>
-</div>
+</div> -->
 
 
 

@@ -18,6 +18,10 @@ var announcementSchema = new mongoose.Schema({
             ref: "Cluborg"
         },
         name: String
+    },
+    isCompleted: {
+        type: Boolean,
+        default: false
     }
 });
 
