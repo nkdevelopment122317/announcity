@@ -14,52 +14,55 @@
 <br>
 
 <div class="content-container">
-    <div class="my-announcement-container">
-        <h3>My Announcements</h3>
-        <% if (announcements.length !== 0) { %>
-            <% announcements.forEach(function(announcement) { %>
-
-                <div class="announcement-home">
-                    <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
-                    <h4><strong><%= announcement.title %></strong></h4>
-                    <p><%= announcement.text %></p>
+    <!-- <% if (cluborgs.length !== 0) { %>
+            <% cluborgs.forEach(function(cluborg) { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="thumbnail">
+                        <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="btn more-info">More Info</a>
+                        <img class="cluborg-image" src="<%= cluborg.image %>">
+                        <div class="caption">
+                            <h3><%= cluborg.name %></h3>
+                        </div>
+                        <p>
+                        </p>
+                    </div>
                 </div>
             <% }); %>
-        <% } else { %>
-            <p id="none-for-now">None at this time</p>
-        <% } %>
-    </div>
+    <% } else { %>
+            <h2>You're not in any clubs!</h2>
+    <% } %> -->
 
-    <div class="row text-center my-clubs">
-        <!-- <% if (cluborgs.length !== 0) { %>
-                <% cluborgs.forEach(function(cluborg) { %>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                        <div class="thumbnail">
-                            <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="btn more-info">More Info</a>
-                            <img class="cluborg-image" src="<%= cluborg.image %>">
-                            <div class="caption">
-                                <h3><%= cluborg.name %></h3>
-                            </div>
-                            <p>
-                            </p>
-                        </div>
-                    </div>
+    <% if (user.school == undefined) { %>
+            <h2>Are you in any of these schools?</h2>
+            <ul>
+                <% schools.forEach(function(school) { %>
+                    <form action="/schools/<%= school._id %>/join?_method=PUT" method="POST">
+                        <li><h3><%= school.name %></h3><input type="submit" value="Join"></li>
+                    </form>
                 <% }); %>
+            </ul>
+    <% } else { %>
+        <% if (cluborgs.length === 0) { %>
+            <a href="/schools/<%= user.school._id %>/cluborgs"><h3>Discover Clubs</h3></a>
         <% } else { %>
-                <h2>You're not in any clubs!</h2>
-        <% } %> -->
+            <div class="my-announcement-container">
+                <h3>My Announcements</h3>
+                <% if (announcements.length !== 0) { %>
+                    <% announcements.forEach(function(announcement) { %>
 
-        <% if (user.school == undefined) { %>
-                <h2>Are you in any of these schools?</h2>
-                <ul>
-                    <% schools.forEach(function(school) { %>
-                        <form action="/schools/<%= school._id %>/join?_method=PUT" method="POST">
-                            <li><h3><%= school.name %></h3><input type="submit" value="Join"></li>
-                        </form>
+                        <div class="announcement-home">
+                            <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
+                            <i class="favorite-announcement far fa-star"></i>
+                            <h4><strong><%= announcement.title %></strong></h4>
+                            <p><%= announcement.text %></p>
+                        </div>
                     <% }); %>
-                </ul>
+                <% } else { %>
+                    <p id="none-for-now">None at this time</p>
+                <% } %>
+            </div>
         <% } %>
-    </div>
+    <% } %>
 </div>
 
 <!--

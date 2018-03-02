@@ -28,4 +28,10 @@ function addEvents() {
         $("#contentTab").addClass("clicked");
         $("#profileTab").removeClass("clicked");
     });
+
+    $(".favorite-announcement").on("click", function() {
+        $(this).toggleClass("far");
+        $(this).toggleClass("fas");
+        $(this).toggleClass("favorited");
+    });
 }

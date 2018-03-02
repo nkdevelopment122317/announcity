@@ -1,7 +1,7 @@
 /*mobile*/
 .my-announcement-container {
     font-family: "Roboto", sans-serif;
-    width: 90%;
+    width: 80%;
     margin: 1em auto;
     border-radius: 15px;
 }
@@ -9,8 +9,8 @@
 .my-announcement-container h3 {
     width: 100%;
     font-weight: 300;
-    text-align: center;
     font-size: 2em;
+    text-align: center;
 }
 
 .my-announcement-container h4 {
@@ -19,6 +19,7 @@
 
 .cluborg-link-home {
     font-size: 2em;
+    text-align: left;
 }
 
 body {
@@ -30,26 +31,31 @@ body {
     font-family: "Roboto", sans-serif;
     width: 100%;
     font-size: 1.5em;
+    text-align: center;
 }
 
 .announcement-home {
     margin: 0 auto;
-    padding: 1.5em;
+    padding: 20px;
+    padding-top: 15px;
     margin-top: 1.5em;
     /*border-radius: 15px;*/
-    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.3);
+    /*box-shadow: 0 0px 8px 0 rgba(0,0,0,0.3);*/
+    border: 1px solid #ced4da;
+    position: relative;
 }
 
-.border-home-announcement-top {
-
+.favorite-announcement {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.5em;
+    padding: 17px;
+    transition: all ease-out 0.1s;
 }
 
-.border-home-announcement-middle {
-
-}
-
-.border-home-announcement-bottom {
-
+.favorited {
+    color: #f9d909;
 }
 
 /*desktop*/
