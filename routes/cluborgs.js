@@ -3,8 +3,8 @@ var router = express.Router({mergeParams: true});
 var middleware = require('../middleware');
 var School = require('../models/school');
 var User = require("../models/user");
-
 var Cluborg = require('../models/cluborg');
+var Announcement = require('../models/announcement');
 
 //index
 router.get("/", function(req, res) {
@@ -112,12 +112,34 @@ router.put("/:club_id", middleware.checkCluborgOwnership, function(req, res) {
 
 //destroy
 router.delete("/:club_id", middleware.checkCluborgOwnership, function(req, res) {
-    Cluborg.findByIdAndRemove(req.params.club_id, function(err) {
-        if (err) {
-            res.redirect("/schools/" + req.params.id + "/cluborgs");
-        } else {
-            res.redirect("/schools/" + req.params.id + "/cluborgs");
-        }
+    // Cluborg.findByIdAndRemove(req.params.club_id, function(err) {
+    //     if (err) {
+    //         res.redirect("/schools/" + req.params.id + "/cluborgs");
+    //     } else {
+    //         res.redirect("/schools/" + req.params.id + "/cluborgs");
+    //     }
+    // });
+
+    Cluborg.findById(req.params.club_id)
+        .populate("announcements")
+        .exec(function(err, cluborg) {
+            cluborg.announcements.forEach(function(announcement) {
+                Announcement.findByIdAndRemove(announcement._id, function(err) {
+                    if (err) {
+                        res.redirect("/schools/" + req.params.id + "/cluborgs");
+                    } else {
+                        // nada
+                    }
+                })
+            });
+
+            Cluborg.findByIdAndRemove(req.params.club_id, function(err) {
+                if (err) {
+                    res.redirect("/schools/" + req.params.id + "/cluborgs");
+                } else {
+                    res.redirect("/schools/" + req.params.id + "/cluborgs");
+                }
+            });
     });
 });
 

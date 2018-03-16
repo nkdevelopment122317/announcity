@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var School = require('../models/school');
+var Cluborg = require ('../models/cluborg');
 var middleware = require('../middleware');
+var Announcement = require('../models/announcement');
 
 //index
 router.get("/", function(req, res) {
@@ -88,22 +90,56 @@ router.put("/:id", middleware.checkSchoolOwnership, function(req, res) {
 router.delete("/:id", middleware.checkSchoolOwnership, function(req, res) {
     var schoolName = "";
 
-    School.findById(req.params.id, function(err, foundSchool) {
-        if (err) {
-            req.flash("error", "Something went wrong");
-        } else {
-            schoolName = foundSchool.name;
-        }
-    });
+    School.findById(req.params.id)
+        .populate("cluborgs")
+        .exec(function(err, foundSchool) {
+            if (err) {
+                req.flash("error", "Something went wrong");
+            } else {
+                schoolName = foundSchool.name;
+                foundSchool.cluborgs.forEach(function(cluborg) {
+                    Cluborg.findById(cluborg._id)
+                        .populate("announcements")
+                        .exec(function(err, cluborg) {
+                            cluborg.announcements.forEach(function(announcement) {
+                                Announcement.findByIdAndRemove(announcement._id, function(err) {
+                                    if (err) {
+                                        res.redirect("/schools");
+                                    } else {
+                                        Cluborg.findByIdAndRemove(cluborg._id, function(err) {
+                                            if (err) {
+                                                res.redirect("/schools/" + req.params.id + "/cluborgs");
+                                            } else {
+                                                // nada
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                    });
+                });
 
-    School.findByIdAndRemove(req.params.id, function(err) {
-        if (err) {
-            res.redirect("/schools");
-        } else {
-            req.flash("success", schoolName + " and all its associated data have been deleted");
-            res.redirect("/schools");
-        }
-    });
+                School.findByIdAndRemove(req.params.id, function(err) {
+                    if (err) {
+                        res.redirect("/schools");
+                    } else {
+                        req.flash("success", schoolName + " and all its associated data have been deleted");
+                        res.redirect("/schools");
+                    }
+                });
+            }
+        });
+
+    // School.findByIdAndRemove(req.params.id, function(err) {
+    //     if (err) {
+    //         res.redirect("/schools");
+    //     } else {
+    //         req.flash("success", schoolName + " and all its associated data have been deleted");
+    //         res.redirect("/schools");
+    //     }
+    // });
+
+
 });
 
 //join
