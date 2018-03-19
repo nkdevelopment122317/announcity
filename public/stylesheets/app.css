@@ -58,6 +58,32 @@ body {
     color: #f9d909;
 }
 
+.label-club {
+    position: relative;
+    height: 100%
+}
+
+.label-club h3 {
+    position: absolute;
+    left: 0;
+}
+
+.label-club a {
+    position: absolute;
+    right: 0;
+}
+
+.page-header-main {
+    width: 100%;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.new-club-button {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
 /*desktop*/
 @media screen and (min-width: 768px) {
 

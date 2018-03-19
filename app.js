@@ -7,16 +7,14 @@ var LocalStrategy = require('passport-local');
 var User = require('./models/user');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
-// var ejsLint = require('ejs-lint');
-
-// ejsLint.lint("home", {});
 
 var PORT = process.env.PORT || 3000;
 
 var announcementRoutes = require('./routes/announcements');
 var cluborgRoutes = require('./routes/cluborgs');
 var indexRoutes = require('./routes/index');
-var schoolRoutes = require("./routes/schools");
+var schoolRoutes = require('./routes/schools');
+var presentationRoutes = require('./routes/presentations');
 
 mongoose.Promise = global.Promise;
 var databaseUri =  "mongodb://nikhil2:2nikhil@ds147518.mlab.com:47518/announcity" || "mongodb://localhost/announcity";
@@ -54,6 +52,7 @@ app.use("/", indexRoutes);
 app.use("/schools", schoolRoutes);
 app.use("/schools/:id/cluborgs", cluborgRoutes);
 app.use("/schools/:id/cluborgs/:club_id/announcements", announcementRoutes); //:id is the school
+app.use("/schools/:id/presentations", presentationRoutes);
 
 app.listen(PORT, process.env.IP, function() {
     console.log("Announcity Server has started");
