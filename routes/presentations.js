@@ -13,7 +13,7 @@ router.get("/", middleware.isInSchool, function(req, res) {
 });
 
 //new
-router.get("/new", middleware.isAdmin, function(req, res){
+router.get("/new", middleware.isAdmin, function(req, res) {
 
 });
 
@@ -22,8 +22,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 
 });
 
-//show
-//runs the presentation
+//show: runs the presentation
 router.get("/:pres_id", middleware.isInSchool, function(req, res) {
 
 });

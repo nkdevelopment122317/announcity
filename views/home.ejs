@@ -32,6 +32,8 @@
             <h2>You're not in any clubs!</h2>
     <% } %> -->
 
+    <h5 class="asking-for-code">Have a code? <a href="/">Yes</a> / <a href="/">No, I am a Student</a></h5> <!-- API needed here... "Thanks for the confirmation" if No is selected -->
+
     <% if (user.school == undefined) { %>
             <h2>Are you in any of these schools?</h2>
             <ul>
@@ -47,15 +49,17 @@
         <% } else { %>
             <div class="my-announcement-container">
                 <h3>My Announcements</h3>
+                <hr>
                 <% if (announcements.length !== 0) { %>
                     <% announcements.forEach(function(announcement) { %>
 
                         <div class="announcement-home">
                             <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
-                            <i class="favorite-announcement far fa-star"></i>
+                            <!-- <i class="favorite-announcement far fa-star"></i> --> <!-- add this in after test phase -->
                             <h4><strong><%= announcement.title %></strong></h4>
                             <p><%= announcement.text %></p>
                         </div>
+                        <hr>
                     <% }); %>
                 <% } else { %>
                     <p id="none-for-now">None at this time</p>

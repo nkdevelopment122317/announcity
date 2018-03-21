@@ -2,9 +2,7 @@
 
 <h1 class="page-header-main">Discover Clubs</h1>
 
-<a href="/schools/<%= school_id %>/cluborgs/new"><i class="fas fa-plus new-club-button"></i></a>
-
-<br>
+<a href="/schools/<%= school_id %>/cluborgs/new"><h4 class="new-club-button">New Club</h4></a>
 
 <!-- <% if (showAccountTypeMessage == true) { %>
     <h1>ACCOUNT TYPE MESSAGE</h1>
@@ -31,8 +29,8 @@
                 <div class="thumbnail">
                     <img class="cluborg-image" src="<%= cluborg.image %>">
                     <div class="caption">
-                        <h3><%= cluborg.name %></h3>
-                        <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="">More Info</a>
+                        <h3 class="cluborg-name"><%= cluborg.name %></h3>
+                        <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="more-info">More Info</a>
                     </div>
                     <p>
                     </p>
