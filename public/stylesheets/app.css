@@ -1,7 +1,11 @@
 /*mobile*/
 
 .navbar-fixed-top {
-    background: #2b76ef;
+    /*background: #2b76ef;*/
+    background: url("https://cdn.pixabay.com/photo/2018/03/11/20/42/mammals-3218028_960_720.jpg");
+    /*background: #000000;*/
+    background-repeat: no-repeat;
+    background-size: cover;
     border: none;
     /*height: 5em;*/
 }
@@ -9,6 +13,7 @@
 .navbar-inverse .navbar-brand {
     color: #ffffff;
     font-size: 1.5em;
+    margin-left: 5.5em;
 }
 
 .navbar-inverse .navbar-toggle {
@@ -17,11 +22,13 @@
 }
 
 .navbar-inverse .navbar-toggle:hover {
-    background: #2b76ef;
+    /*background: #2b76ef;*/
+    background: transparent;
 }
 
 .navbar-inverse .navbar-toggle:focus {
-    background: #2b76ef;
+    /*background: #2b76ef;*/
+    background: transparent;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -30,6 +37,10 @@
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: #ffffff;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border: none;
 }
 
 .my-announcement-container {
@@ -141,6 +152,74 @@ hr {
 }
 
 .asking-for-code {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.3em;
+    width: 100%;
+    text-align: center;
+}
+
+.flash-container {
+    margin-top: 3.5em;
+}
+
+.alert-success, .alert-danger {
+    margin-bottom: 0;
+}
+
+.submit-code label {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 1.25em;
+    margin: 0;
+}
+
+.submit-code {
+    width: 100%;
+    text-align: center;
+}
+
+.submit-code input {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    width: 8em;
+}
+
+.no-display {
+    display: none;
+}
+
+.submit-code-links {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    margin-top: 1em;
+}
+
+.loader {
+    border: 6px solid #d6d6d6;
+    border-radius: 50%;
+    border-top: 6px solid #2b76ef;
+    /*border-bottom: 16px solid #2b76ef;*/
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 0.5s linear infinite;
+    animation: spin 0.5s linear infinite;
+    margin: 0 auto;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.code-feedback {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    font-weight: 300;
     width: 100%;
     text-align: center;
 }
@@ -158,7 +237,7 @@ hr {
 
     html {
         height: 100%;
-        font-family: Roboto, sans-serif;
+        font-family: "Roboto", sans-serif;
     }
 
     body {

@@ -34,4 +34,34 @@ function addEvents() {
         $(this).toggleClass("fas");
         $(this).toggleClass("favorited");
     });
+
+    $("#yes-for-code").on("click", function() {
+        $(".submit-code").toggleClass("no-display");
+        $(".asking-for-code").toggleClass("no-display");
+    });
+
+    $(".back-link").on("click", function() {
+        $(".submit-code").toggleClass("no-display");
+        $(".asking-for-code").toggleClass("no-display");
+    });
+
+    $(".submit-code-link").on("click", function() {
+        $(".submit-code").toggleClass("no-display");
+        $(".loader").toggleClass("no-display");
+
+        setTimeout(function() {
+            $(".loader").toggleClass("no-display");
+            $(".yes-code").toggleClass("no-display");
+        }, 1000);
+    });
+
+    $("#no-for-code").on("click", function() {
+        $(".asking-for-code").toggleClass("no-display");
+        $(".loader").toggleClass("no-display");
+
+        setTimeout(function() {
+            $(".loader").toggleClass("no-display");
+            $(".no-code").toggleClass("no-display");
+        }, 500);
+    });
 }
