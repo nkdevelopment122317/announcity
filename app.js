@@ -15,6 +15,7 @@ var cluborgRoutes = require('./routes/cluborgs');
 var indexRoutes = require('./routes/index');
 var schoolRoutes = require('./routes/schools');
 var presentationRoutes = require('./routes/presentations');
+var apiRoutes = require('./routes/api');
 
 mongoose.Promise = global.Promise;
 var databaseUri =  "mongodb://nikhil2:2nikhil@ds147518.mlab.com:47518/announcity" || "mongodb://localhost/announcity";
@@ -53,6 +54,7 @@ app.use("/schools", schoolRoutes);
 app.use("/schools/:id/cluborgs", cluborgRoutes);
 app.use("/schools/:id/cluborgs/:club_id/announcements", announcementRoutes); //:id is the school
 app.use("/schools/:id/presentations", presentationRoutes);
+app.use("/api", apiRoutes);
 
 app.listen(PORT, process.env.IP, function() {
     console.log("Announcity Server has started");

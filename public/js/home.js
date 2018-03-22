@@ -49,6 +49,8 @@ function addEvents() {
         $(".submit-code").toggleClass("no-display");
         $(".loader").toggleClass("no-display");
 
+        sendCode();
+
         setTimeout(function() {
             $(".loader").toggleClass("no-display");
             $(".yes-code").toggleClass("no-display");
@@ -63,5 +65,23 @@ function addEvents() {
             $(".loader").toggleClass("no-display");
             $(".no-code").toggleClass("no-display");
         }, 500);
+    });
+
+    $(".ah").on("click", function() {
+        $.getJSON("/api/")
+        .done(function(data) {
+            $("body").append(JSON.stringify(data));
+        });
+    });
+}
+
+function sendCode() {
+    var code = $("#code-box").val();
+    $.ajax({
+        url: "/api/accountType/" + code + "/confirm",
+        type: "PUT",
+        success: function(data) {
+            $(".yes-code").text(data);
+        }
     });
 }
