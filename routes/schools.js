@@ -32,10 +32,10 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         name: req.body.school.name,
         location: req.body.school.location,
         author: author,
-        code: req.body.school.code
+        schoolCode: req.body.school.code,
+        advisorCode: generateCode(),
+        adminCode: generateCode()
     };
-
-    console.log(school);
 
     School.create(school, function(err, newlyCreated) {
         if (err) {
@@ -159,5 +159,16 @@ router.put("/:id/join", middleware.isLoggedIn, function(req, res) {
         }
     });
 });
+
+function generateCode() {
+    var code = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 7; i++) {
+        code += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return code;
+}
 
 module.exports = router; //put this in EVERY single one of your routes file to get rid of router errors

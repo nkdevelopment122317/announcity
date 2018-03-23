@@ -30,7 +30,7 @@ router.get("/", function(req, res) {
 });
 
 //new
-router.get("/new", middleware.isLoggedIn, function(req, res) {
+router.get("/new", middleware.isAdminOrAdvisor, function(req, res) {
     School.findById(req.params.id, function(err, school) {
         if (err) {
             req.flash("error", "School not found");
@@ -42,7 +42,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 });
 
 //create
-router.post("/", middleware.isLoggedIn, function(req, res) {
+router.post("/", middleware.isAdminOrAdvisor, function(req, res) {
     School.findById(req.params.id, function(err, school) {
         if (err) {
             req.flash("error", "School not found");
@@ -74,6 +74,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 
 //show
 router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
+    var ownsClub = false;
+    var isInClub = false;
+
     Cluborg.findById(req.params.club_id)
         .populate("members")
         .populate("announcements")
@@ -82,7 +85,22 @@ router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
                 req.flash("error", "Something went wrong");
                 res.redirect("/schools/" + req.params.id + "/cluborgs/new");
             } else {
-                res.render("cluborgs/show", {cluborg: foundCluborg, school_id: req.params.id});
+                console.log(foundCluborg.members.indexOf(req.user));
+
+                if (req.user._id.equals(foundCluborg.author.id)) {
+                    ownsClub = true;
+                } else {
+                    while (!isInClub) {
+                        foundCluborg.members.forEach(function(member) {
+                            if (member._id.equals(req.user._id)) {
+                                isInClub = true;
+                            }
+                        });
+                    }
+                }
+                console.log(ownsClub);
+                console.log(isInClub);
+                res.render("cluborgs/show", {cluborg: foundCluborg, school_id: req.params.id, ownsClub: ownsClub, isInClub: isInClub});
             }
     });
 });

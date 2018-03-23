@@ -13,7 +13,9 @@ var schoolSchema = new mongoose.Schema({
         },
         username: String
     },
-    code: Number,
+    schoolCode: Number,
+    advisorCode: String,
+    adminCode: String,
     members: [
         {
             type: mongoose.Schema.Types.ObjectId,

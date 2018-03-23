@@ -15,10 +15,10 @@
     </form>
 <% } %>
 
-<% if (currentUser) { %>
-        <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
-            <input type="submit" value="Join">
-       </form>
+<% if ((currentUser && (!ownsClub)) && (currentUser && (!isInClub))) { %>
+    <form class="join-club" action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
+        <input type="submit" value="Join">
+   </form>
 <% } %>
 
 <hr>
@@ -51,5 +51,7 @@
 <% }); %>
 
 <% } %>
+
+<script type="text/javascript" src="/js/events.js"></script>
 
 <% include ../partials/footer %>

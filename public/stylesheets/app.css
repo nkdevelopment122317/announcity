@@ -2,8 +2,8 @@
 
 .navbar-fixed-top {
     /*background: #2b76ef;*/
-    background: url("https://cdn.pixabay.com/photo/2018/03/11/20/42/mammals-3218028_960_720.jpg");
-    /*background: #000000;*/
+    /*background: url("https://cdn.pixabay.com/photo/2018/03/11/20/42/mammals-3218028_960_720.jpg");*/
+    background: #000000;
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
@@ -122,7 +122,7 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 2em;
-    font-family: "Robot", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 300;
 }
 
@@ -222,6 +222,12 @@ hr {
     font-weight: 300;
     width: 100%;
     text-align: center;
+}
+
+.new-button {
+    margin: 0 auto;
+    display: block;
+    margin: 1em;
 }
 
 /*desktop*/

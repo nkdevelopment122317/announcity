@@ -93,6 +93,20 @@ middlewareObj.isInSchool = function(req, res, next) {
     }
 };
 
+middlewareObj.isAdminOrAdvisor = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        if (req.user.isAdmin || req.user.isFaculty) {
+            next();
+        } else {
+            req.flash("error", "You are not authorized to do that.");
+            res.redirect("back");
+        }
+    } else {
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+    }
+};
+
 middlewareObj.isAdmin = function(req, res, next) {
     if (req.isAuthenticated()) {
         if (req.user.isAdmin) {

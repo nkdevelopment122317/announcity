@@ -32,6 +32,9 @@
                             <li><a href="/schools">Schools</a></li>
                         <% } %>
                         <li><a href="/schools/<%= currentUser.school %>/cluborgs">Clubs And Activities</a></li>
+                        <% if (currentUser.isAdmin) { %>
+                            <li><a href="/schools/<%= currentUser.school %>/presentations">Presentations</a></li>
+                        <% } %>
                       <% } %>
 
                   </ul>

@@ -32,11 +32,13 @@
             <h2>You're not in any clubs!</h2>
     <% } %> -->
 
-    <h5 class="asking-for-code">Have a code? <a id="yes-for-code" href="#">Yes</a> / <a id="no-for-code" href="#">No, I am a Student</a></h5> <!-- API needed here... "Thanks for the confirmation" if No is selected -->
+    <% if ((user.isStudent === false) && (user.isFaculty === false) && (user.isAdmin === false)) { %>
+        <h5 class="asking-for-code">Have a code? <a id="yes-for-code" href="#">Yes</a> / <a id="no-for-code" href="#">No, I am a Student</a></h5>
+    <% } %>
 
     <div class="submit-code no-display">
         <label for="code-box">Enter the code here: </label>
-        <input type="number" id="code-box">
+        <input type="text" id="code-box">
         <div class="submit-code-links"><a href="#" class="submit-code-link"> Submit</a> / <a href="#" class="back-link">Back</a></div>
     </div>
 

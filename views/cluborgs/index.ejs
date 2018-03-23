@@ -2,7 +2,9 @@
 
 <h1 class="page-header-main">Discover Clubs</h1>
 
-<a href="/schools/<%= school_id %>/cluborgs/new"><h4 class="new-club-button">New Club</h4></a>
+<% if (currentUser.isAdmin || currentUser.isFaculty) { %>
+    <a href="/schools/<%= school_id %>/cluborgs/new"><h4 class="new-club-button">New Club</h4></a>
+<% } %>
 
 <!-- <% if (showAccountTypeMessage == true) { %>
     <h1>ACCOUNT TYPE MESSAGE</h1>

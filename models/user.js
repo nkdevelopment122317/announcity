@@ -21,9 +21,9 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isRegularUser:{
+    isStudent:{
         type: Boolean,
-        default: true
+        default: false
     },
     isFaculty: {
         type: Boolean,

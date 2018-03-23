@@ -61,6 +61,8 @@ function addEvents() {
         $(".asking-for-code").toggleClass("no-display");
         $(".loader").toggleClass("no-display");
 
+        confirmStudentAccount();
+
         setTimeout(function() {
             $(".loader").toggleClass("no-display");
             $(".no-code").toggleClass("no-display");
@@ -82,6 +84,18 @@ function sendCode() {
         type: "PUT",
         success: function(data) {
             $(".yes-code").text(data);
+        }
+    });
+}
+
+function confirmStudentAccount() {
+    $.ajax({
+        url: "/api/accountType/student/confirm",
+        type: "PUT",
+        success: function(data) {
+            if (data === "SUCCESS") {
+                $(".no-code").text("Student account verified.");
+            }
         }
     });
 }

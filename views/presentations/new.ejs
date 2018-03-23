@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<h1>New Presentation</h1>
+
+<form action="/schools/<%= currentUser.school %>/presentations" method="POST">
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="description" placeholder="Description">
+    <input type="text" name="image" placeholder="Image URL">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>

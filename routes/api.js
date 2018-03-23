@@ -15,8 +15,35 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 
 //gets the code from the user and confirms account type
 router.put("/accountType/:code/confirm", function(req, res) {
-    console.log(req.params.code);
-    res.send("You are a club advisor or an administrator.");
+    console.log(req.user);
+    User.findById(req.user._id)
+        .populate("school")
+        .exec(function(err, user) {
+            if (err) {
+                res.send(err);
+            } else {
+                if (req.params.code === "student") {
+                    user.isStudent = true;
+                    user.isFaculty = false;
+                    user.isAdmin = false;
+                    user.save();
+                } else if (req.params.code === user.school.advisorCode) {
+                    user.isStudent = false;
+                    user.isFaculty = true;
+                    user.isAdmin = false;
+                    user.save();
+                    res.send("Club Advisor account verified.");
+                } else if (req.params.code === user.school.adminCode) {
+                    user.isStudent = false;
+                    user.isFaculty = false;
+                    user.isAdmin = true;
+                    user.save();
+                    res.send("Adminstrator account verified.");
+                } else {
+                    res.send("Invalid code.");
+                }
+            }
+        });
 });
 
 module.exports = router;
