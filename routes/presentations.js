@@ -21,7 +21,6 @@ router.get("/new", middleware.isAdmin, function(req, res) {
 
 //create
 router.post("/", middleware.isAdmin, function(req, res) {
-    console.log("1");
 
     var author = {
         id: req.user._id,
@@ -45,11 +44,10 @@ router.post("/", middleware.isAdmin, function(req, res) {
                     req.flash("error", err);
                     res.redirect("back");
                 } else {
-                    newlyCreated.school = school;
-                    newlyCreated.save();
-
+                    school.presentations.push(newlyCreated);
+                    school.save();
                     req.flash("success", "Successfully created");
-                    res.redirect("/schools/" + school._id + "/presentations/" + newlyCreated._id);
+                    res.redirect("/schools/" + school._id + "/presentations");
                 }
             });
         }
@@ -58,7 +56,26 @@ router.post("/", middleware.isAdmin, function(req, res) {
 
 //show: runs the presentation
 router.get("/:pres_id", middleware.isAdmin, function(req, res) {
+    Presentation.findById(req.params.pres_id, function(err, presentation) {
+        if (err) {
+            req.flash("error", err);
+            res.redirect("back");
+        } else {
+            res.render("presentations/show", {presentation: presentation});
+        }
+    });
+});
 
+//plays the presentation
+router.get(":/pres_id/play", middleware.isAdmin, function(req, res) {
+    Presentation.findById(req.params.pres_id, function(err, presentation) {
+        if (err) {
+            req.flash("error", err);
+            res.redirect("back");
+        } else {
+            res.render("presentations/play", {presentation: presentation});
+        }
+    });
 });
 
 //edit

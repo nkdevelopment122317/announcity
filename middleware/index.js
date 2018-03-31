@@ -110,6 +110,7 @@ middlewareObj.isAdminOrAdvisor = function(req, res, next) {
 middlewareObj.isAdmin = function(req, res, next) {
     if (req.isAuthenticated()) {
         if (req.user.isAdmin) {
+            console.log("he's good");
             next();
         } else {
             req.flash("error", "You are not authorized to do that.");
