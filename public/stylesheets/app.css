@@ -90,7 +90,7 @@ body {
     position: relative;
 }
 
-.favorite-announcement {
+.favorite {
     position: absolute;
     right: 0;
     top: 0;
@@ -239,8 +239,69 @@ hr {
     margin-right: 0;
 }
 
+.caption-top {
+    position: relative;
+    height: 3em;
+}
+
+.caption-top > * {
+    position: absolute;
+}
+
+.caption-top a {
+    left: 0;
+}
+
+.caption-top a h3 {
+    margin-top: 0.5em;
+}
+
+.caption-top i {
+    right: 0;
+    padding: 0.5em;
+    padding-top: 0.7em;
+}
+
+.pres-description {
+    margin-top: 0.25em;
+}
+
+.dashboard-header {
+    margin-left: 0.5em;
+}
+
+.dashboard-tabs {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.tab-content {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.see-more {
+    font-size: 2em;
+}
+
 /*desktop*/
 @media screen and (min-width: 768px) {
+
+    .dashboard-header {
+        margin-left: 0.75em;
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        margin-bottom: 0.5em;
+    }
+
+    .dashboard-tabs {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    .tab-content {
+        margin-left: 0.75em;
+    }
 
     .my-announcement-container {
         background: none;
@@ -337,6 +398,16 @@ hr {
         transition: all 0.3s ease 0s;
         padding: 0;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .see-more {
+        transition: all 0.3s ease 0s;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .see-more:hover {
+        transform: translateY(-7px);
+        box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
     }
 
     .new-button {

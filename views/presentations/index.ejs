@@ -11,13 +11,20 @@
             <div class="thumbnail">
                 <img class="cluborg-image" src="<%= presentation.image %>">
                 <div class="caption">
-                    <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>"><h3 class="cluborg-name"><%= presentation.name %></h3></a>
+                    <div class="caption-top">
+                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>"><h3 class="cluborg-name"><%= presentation.name %></h3></a>
+                        <% if (presentation.favorite) { %>
+                            <i class="favorite favorited fas fa-star" data-pres-id="<%= presentation._id %>"></i>
+                        <% } else { %>
+                            <i class="favorite far fa-star" data-pres-id="<%= presentation._id %>"></i>
+                        <% } %>
+                    </div>
 
-                    <p><%= presentation.description %></p>
+                    <p class="pres-description"><%= presentation.description %></p>
 
                     <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="more-info">More Info</a> -->
                     <div class="thumbnail-button-group">
-                        <a href="#" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a>
+                        <a href="#" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></a>
                     </div>
 
                 </div>
@@ -27,5 +34,7 @@
         </div>
     <% }); %>
 </div>
+
+<script src="/js/presIndex.js"></script>
 
 <% include ../partials/footer %>

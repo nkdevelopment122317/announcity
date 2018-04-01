@@ -13,7 +13,7 @@
 
 <br>
 
-<div class="content-container">
+<div class="content-container" id="dashboard-container">
     <!-- <% if (cluborgs.length !== 0) { %>
             <% cluborgs.forEach(function(cluborg) { %>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
@@ -57,32 +57,90 @@
                 <% }); %>
             </ul>
     <% } else { %>
-        <% if (cluborgs.length === 0) { %>
+        <% if (cluborgs.length === 0 && currentUser.isStudent) { %>
             <a href="/schools/<%= user.school._id %>/cluborgs"><h3>Discover Clubs</h3></a>
         <% } else { %>
-            <div class="my-announcement-container">
-                <h3>My Announcements</h3>
-                <hr>
-                <% if (announcements.length !== 0) { %>
-                    <% announcements.forEach(function(announcement) { %>
+            <% if (currentUser.isStudent) { %>
+                <div class="my-announcement-container">
+                    <h3>My Announcements</h3>
+                    <hr>
+                    <% if (announcements.length !== 0) { %>
+                        <% announcements.forEach(function(announcement) { %>
 
-                        <div class="announcement-home">
-                            <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
-                            <!-- <i class="favorite-announcement far fa-star"></i> --> <!-- add this in after test phase -->
-                            <h4><strong><%= announcement.title %></strong></h4>
-                            <p><%= announcement.text %></p>
-                        </div>
-                        <hr>
-                    <% }); %>
-                <% } else { %>
-                    <p id="none-for-now">None at this time</p>
-                <% } %>
-            </div>
+                            <div class="announcement-home">
+                                <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
+                                <!-- <i class="favorite-announcement far fa-star"></i> --> <!-- add this in after test phase -->
+                                <h4><strong><%= announcement.title %></strong></h4>
+                                <p><%= announcement.text %></p>
+                            </div>
+                            <hr>
+                        <% }); %>
+                    <% } else { %>
+                        <p id="none-for-now">None at this time</p>
+                    <% } %>
+                </div>
+            <% } %>
         <% } %>
+    <% } %>
+
+    <% if (currentUser.isAdmin) { %>
+        <h1 class="dashboard-header">Administrator Dashboard</h1>
+        <ul class="nav nav-tabs nav-justified dashboard-tabs">
+            <li role="presentation" class="active" data-tab="presentations"><a href="#">Favorite Presentations</a></li>
+            <li role="presentation" data-tab="announcements"><a href="#">Announcements</a></li>
+            <li role="presentation" data-tab="clubs"><a href="#">Clubs</a></li>
+        </ul>
+
+        <div class="tab-content" data-tab="presentations">
+            <div class="row">
+                <% presentations.forEach(function(presentation) { %>
+                    <% if (presentation.favorite) { %>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="thumbnail">
+                                <img class="cluborg-image" src="<%= presentation.image %>">
+                                <div class="caption">
+                                    <div class="caption-top">
+                                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>"><h3 class="cluborg-name"><%= presentation.name %></h3></a>
+                                        <% if (presentation.favorite) { %>
+                                            <i class="favorite favorited fas fa-star" data-pres-id="<%= presentation._id %>"></i>
+                                        <% } else { %>
+                                            <i class="favorite far fa-star" data-pres-id="<%= presentation._id %>"></i>
+                                        <% } %>
+                                    </div>
+
+                                    <p class="pres-description"><%= presentation.description %></p>
+
+                                    <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="more-info">More Info</a> -->
+                                    <div class="thumbnail-button-group">
+                                        <a href="#" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/edit" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+
+                                </div>
+                                <p>
+                                </p>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <a href="/schools/<%= currentUser.school %>/presentations" role="button" class="btn btn-default btn-lg see-more" id="see-more">See All Presentations <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="tab-content no-display" data-tab="announcements">
+            <p>Announcements</p>
+        </div>
+
+        <div class="tab-content no-display" data-tab="clubs">
+            <p>Clubs</p>
+        </div>
     <% } %>
 </div>
 
-<a class="ah" href="#">Get all announcements</a>
+<!-- <a class="ah" href="#">Get all announcements</a> -->
 
 <!--
 

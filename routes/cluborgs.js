@@ -85,8 +85,6 @@ router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
                 req.flash("error", "Something went wrong");
                 res.redirect("/schools/" + req.params.id + "/cluborgs/new");
             } else {
-                console.log(foundCluborg.members.indexOf(req.user));
-
                 if (req.user._id.equals(foundCluborg.author.id)) {
                     ownsClub = true;
                 } else {
@@ -96,7 +94,9 @@ router.get("/:club_id", middleware.isLoggedIn, function(req, res) {
                                 isInClub = true;
                             }
                         });
+                        break;
                     }
+                    console.log(3);
                 }
                 console.log(ownsClub);
                 console.log(isInClub);

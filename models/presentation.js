@@ -12,7 +12,11 @@ var presentationSchema = new mongoose.Schema({
     date: {type: Date, default: Date.now},
     name: String,
     description: String,
-    image: String
+    image: String,
+    favorite: {
+        type: Boolean,
+        default: false
+    }
 }, { usePushEach: true });
 
 module.exports = mongoose.model("Presentation", presentationSchema);

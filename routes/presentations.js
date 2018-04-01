@@ -79,8 +79,8 @@ router.get(":/pres_id/play", middleware.isAdmin, function(req, res) {
 });
 
 //edit
-router.get("/edit", middleware.isAdmin, function(req, res) {
-
+router.get("/:id/edit", middleware.isAdmin, function(req, res) {
+    res.render("presentations/edit");
 });
 
 //update
@@ -89,7 +89,7 @@ router.put("/:pres_id", middleware.isAdmin, function(req, res) {
 });
 
 //destroy
-router.delete("/", middleware.isAdmin, function(req, res) {
+router.delete("/:pres_id", middleware.isAdmin, function(req, res) {
 
 });
 

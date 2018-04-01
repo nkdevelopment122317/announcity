@@ -129,17 +129,6 @@ router.delete("/:id", middleware.checkSchoolOwnership, function(req, res) {
                 });
             }
         });
-
-    // School.findByIdAndRemove(req.params.id, function(err) {
-    //     if (err) {
-    //         res.redirect("/schools");
-    //     } else {
-    //         req.flash("success", schoolName + " and all its associated data have been deleted");
-    //         res.redirect("/schools");
-    //     }
-    // });
-
-
 });
 
 //join

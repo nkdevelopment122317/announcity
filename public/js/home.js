@@ -1,6 +1,7 @@
 $(document).ready(function() {
     fixButtonHeight();
     addEvents();
+    adjustButtonPadding();
 });
 
 function fixButtonHeight() {
@@ -29,10 +30,12 @@ function addEvents() {
         $("#profileTab").removeClass("clicked");
     });
 
-    $(".favorite-announcement").on("click", function() {
+    $(".favorite").on("click", function() {
         $(this).toggleClass("far");
         $(this).toggleClass("fas");
         $(this).toggleClass("favorited");
+
+        updateStatus($(this).hasClass("favorited"), $(this).attr("data-pres-id"));
     });
 
     $("#yes-for-code").on("click", function() {
@@ -69,6 +72,27 @@ function addEvents() {
         }, 500);
     });
 
+    $(".nav-tabs li").on("click", function() {
+        $(".nav-tabs li").each(function() {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+            }
+        });
+        $(this).addClass("active");
+
+        var attr = $(this).attr("data-tab");
+
+        if ($(this).attr("data-tab") === attr) {
+            $(".tab-content").each(function() {
+                if ($(this).attr("data-tab") === attr) {
+                    $(this).removeClass("no-display");
+                } else {
+                    $(this).addClass("no-display");
+                }
+            });
+        }
+    });
+
     $(".ah").on("click", function() {
         $.getJSON("/api/")
         .done(function(data) {
@@ -98,4 +122,34 @@ function confirmStudentAccount() {
             }
         }
     });
+}
+
+function updateStatus(favorited, id) {
+    if (favorited) {
+        $.ajax({
+            url: "/api/presentations/" + id + "/updateStatus/favorite",
+            type: "PUT",
+            success: function(data) {
+
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/api/presentations/" + id + "/updateStatus/unfavorite",
+            type: "PUT",
+            success: function(data) {
+
+            }
+        });
+    }
+}
+
+function adjustButtonPadding() {
+    var button = $(".see-more");
+    var thumbnail = $(".thumbnail");
+
+    button.css("padding-top", (thumbnail.height() - button.height()) / 2);
+    button.css("padding-bottom", (thumbnail.height() - button.height()) / 2);
+    button.css("padding-right", (thumbnail.width() - button.width()) / 2);
+    button.css("padding-left", (thumbnail.width() - button.width()) / 2);
 }

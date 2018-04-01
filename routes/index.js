@@ -6,6 +6,7 @@ var middleware = require("../middleware");
 var School = require("../models/school");
 var Cluborg = require("../models/cluborg");
 var Announcement = require("../models/announcement");
+var Presentation = require("../models/presentation");
 var request = require("request");
 
 router.get("/", function(req, res) {
@@ -49,7 +50,18 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                                     }
                                 });
                         });
-                        res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements});
+                        if (req.user.isAdmin) {
+                            Presentation.find({"school": req.user.school._id}, function(err, presentations) {
+                                if (err) {
+                                    req.flash("error", err);
+                                    res.redirect("back");
+                                } else {
+                                    res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements, presentations: presentations});
+                                }
+                            });
+                        } else {
+                            res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements});
+                        }
                     }
                 });
             }

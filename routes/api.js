@@ -15,7 +15,6 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 
 //gets the code from the user and confirms account type
 router.put("/accountType/:code/confirm", function(req, res) {
-    console.log(req.user);
     User.findById(req.user._id)
         .populate("school")
         .exec(function(err, user) {
@@ -44,6 +43,25 @@ router.put("/accountType/:code/confirm", function(req, res) {
                 }
             }
         });
+});
+
+router.put("/presentations/:id/updateStatus/:status", function(req, res) {
+    Presentation.findById(req.params.id, function(err, presentation) {
+        if (err) {
+            req.flash("error", err);
+            res.redirect("back");
+        } else {
+            if (req.params.status === "favorite") {
+                presentation.favorite = true;
+                presentation.save();
+                res.send("Presentation favorited");
+            } else if (req.params.status === "unfavorite") {
+                presentation.favorite = false;
+                presentation.save();
+                res.send("Presentation unfavorited");
+            }
+        }
+    });
 });
 
 module.exports = router;
