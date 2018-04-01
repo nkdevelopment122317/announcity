@@ -79,18 +79,61 @@ router.get(":/pres_id/play", middleware.isAdmin, function(req, res) {
 });
 
 //edit
-router.get("/:id/edit", middleware.isAdmin, function(req, res) {
-    res.render("presentations/edit");
+router.get("/:pres_id/edit", middleware.isAdmin, function(req, res) {
+    Presentation.findById(req.params.pres_id, function(err, presentation) {
+        if (err) {
+            req.flash("error", err)
+            res.redirect("back");
+        } else {
+            res.render("presentations/edit", {presentation: presentation});
+        }
+    });
 });
 
 //update
 router.put("/:pres_id", middleware.isAdmin, function(req, res) {
+    Presentation.findById(req.params.pres_id, function(err, presentation) {
+        if (err) {
+            req.flash("eror", err);
+            res.redirect("back");
+        } else {
+            presentation.name = req.body.name;
+            presentation.save();
 
+            presentation.description = req.body.description;
+            presentation.save();
+
+            presentation.image = req.body.image;
+            presentation.save();
+
+            req.flash("success", "Presentation saved");
+            res.redirect("/schools/" + req.user.school + "/presentations");
+        }
+    });
 });
 
 //destroy
 router.delete("/:pres_id", middleware.isAdmin, function(req, res) {
+    School.findById(req.user.school, function(err, school) {
+        if (err) {
+            req.flash("error", err);
+            res.redirect("back");
+        } else {
+            var index = school.presentations.indexOf(req.params.pres_id);
+            school.presentations.splice(index, 1);
+            school.save();
 
+            Presentation.findByIdAndRemove(req.parans.pres_id, function(err) {
+                if (err) {
+                    req.flash("error", err);
+                    res.redirect("back");
+                } else {
+                    req.flash("success", "Presentation deleted");
+                    res.redirect("/schools/" + req.user.school + "/presentations");
+                }
+            })
+        }
+    })
 });
 
 module.exports = router;

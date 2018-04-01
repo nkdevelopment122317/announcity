@@ -1,5 +1,11 @@
 <% include ../partials/header %>
 
-<h1>Edit Presentation</h1>
+<form class="standard-form" action="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=PUT" method="POST">
+    <h1 class="form-header">Edit Presentation</h1>
+    <input class="reg-input form-text-box" type="text" name="name" placeholder="Name" value="<%= presentation.name %>">
+    <input class="reg-input form-text-box" type="text" name="description" placeholder="Description" value="<%= presentation.description %>">
+    <input class="reg-input form-text-box" type="text" name="image" placeholder="Image URL" value="<%= presentation.image %>">
+    <input class="material-button submit" type="submit" value="Save">
+</form>
 
 <% include ../partials/footer %>
