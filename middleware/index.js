@@ -33,7 +33,7 @@ middlewareObj.checkAnnouncementOwnership = function(req, res, next) {
         });
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back"); //takes the user back to the previous page they were on
+        res.redirect("/login"); //takes the user back to the previous page they were on
     }
 };
 
@@ -54,7 +54,7 @@ middlewareObj.checkCluborgOwnership = function(req, res, next) {
         });
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
+        res.redirect("/login");
     }
 };
 
@@ -75,7 +75,7 @@ middlewareObj.checkSchoolOwnership = function(req, res, next) {
         });
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
+        res.redirect("/login");
     }
 };
 
@@ -89,7 +89,7 @@ middlewareObj.isInSchool = function(req, res, next) {
         }
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
+        res.redirect("/login");
     }
 };
 
@@ -103,7 +103,7 @@ middlewareObj.isAdminOrAdvisor = function(req, res, next) {
         }
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
+        res.redirect("/login");
     }
 };
 
@@ -118,7 +118,7 @@ middlewareObj.isAdmin = function(req, res, next) {
         }
     } else {
         req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
+        res.redirect("/login");
     }
 };
 

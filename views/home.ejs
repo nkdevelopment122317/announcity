@@ -100,7 +100,7 @@
                                 <img class="cluborg-image" src="<%= presentation.image %>">
                                 <div class="caption">
                                     <div class="caption-top">
-                                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>"><h3 class="cluborg-name"><%= presentation.name %></h3></a>
+                                        <h3><%= presentation.name %></h3>
                                         <% if (presentation.favorite) { %>
                                             <i class="favorite favorited fas fa-star" data-pres-id="<%= presentation._id %>"></i>
                                         <% } else { %>
@@ -112,7 +112,7 @@
 
                                     <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="more-info">More Info</a> -->
                                     <div class="thumbnail-button-group">
-                                        <a href="#" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <a href="#" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/edit" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <form action="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=DELETE" method="POST"><a type="submit" href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=DELETE" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></a></form>
+                                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play" target="_blank" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> --> <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/edit" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></button></form>
                                     </div>
 
                                 </div>

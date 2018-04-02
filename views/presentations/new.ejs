@@ -1,12 +1,23 @@
 <% include ../partials/header %>
 
-<h1>New Presentation</h1>
+<form class="standard-form" action="/schools/<%= currentUser.school %>/presentations" method="POST">
+    <h1 class="form-header">New Presentation</h1>
+    <input class="reg-input" type="text" name="name" placeholder="Name">
+    <input class="reg-input" type="text" name="description" placeholder="Description">
+    <input class="reg-input" type="text" name="image" placeholder="Image URL">
+    <p class="input-explanation">Search for clubs to link their announcements to this presentation:</p>
 
-<form action="/schools/<%= currentUser.school %>/presentations" method="POST">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="description" placeholder="Description">
-    <input type="text" name="image" placeholder="Image URL">
-    <input type="submit">
+    <div class="search-results no-display">
+
+    </div>
+    <input class="reg-input" id="search" type="text" placeholder='Search for Clubs...'>
+    <input class="material-button submit" type="submit">
+
+    <div class="cluborg-list">
+
+    </div>
 </form>
+
+<script src="/js/newPres.js"></script>
 
 <% include ../partials/footer %>

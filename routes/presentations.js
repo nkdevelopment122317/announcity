@@ -67,7 +67,7 @@ router.get("/:pres_id", middleware.isAdmin, function(req, res) {
 });
 
 //plays the presentation
-router.get(":/pres_id/play", middleware.isAdmin, function(req, res) {
+router.get("/:pres_id/play", middleware.isAdmin, function(req, res) {
     Presentation.findById(req.params.pres_id, function(err, presentation) {
         if (err) {
             req.flash("error", err);
@@ -123,7 +123,7 @@ router.delete("/:pres_id", middleware.isAdmin, function(req, res) {
             school.presentations.splice(index, 1);
             school.save();
 
-            Presentation.findByIdAndRemove(req.parans.pres_id, function(err) {
+            Presentation.findByIdAndRemove(req.params.pres_id, function(err) {
                 if (err) {
                     req.flash("error", err);
                     res.redirect("back");

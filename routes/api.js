@@ -37,7 +37,7 @@ router.put("/accountType/:code/confirm", function(req, res) {
                     user.isFaculty = false;
                     user.isAdmin = true;
                     user.save();
-                    res.send("Adminstrator account verified.");
+                    res.send("Administrator account verified.");
                 } else {
                     res.send("Invalid code.");
                 }
@@ -61,6 +61,13 @@ router.put("/presentations/:id/updateStatus/:status", function(req, res) {
                 res.send("Presentation unfavorited");
             }
         }
+    });
+});
+
+//returns all cluborg data at a school
+router.get("/cluborgs/get", function(req, res) {
+    Cluborg.find({}, function(err, cluborgs) {
+        res.send(cluborgs);
     });
 });
 

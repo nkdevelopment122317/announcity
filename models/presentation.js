@@ -16,6 +16,14 @@ var presentationSchema = new mongoose.Schema({
     favorite: {
         type: Boolean,
         default: false
+    },
+    cluborgs: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cluborg"
+    },
+    announcements: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Announcement"
     }
 }, { usePushEach: true });
 
