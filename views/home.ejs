@@ -112,8 +112,16 @@
 
                                     <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="more-info">More Info</a> -->
                                     <div class="thumbnail-button-group">
-                                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play" target="_blank" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> --> <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/edit" class="btn btn-default" role="button"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button"><i class="fas fa-trash-alt"></i></button></form>
+                                        <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play" title="Play Presentation" class="btn btn-default" role="button"><i class="fas fa-play"></i></a> <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> --> <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/edit" class="btn btn-default" role="button" title="Edit Presentation"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
                                     </div>
+
+                                    <% if (!presentation.linkAllClubs) { %>
+                                        <% presentation.cluborgs.forEach(function(cluborg) { %>
+                                            <p class="pres-cluborg-info"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>"><%= cluborg.name %></a></p>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <p class="pres-cluborg-info" id="all-cluborgs-message"><a href="/schools/<%= currentUser.school %>/cluborgs">All Clubs and Activities</a></p>
+                                    <% } %>
 
                                 </div>
                                 <p>

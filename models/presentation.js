@@ -17,13 +17,21 @@ var presentationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    cluborgs: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Cluborg"
-    },
-    announcements: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Announcement"
+    cluborgs: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cluborg"
+        }
+    ],
+    announcements: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Announcement"
+        }
+    ],
+    linkAllClubs: {
+        type: Boolean,
+        default: false
     }
 }, { usePushEach: true });
 

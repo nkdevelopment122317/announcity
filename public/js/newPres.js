@@ -2,6 +2,7 @@ $("body").css("background", "#109cef");
 
 var previousHeight = 0;
 var currentHeight = 0;
+var i = 0;
 
 addEvents();
 
@@ -10,9 +11,47 @@ function addEvents() {
         $(".search-results").css("width", $("form input").width() + (parseInt($("form input").css("border-left-width"), 10) * 2));
     });
 
-    $(".search-results p input").on("click", function() {
-        console.log(34);
-        $(".cluborg-list").append("<span class='cluborg-name-pill'>" + $(this).text() + "</span>");
+    $(".search-results").on("click", "p label", function() {
+        if ((i++ % 2 === 0)) {
+            if (!$(this).children("input").prop("checked")) {
+                $(".label-small").children("input").prop("checked", false);
+                $("#all-cluborgs-pill").remove();
+                $(".cluborg-list").append("<span class='cluborg-name-pill'>" + $(this).text() + " <i class='far fa-times-circle'></i></span>");
+            } else {
+                var searchResult = $(this).text();
+
+                $(".cluborg-list").children().each(function() {
+                    if ($(this).text() === searchResult + " ") {
+                        $(this).remove();
+                    }
+                });
+            }
+        }
+    });
+
+    $("body").on("click", ".far.fa-times-circle", function() {
+        var pillText = $(this).parent().text()
+        if (pillText !== "All ") {
+            $(".search-results p").children().each(function() {
+                if ($(this).text() + " " === pillText) {
+                    $(this).children("input").remove();
+                }
+            });
+        } else {
+            $(".label-small").children("input").prop("checked", false);
+        }
+
+        $(this).parent().remove();
+    });
+
+    $(".label-small").on("click", function() {
+        if ($(this).children("input").prop("checked")) {
+            $(".cluborg-list").empty();
+            $(".cluborg-list").append("<span class='cluborg-name-pill' id='all-cluborgs-pill'>All <i class='far fa-times-circle'></i></span>");
+        } else {
+            $(".cluborg-list").empty();
+            $(".search-results").empty();
+        }
     });
 
     $("#search").keypress(function() {
@@ -30,7 +69,9 @@ function updateSearchResults() {
     if ($("#search").val() === "") {
         $(".search-results").addClass("no-display");
     } else {
-        $(".search-results").empty();
+        $(".search-results").children("p").each(function() {
+            $(this).addClass("no-display");
+        });
 
         var cluborgNames = [];
 
@@ -57,7 +98,7 @@ function updateSearchResults() {
 
                 results.forEach(function(result) {
                     cluborgNames.push(result.name);
-                    $(".search-results").append("<p><label><input type='checkbox'><span class='checkmark' value='" + result._id + "'></span>" +  result.name + "</label></p>");
+                    $(".search-results").append("<p><label><input type='checkbox' name='" + result._id + "' value='" + result._id + "'><span class='checkmark'></span>" +  result.name + "</label></p>");
                 });
 
                 currentHeight = $(".search-results").height();

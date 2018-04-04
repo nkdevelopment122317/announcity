@@ -51,14 +51,16 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                                 });
                         });
                         if (req.user.isAdmin) {
-                            Presentation.find({"school": req.user.school._id}, function(err, presentations) {
-                                if (err) {
-                                    req.flash("error", err);
-                                    res.redirect("back");
-                                } else {
-                                    res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements, presentations: presentations});
-                                }
-                            });
+                            Presentation.find({"school": req.user.school._id})
+                                .populate("cluborgs")
+                                .exec(function(err, presentations) {
+                                    if (err) {
+                                        req.flash("error", err);
+                                        res.redirect("back");
+                                    } else {
+                                        res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements, presentations: presentations});
+                                    }
+                                });
                         } else {
                             res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: user.announcements});
                         }

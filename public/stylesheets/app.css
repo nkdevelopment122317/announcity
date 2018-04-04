@@ -7,7 +7,20 @@
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
-    /*height: 5em;*/
+    min-height: 60px;
+    font-size: 120%;
+}
+
+.navbar-nav > li > a {
+    padding-top: 16.5px;
+    padding-bottom: 16.5px;
+    line-height: 27px;
+}
+
+.navbar-brand {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 15px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -68,7 +81,7 @@
 }
 
 body {
-    margin-top: 3em;
+    margin-top: 4em;
     background: #ffffff;
 }
 
@@ -121,7 +134,8 @@ body {
 .page-header-main {
     width: 100%;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
 }
@@ -159,7 +173,7 @@ hr {
 }
 
 .flash-container {
-    margin-top: 3.5em;
+    margin-top: 4.25em;
 }
 
 .alert-success, .alert-danger {
@@ -316,6 +330,7 @@ hr {
 
 .thumbnail-button-group {
     margin-top: 1em;
+    margin-bottom: 0.6em;
 }
 
 .row {
@@ -425,20 +440,24 @@ input.empty {
 /*******************************/
 /*custom checkmark stuff begins*/
 /*******************************/
-.search-results label {
-    /*display: block;*/
+label {
     cursor: pointer;
     position: relative;
-    padding-left: 1em;
+    padding-left: 1.5em;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
 }
 
-.search-results label:first-child {
+label input {
+    position: absolute;
+    z-index: -1000;
+}
+
+label:first-child {
     margin-top: 0.25em;
 }
 
-.search-results label input[type="checkbox"] {
+label input[type="checkbox"] {
     opacity: 0;
     cursor: pointer;
 }
@@ -457,7 +476,7 @@ input.empty {
     -webkit-transition: 0.1s ease-out all;
 }
 
-.search-results label input[type="checkbox"]:checked ~ .checkmark {
+input[type="checkbox"]:checked ~ .checkmark {
     background-color: #109cef;
 }
 
@@ -467,11 +486,11 @@ input.empty {
     display: none;
 }
 
-.search-results label input:checked ~ .checkmark:after {
+label input:checked ~ .checkmark:after {
     display: block;
 }
 
-.search-results label .checkmark:after {
+label .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -484,7 +503,7 @@ input.empty {
 }
 
 /* On mouse-over, add a grey background color */
-.search-results label:hover input ~ .checkmark {
+label:hover input ~ .checkmark {
     background-color: #ccc;
 }
 /*****************************/
@@ -503,10 +522,115 @@ input.empty {
     color: #ffffff;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
+    margin-right: 0.6em;
+    display: inline-block;
+    margin-bottom: 0.6em;
 }
 
-.cluborg-name-pill:first-child {
-    margin-left: 0;
+.cluborg-name-pill:last-child {
+    margin-right: 0;
+}
+
+.cluborg-name-pill i {
+    cursor: pointer;
+}
+
+.label-small {
+    font-size: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+.label-small .checkmark {
+    width: 20px;
+    height: 20px;
+}
+
+.label-small .checkmark:after {
+    left: 8px;
+    top: 4px;
+}
+
+.pres-cluborg-info {
+    font-family: "Roboto Mono", sans-serif;
+    color: #ffffff;
+    background: #109cef;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    border-radius: 5px;
+    margin-right: 0.1em;
+    margin-bottom: 0.4em;
+    transition: 0.1s ease-out all;
+    -moz-transition: 0.1s ease-out all;
+    -webkit-transition: 0.1s ease-out all;
+}
+
+.pres-cluborg-info:hover {
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    transform: translateY(-3px);
+}
+
+.pres-cluborg-info:last-child {
+    margin-right: 0;
+}
+
+.fa-star {
+    cursor: pointer;
+}
+
+a.material-button {
+    text-decoration: none;
+}
+
+a.material-button:hover {
+    color: #ffffff;
+}
+
+#new-button {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 56px;
+}
+
+#all-cluborgs-message {
+    background: #2abc16;
+}
+
+.pres-cluborg-info {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.pres-cluborg-info a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.pres-cluborg-info a:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#pres-carousel-container {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.carousel,.item,.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-inner .item img {
+    width: 100%;
+    height: 100%;
 }
 
 /*desktop*/
@@ -533,7 +657,7 @@ input.empty {
     .dashboard-header {
         margin-left: 0.75em;
         font-family: "Roboto", sans-serif;
-        font-weight: 300;
+        font-weight: 400;
         margin-bottom: 0.5em;
     }
 
@@ -648,13 +772,17 @@ input.empty {
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .see-more:hover {
+    /*.see-more:hover {
         transform: translateY(-7px);
         box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
-    }
+    }*/
 
-    .new-button {
-        margin-bottom: 2em;
+    #new-button {
+        height: 2em;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        width: 80%;
+        margin: 2em auto;
+        margin-top: 0;
     }
 
     /*.more-info {
@@ -679,10 +807,10 @@ input.empty {
         background-color: rgba(0,0,0,0.2);
     }
 
-    .thumbnail:hover {
+    /*.thumbnail:hover {
         transform: translateY(-7px);
         box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
-    }
+    }*/
 
     .header {
         font-family: Roboto, sans-serif;
@@ -895,7 +1023,7 @@ input.empty {
         border-radius: 10px;
         border: none;
         background: #109cef;
-        color: white;
+        color: #ffffff;
         font-family: Roboto, sans-serif;
         font-weight: 300;
         font-size: 2em;

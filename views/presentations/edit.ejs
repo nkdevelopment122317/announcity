@@ -5,7 +5,40 @@
     <input class="reg-input form-text-box" type="text" name="name" placeholder="Name" value="<%= presentation.name %>">
     <input class="reg-input form-text-box" type="text" name="description" placeholder="Description" value="<%= presentation.description %>">
     <input class="reg-input form-text-box" type="text" name="image" placeholder="Image URL" value="<%= presentation.image %>">
+    <p class="input-explanation">Search for clubs to link their announcements to this presentation:</p>
+
+    <div class="search-results no-display">
+        <% if (!presentation.linkAllClubs) { %>
+            <% presentation.cluborgs.forEach(function(cluborg) { %>
+                <p><label><input type='checkbox' class="no-display" name='<%= cluborg._id %>' value='<%= cluborg._id %>' checked="checked"><span class='checkmark'></span><%= cluborg.name %></label></p>
+            <% }); %>
+        <% } %>
+    </div>
+
+    <input class="reg-input" id="search" type="text" placeholder='Search for Clubs...'>
+    <label class="label-small">
+        <% if (presentation.linkAllClubs) { %>
+            <input type="checkbox" name="allCluborgs" value="allCluborgs" checked="checked"><span class="checkmark"></span>
+        <% } else { %>
+            <input type="checkbox" name="allCluborgs" value="allCluborgs"><span class="checkmark"></span>
+        <% } %>
+
+        Link all clubs
+    </label>
+
     <input class="material-button submit" type="submit" value="Save">
+
+    <div class="cluborg-list">
+        <% if (presentation.linkAllClubs) { %>
+            <span class='cluborg-name-pill'  id='all-cluborgs-pill'>All <i class='far fa-times-circle'></i></span>
+        <% } else { %>
+            <% presentation.cluborgs.forEach(function(cluborg) { %>
+                <span class='cluborg-name-pill'><%= cluborg.name %> <i class='far fa-times-circle'></i></span>
+            <% }); %>
+        <% } %>
+    </div>
 </form>
+
+<script src="/js/newPres.js"></script>
 
 <% include ../partials/footer %>
