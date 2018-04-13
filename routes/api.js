@@ -71,4 +71,30 @@ router.get("/cluborgs/get", function(req, res) {
     });
 });
 
+router.get("/cluborgs/:id/get", function(req, res) {
+    Cluborg.findById(req.params.id)
+        .populate("announcements")
+        .exec(function(err, cluborg) {
+            if (err) {
+                req.flash("error", err);
+                res.redirect("back");
+            } else {
+                res.send(cluborg);
+            }
+        });
+});
+
+router.get("/presentations/:id/get", function(req, res) {
+    Presentation.findById(req.params.id)
+        .populate("cluborgs")
+        .exec(function(err, presentation) {
+            if (err) {
+                req.flash("error", err);
+                res.redirect("back");
+            } else {
+                res.send(presentation);
+            }
+        });
+});
+
 module.exports = router;

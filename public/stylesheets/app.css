@@ -604,6 +604,11 @@ a.material-button:hover {
     color: #ffffff;
 }
 
+.pres-cluborg-info:active {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .pres-cluborg-info a:hover {
     text-decoration: none;
     color: #ffffff;
@@ -631,6 +636,30 @@ a.material-button:hover {
 .carousel-inner .item img {
     width: 100%;
     height: 100%;
+}
+
+.loader.center {
+    position: absolute;
+    top: 45%;
+    left: 47.5%;
+    transform: translate(-52.5%, -55%);
+}
+
+.loader.large {
+    border: 12px solid #d6d6d6;
+    border-radius: 50%;
+    border-top: 12px solid #2b76ef;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 0.4s linear infinite;
+    animation: spin 0.4s linear infinite;
+    margin: 0 auto;
+}
+
+.wrapper-full {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 /*desktop*/

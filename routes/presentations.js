@@ -104,36 +104,14 @@ router.get("/:pres_id", middleware.isAdmin, function(req, res) {
 
 //plays the presentation
 router.get("/:pres_id/play", middleware.isAdmin, function(req, res) {
-    Presentation.findById(req.params.pres_id)
-        .populate("cluborgs")
-        .populate("announcements")
-        .exec(function(err, presentation) {
-            if (err) {
-                req.flash("error", err);
-                res.redirect("back");
-            } else {
-                presentation.cluborgs.forEach(function(cluborg) {
-                    Cluborg.findById(cluborg._id)
-                        .populate("announcements")
-                        .exec(function(err, popCluborg) {
-                            if (err) {
-                                req.flash("error", err);
-                                res.redirect("back");
-                            } else {
-                                popCluborg.announcements.forEach(function(announcement) {
-                                    Announcement.findById(announcement._id)
-                                        .populate("cluborg")
-                                        .exec(function() {
-                                            presentation.announcements.push(announcement);
-                                        });
-                                });
-                            }
-                        });
-                });
-                presentation.save();
-                res.render("presentations/play", {presentation: presentation, announcements: presentation.announcements});
-            }
-        });
+    Presentation.findById(req.params.pres_id, function(err, presentation) {
+        if (err) {
+            req.flash("error", err)
+            res.redirect("back");
+        } else {
+            res.render("presentations/play", {presentation: presentation});
+        }
+    });
 });
 
 //edit

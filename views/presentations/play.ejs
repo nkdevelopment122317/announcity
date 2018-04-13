@@ -1,33 +1,19 @@
 <% include ../partials/header %>
 
-<div class="container" id="pres-carousel-container">
+<div class="wrapper-full">
+    <div class="loader center large"></div>
+</div>
+
+<!-- <div class="no no-display"></div> -->
+
+<div class="no-display container" id="pres-carousel-container" data-pres="<%= presentation._id %>">
     <div id="pres-carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <% announcements.forEach(function(announcement) { %>
-                <% if (announcements.indexOf(announcement) == 0) { %>
-                    <li data-target="#pres-carousel" data-slide-to="0" class="active"></li>
-                <% } else { %>
-                    <li data-target="#pres-carousel" data-slide-to="<%= announcements.indexOf(announcement) %>"></li>
-                <% } %>
-            <% }); %>
+
         </ol>
 
         <div class="carousel-inner">
-            <% announcements.forEach(function(announcement) { %>
-                <% if (announcements.indexOf(announcement) == 0) { %>
-                    <div class="item active">
-                        <p><%= announcement.cluborg.name %></p>
-                        <p><%= announcement.title %></p>
-                        <p><%= announcement.text %></p>
-                    </div>
-                <% } else { %>
-                    <div class="item">
-                        <p><%= announcement.cluborg.name %></p>
-                        <p><%= announcement.title %></p>
-                        <p><%= announcement.text %></p>
-                    </div>
-                <% } %>
-            <% }); %>
+
         </div>
 
         <a class="left carousel-control" href="#pres-carousel" data-slide="prev">
