@@ -28,10 +28,10 @@ function grabAnnouncements() {
                         cluborg.announcements.forEach(function(announcement) {
                             if (i == 0) {
                                 $(".carousel-indicators").append("<li data-target='#pres-carousel' data-slide-to='0' class='active'></li>");
-                                $(".carousel-inner").append("<div class='item active'><h1>" + cluborg.name  + "</h1><h3>" + announcement.title  + "</h3><h3>" + announcement.text  + "</h3></div>");
+                                $(".carousel-inner").append("<div class='item active'><h1>" + cluborg.name  + "</h1><h3>" + announcement.title  + "</h3><h4>" + announcement.text  + "</h4></div>");
                             } else {
                                 $(".carousel-indicators").append("<li data-target='#pres-carousel' data-slide-to='" + i + "'></li>");
-                                $(".carousel-inner").append("<div class='item'><h1>" + cluborg.name  + "</h1><h3>" + announcement.title  + "</h3><h3>" + announcement.text  + "</h3></div>");
+                                $(".carousel-inner").append("<div class='item'><h1>" + cluborg.name  + "</h1><h3>" + announcement.title  + "</h3><h4>" + announcement.text  + "</h4></div>");
                             }
 
                             i++;

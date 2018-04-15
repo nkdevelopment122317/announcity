@@ -26,19 +26,21 @@
 <% }); %> -->
 
 <% if (cluborgs.length !== 0) { %>
-        <% cluborgs.forEach(function(cluborg) { %>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="thumbnail">
-                    <img class="cluborg-image" src="<%= cluborg.image %>">
-                    <div class="caption">
-                        <h3 class="cluborg-name"><%= cluborg.name %></h3>
-                        <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="more-info">More Info</a>
+        <div class="row">
+            <% cluborgs.forEach(function(cluborg) { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="thumbnail">
+                        <img class="cluborg-image" src="<%= cluborg.image %>">
+                        <div class="caption">
+                            <h3 class="cluborg-name"><%= cluborg.name %></h3>
+                            <a href="/schools/<%= cluborg.school %>/cluborgs/<%= cluborg._id %>" class="more-info">More Info</a>
+                        </div>
+                        <p>
+                        </p>
                     </div>
-                    <p>
-                    </p>
                 </div>
-            </div>
-        <% }); %>
+            <% }); %>
+        </div>
 <% } else { %>
         <h2>You're not in any clubs!</h2>
 <% } %>

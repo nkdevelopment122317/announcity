@@ -8,6 +8,10 @@
 
 <div class="no-display container" id="pres-carousel-container" data-pres="<%= presentation._id %>">
     <div id="pres-carousel" class="carousel slide" data-ride="carousel">
+
+        <div class="control-panel">
+            <a href="/home" class="btn btn-lg" role="button"><i class="fas fa-home"></i></a> <!-- <a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>" class="btn btn-lg" role="button"><i class="fas fa-info-circle"></i></a> --> <a href="" class="btn btn-lg" role="button"><i class="fas fa-redo-alt"></i></a>
+        </div>
         <ol class="carousel-indicators">
 
         </ol>
@@ -16,11 +20,11 @@
 
         </div>
 
-        <a class="left carousel-control" href="#pres-carousel" data-slide="prev">
+        <a id="carousel-control-left" class="left carousel-control" href="#pres-carousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#pres-carousel" data-slide="next">
+        <a id="carousel-control-right" class="right carousel-control" href="#pres-carousel" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
         </a>

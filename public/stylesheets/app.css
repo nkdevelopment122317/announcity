@@ -662,6 +662,59 @@ a.material-button:hover {
     position: relative;
 }
 
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
+.item {
+    width: 100%;
+    text-align: center;
+}
+
+.item h1 {
+    font-size: 5em;
+    margin-top: 2em;
+}
+
+.item h3 {
+    font-size: 3em;
+}
+
+.item h4 {
+    font-size: 2em;
+    line-height: 1.6;
+    width: 60%;
+    margin: 0.5em auto;
+}
+
+.control-panel {
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 75px;
+}
+
+.control-panel a {
+    background: rgba(48,48,48, 0.5);
+    color: #ffffff;
+    border: none;
+    transition: all ease 0.3s;
+}
+
+.control-panel a:hover {
+    background: rgba(48,48,48, 0.7);
+    color: #ffffff;
+    border: none;
+}
+
+.control-panel a:active {
+    background: rgba(48,48,48, 0.7);
+    color: #ffffff;
+    border: none;
+}
+
 /*desktop*/
 @media screen and (min-width: 768px) {
 
