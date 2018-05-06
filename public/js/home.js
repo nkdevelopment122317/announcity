@@ -1,18 +1,18 @@
 $(document).ready(function() {
-    fixButtonHeight();
+    // fixButtonHeight();
     addEvents();
     adjustButtonPadding();
 });
 
-function fixButtonHeight() {
-    var buttons = document.getElementsByClassName("more-info");
-    var thumbnails = document.getElementsByClassName("thumbnail");
-    var captions = document.getElementsByClassName("caption");
+// function fixButtonHeight() {
+//     var buttons = document.getElementsByClassName("more-info");
+//     var thumbnails = document.getElementsByClassName("thumbnail");
+//     var captions = document.getElementsByClassName("caption");
 
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].style.height = thumbnails[i].offsetHeight - captions[i].offsetHeight + "px";
-    }
-}
+//     for (var i = 0; i < buttons.length; i++) {
+//         buttons[i].style.height = thumbnails[i].offsetHeight - captions[i].offsetHeight + "px";
+//     }
+// }
 
 function addEvents() {
     //for tabs

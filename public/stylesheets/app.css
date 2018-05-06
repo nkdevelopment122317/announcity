@@ -7,11 +7,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
-    min-height: 60px;
-    font-size: 120%;
+    /*min-height: 60px;
+    font-size: 120%;*/
 }
 
-.navbar-nav > li > a {
+/*.navbar-nav > li > a {
     padding-top: 16.5px;
     padding-bottom: 16.5px;
     line-height: 27px;
@@ -23,10 +23,16 @@
     padding: 0 15px;
 }
 
+.navbar-toggle {
+    padding-top: 16.5px;
+    padding-bottom: 16.5px;
+    line-height: 27px;
+}*/
+
 .navbar-inverse .navbar-brand {
     color: #ffffff;
     font-size: 1.5em;
-    margin-left: 5.5em;
+    /*margin-left: 5.5em;*/
 }
 
 .navbar-inverse .navbar-toggle {
@@ -173,7 +179,7 @@ hr {
 }
 
 .flash-container {
-    margin-top: 4.25em;
+    margin-top: 3em;
 }
 
 .alert-success, .alert-danger {
@@ -347,6 +353,11 @@ hr {
     position: absolute;
 }
 
+.caption-top h3 {
+    font-size: 4vmin;
+    font-weight: bold;
+}
+
 .caption-top a {
     left: 0;
 }
@@ -381,6 +392,9 @@ hr {
 
 .see-more {
     font-size: 2em;
+    width: 100%;
+    text-align: center;
+    margin: 1em 0;
 }
 
 .row {
@@ -715,8 +729,22 @@ a.material-button:hover {
     border: none;
 }
 
+#see-more {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+}
+
 /*desktop*/
 @media screen and (min-width: 768px) {
+
+    .caption-top h3 {
+        font-size: 125%;
+    }
 
     .standard-form {
         width: 400px;

@@ -6,6 +6,10 @@ $(".flash-container").addClass("no-display");
 
 grabAnnouncements();
 
+$(".carousel-indicators li").on("mouseover", function() {
+    // do later
+});
+
 function grabAnnouncements() {
     $(".no").addClass("no-display");
 

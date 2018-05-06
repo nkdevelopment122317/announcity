@@ -92,6 +92,8 @@
         </ul>
 
         <div class="tab-content" data-tab="presentations">
+            <a href="/schools/<%= currentUser.school %>/presentations" role="button" class="material-button" id="see-more">See All Presentations <i class="fas fa-arrow-circle-right"></i></a>
+
             <div class="row">
                 <% presentations.forEach(function(presentation) { %>
                     <% if (presentation.favorite) { %>
@@ -130,9 +132,9 @@
                         </div>
                     <% } %>
                 <% }); %>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <a href="/schools/<%= currentUser.school %>/presentations" role="button" class="btn btn-default btn-lg see-more" id="see-more">See All Presentations <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
+                </div> -->
             </div>
 
 
