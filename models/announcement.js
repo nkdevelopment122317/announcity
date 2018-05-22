@@ -22,7 +22,9 @@ var announcementSchema = new mongoose.Schema({
     isCompleted: {
         type: Boolean,
         default: false
-    }
+    },
+    scheduledDate: {type: Date, default: Date.now},
+    state: String
 });
 
 //DO NOT PLUGIN PASSPORT TO THIS SCHEMA. THAT CAUSED THE DUPLICATE KEY ERROR!!!!!!!

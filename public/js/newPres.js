@@ -1,5 +1,3 @@
-$("body").css("background", "#109cef");
-
 var previousHeight = 0;
 var currentHeight = 0;
 var i = 0;

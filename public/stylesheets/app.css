@@ -739,6 +739,37 @@ a.material-button:hover {
     line-height: 2em;
 }
 
+.color-key {
+    margin: 0 auto;
+    display: inline-block;
+    color: #ffffff;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: 300;
+    font-size: 1.1em;
+}
+
+.color-group {
+    text-align: center;
+    width: 75px;
+    height: 35px;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+#color-group-blue {
+    background: #109cef;
+}
+
+#color-group-green {
+    background: #2abc16;
+}
+
+#color-group-red {
+    background: #ff4b38;
+}
+
 /*desktop*/
 @media screen and (min-width: 768px) {
 

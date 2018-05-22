@@ -92,7 +92,7 @@
         </ul>
 
         <div class="tab-content" data-tab="presentations">
-            <a href="/schools/<%= currentUser.school %>/presentations" role="button" class="material-button" id="see-more">See All Presentations <i class="fas fa-arrow-circle-right"></i></a>
+            <!-- <a href="/schools/<%= currentUser.school %>/presentations" role="button" class="material-button" id="see-more">See All Presentations <i class="fas fa-arrow-circle-right"></i></a> -->
 
             <div class="row">
                 <% presentations.forEach(function(presentation) { %>
@@ -141,7 +141,20 @@
         </div>
 
         <div class="tab-content no-display" data-tab="announcements">
-            <p>Announcements</p>
+            <div class="color-key">
+                <div class="color-group" id="color-group-blue">Normal</div>
+                <div class="color-group" id="color-group-green">Active</div>
+                <div class="color-group" id="color-group-red">Alert</div>
+            </div>
+
+            <div class="announcement-container">
+                <% announcements.forEach(function(announcement) { %>
+                    <div class="color-indicator"></div>
+                    <div class="announcement">
+                        <h2><%= announcement.title %></h2>
+                    </div>
+                <% }); %>
+            </div>
         </div>
 
         <div class="tab-content no-display" data-tab="clubs">

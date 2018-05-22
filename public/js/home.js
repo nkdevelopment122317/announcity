@@ -99,6 +99,15 @@ function addEvents() {
             $("body").append(JSON.stringify(data));
         });
     });
+
+    // $.ajax({
+    //     url: "/api/announcements/get",
+    //     type: "GET",
+    //     success: function(announcements) {
+    //         console.log(announcements);
+    //         $(".announcement-container").data("announcements", announcements.length + "");
+    //     }
+    // });
 }
 
 function sendCode() {

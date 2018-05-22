@@ -97,4 +97,15 @@ router.get("/presentations/:id/get", function(req, res) {
         });
 });
 
+router.get("/announcements/get", function(req, res) {
+    Announcement.find({}, function(err, announcements) {
+        if (err) {
+            req.flash("error", err);
+            res.redirect("back");
+        } else {
+            res.send(announcements);
+        }
+    });
+});
+
 module.exports = router;
