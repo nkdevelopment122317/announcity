@@ -42,6 +42,21 @@
                                 <a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>/edit" class="btn btn-default" role="button" title="Edit Club"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
                             </div>
 
+                            <% presentations.some(function(presentation) { %>
+                                <% if (presentation.cluborgs.find(function(club) {return club.name == cluborg.name}) != null) { %>
+                                    <% if (presentation.linkAllClubs) { %>
+                                        <p class="pres-cluborg-info" id="all-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">Master Presentation</a></p>
+                                        <% return; %>
+                                    <% } else { %>
+                                        <p class="pres-cluborg-info"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play"><%= presentation.name %></a></p>
+                                        <% return; %>
+                                    <% } %>
+                                <% } else if (presentation.linkAllClubs) { %>
+                                    <p class="pres-cluborg-info" id="no-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">No Presentation Linked</a></p>
+                                    <% return; %>
+                                <% } %>
+                            <% }); %>
+
                         </div>
                     </div>
                 </div>

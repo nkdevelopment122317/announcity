@@ -108,6 +108,10 @@ function addEvents() {
     //         $(".announcement-container").data("announcements", announcements.length + "");
     //     }
     // });
+
+    $(".color-indicator").hover(function() {
+
+    });
 }
 
 function sendCode() {

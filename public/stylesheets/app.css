@@ -613,6 +613,15 @@ a.material-button:hover {
     background: #2abc16;
 }
 
+#no-cluborgs-message {
+    background: #ff4b38;
+}
+
+p.pres-cluborg-info a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .pres-cluborg-info {
     text-decoration: none;
     color: #ffffff;
@@ -746,11 +755,13 @@ a.material-button:hover {
     font-family: "Roboto Mono", sans-serif;
     font-weight: 300;
     font-size: 1.1em;
+    margin-bottom: 1em;
 }
 
 .color-group {
     text-align: center;
-    width: 75px;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 35px;
     border-radius: 10px;
     display: inline-block;
@@ -768,6 +779,68 @@ a.material-button:hover {
 
 #color-group-red {
     background: #ff4b38;
+}
+
+.tab-content[data-tab="announcements"] {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.announcement {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #b3b6bc;
+}
+
+.color-indicator {
+    width: 30px;
+    height: 100%;
+    display: inline-block;
+    transition: all ease-out 0.15s;
+}
+
+.color-indicator:hover {
+    width: 100px;
+}
+
+.announcement-right-column {
+    display: inline;
+}
+
+.announcement-content {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1em;
+}
+
+.announcement-content h3 {
+    margin-top: 0.5em;
+}
+
+.announcement-content h3, .announcement-content h4 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.color-state-normal {
+    background: #109cef;
+}
+
+.color-state-active {
+    background: #2abc16;
+}
+
+.color-state-alert {
+    background: #ff4b38;
+}
+
+.inline-pill {
+    font-size: 80%;
+    margin-left: 0.3em;
+}
+
+.orange-pill {
+    background: #ff9a02;
 }
 
 /*desktop*/

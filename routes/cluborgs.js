@@ -5,6 +5,7 @@ var School = require('../models/school');
 var User = require("../models/user");
 var Cluborg = require('../models/cluborg');
 var Announcement = require('../models/announcement');
+var Presentation = require('../models/presentation');
 
 //index
 router.get("/", function(req, res) {
@@ -24,7 +25,18 @@ router.get("/", function(req, res) {
                 req.user.save();
             }
 
-            res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id, showAccountTypeMessage: showAccountTypeMessage});
+            Presentation.find({})
+                .populate("cluborgs")
+                .exec(function(err, presentations) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        presentations.forEach(function(presentation) {
+                            console.log(presentation.linkAllClubs);
+                        });
+                        res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id, showAccountTypeMessage: showAccountTypeMessage, presentations: presentations});
+                    }
+            });
         }
     });
 });

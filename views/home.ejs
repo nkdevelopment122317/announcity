@@ -149,10 +149,26 @@
 
             <div class="announcement-container">
                 <% announcements.forEach(function(announcement) { %>
-                    <div class="color-indicator"></div>
-                    <div class="announcement">
-                        <h2><%= announcement.title %></h2>
+                <div class="announcement">
+                    <% if (announcement.state === "Normal") { %>
+                        <div class="color-indicator color-state-normal"></div>
+                    <% } else if (announcement.state === "Active") { %>
+                        <div class="color-indicator color-state-active"></div>
+                    <% } else if (announcement.state === "Alert") { %>
+                        <div class="color-indicator color-state-alert"></div>
+                    <% } %>
+                    <div class="announcement-right-column">
+                        <div class="announcement-content">
+                            <h3><%= announcement.title %> <p class="pres-cluborg-info inline-pill orange-pill"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a></p></h3>
+                            <h4><%= announcement.text %></h4>
+                        </div>
+
+                        <div class="action-bar">
+
+                        </div>
                     </div>
+
+                </div>
                 <% }); %>
             </div>
         </div>

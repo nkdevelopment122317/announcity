@@ -71,8 +71,6 @@ function updateSearchResults() {
             $(this).addClass("no-display");
         });
 
-        var cluborgNames = [];
-
         var options = {
             shouldSort: true,
             threshold: 0.6,
@@ -94,10 +92,14 @@ function updateSearchResults() {
 
                 var results = fuse.search($("#search").val());
 
-                results.forEach(function(result) {
-                    cluborgNames.push(result.name);
-                    $(".search-results").append("<p><label><input type='checkbox' name='" + result._id + "' value='" + result._id + "'><span class='checkmark'></span>" +  result.name + "</label></p>");
-                });
+                if (results.length !== 0) {
+                    $(".search-results").append("<p><label><input type='checkbox' name='" + results[0]._id + "' value='" + results[0]._id + "'><span class='checkmark'></span>" +  results[0].name + "</label></p>");
+                }
+
+                // results.forEach(function(result) {
+                //     cluborgNames.push(result.name);
+                //     $(".search-results").append("<p><label><input type='checkbox' name='" + result._id + "' value='" + result._id + "'><span class='checkmark'></span>" +  result.name + "</label></p>");
+                // });
 
                 currentHeight = $(".search-results").height();
 
