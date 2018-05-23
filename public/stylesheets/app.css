@@ -788,15 +788,16 @@ p.pres-cluborg-info a {
 
 .announcement {
     width: 100%;
-    height: 100px;
+    height: 140px;
     border: 1px solid #b3b6bc;
+    margin-bottom: 1em;
 }
 
 .color-indicator {
     width: 30px;
     height: 100%;
     display: inline-block;
-    transition: all ease-out 0.15s;
+    transition: all ease-out 0.2s;
 }
 
 .color-indicator:hover {
@@ -842,6 +843,10 @@ p.pres-cluborg-info a {
 .orange-pill {
     background: #ff9a02;
 }
+
+/*.action-bar {
+    display: inline-block;
+}*/
 
 /*desktop*/
 @media screen and (min-width: 768px) {

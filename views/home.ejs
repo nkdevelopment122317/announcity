@@ -161,20 +161,57 @@
                         <div class="announcement-content">
                             <h3><%= announcement.title %> <p class="pres-cluborg-info inline-pill orange-pill"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a></p></h3>
                             <h4><%= announcement.text %></h4>
-                        </div>
-
-                        <div class="action-bar">
-
+                            <div class="thumbnail-button-group action-bar">
+                                <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>" title="Info" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>/edit" class="btn btn-default" role="button" title="Edit Presentation"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <% }); %>
             </div>
         </div>
 
         <div class="tab-content no-display" data-tab="clubs">
-            <p>Clubs</p>
+            <% if (cluborgs.length !== 0) { %>
+                <div class="row">
+                    <% cluborgs.forEach(function(cluborg) { %>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="thumbnail">
+                                <img class="cluborg-image" src="<%= cluborg.image %>">
+                                <div class="caption">
+                                    <div class="caption-top">
+                                        <h3><%= cluborg.name %></h3>
+                                    </div>
+
+                                    <p class="pres-description"><%= cluborg.description %></p>
+
+                                    <div class="thumbnail-button-group">
+                                        <a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>/edit" class="btn btn-default" role="button" title="Edit Club"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
+                                    </div>
+
+                                    <% presentations.some(function(presentation) { %>
+                                        <% if (presentation.cluborgs.find(function(club) {return club.name == cluborg.name}) != null) { %>
+                                            <% if (presentation.linkAllClubs) { %>
+                                                <p class="pres-cluborg-info" id="all-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">Master Presentation</a></p>
+                                                <% return; %>
+                                            <% } else { %>
+                                                <p class="pres-cluborg-info"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play"><%= presentation.name %></a></p>
+                                                <% return; %>
+                                            <% } %>
+                                        <% } else if (presentation.linkAllClubs) { %>
+                                            <p class="pres-cluborg-info" id="no-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">No Presentation Linked</a></p>
+                                            <% return; %>
+                                        <% } %>
+                                    <% }); %>
+
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                    <h2>There aren't clubs online, why don't you change that?</h2>
+            <% } %>
         </div>
     <% } %>
 </div>

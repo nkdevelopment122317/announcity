@@ -63,7 +63,14 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                                                 req.flash("error", err);
                                                 res.redirect("back");
                                             } else {
-                                                res.render("home", {user: user, cluborgs: user.cluborgs, schools: schools, announcements: announcements, presentations: presentations});
+                                                Cluborg.find({}, function(err, cluborgs) {
+                                                    if (err) {
+                                                        req.flash("error", err);
+                                                        res.redirect("back");
+                                                    } else {
+                                                        res.render("home", {user: user, cluborgs: cluborgs, schools: schools, announcements: announcements, presentations: presentations});
+                                                    }
+                                                });
                                             }
                                         })
                                     }
