@@ -782,7 +782,7 @@ p.pres-cluborg-info a {
 }
 
 .tab-content[data-tab="announcements"] {
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -794,14 +794,31 @@ p.pres-cluborg-info a {
 }
 
 .color-indicator {
-    width: 30px;
+    width: 45px;
     height: 100%;
     display: inline-block;
     transition: all ease-out 0.2s;
+    color: transparent;
+    position: relative;
+}
+
+.color-indicator > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+}
+
+.color-indicator > div > button {
+    background: transparent;
+    border-color: transparent;
+    margin-left: 0.35em;
 }
 
 .color-indicator:hover {
-    width: 100px;
+    width: 120px;
+    color: #ffffff;
 }
 
 .announcement-right-column {

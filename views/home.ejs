@@ -142,20 +142,35 @@
 
         <div class="tab-content no-display" data-tab="announcements">
             <div class="color-key">
-                <div class="color-group" id="color-group-blue">Normal</div>
-                <div class="color-group" id="color-group-green">Active</div>
-                <div class="color-group" id="color-group-red">Alert</div>
+                <div class="color-group" id="color-group-blue" title="No Approval Needed">Ready</div>
+                <div class="color-group" id="color-group-green" title="Currently Showing in Presentation">Active</div>
+                <div class="color-group" id="color-group-red" title="Requires Approval">Alert</div>
             </div>
 
             <div class="announcement-container">
                 <% announcements.forEach(function(announcement) { %>
                 <div class="announcement">
                     <% if (announcement.state === "Normal") { %>
-                        <div class="color-indicator color-state-normal"></div>
+                        <div class="color-indicator color-state-normal">
+                            <div>
+                                <button><i class="fas fa-question-circle"></i></button>
+                                <button><i class="fas fa-clock"></i></button>
+                            </div>
+                        </div>
                     <% } else if (announcement.state === "Active") { %>
-                        <div class="color-indicator color-state-active"></div>
+                        <div class="color-indicator color-state-active">
+                            <div>
+                                <button><i class="fas fa-question-circle"></i></button>
+                                <button><i class="fas fa-clock"></i></button>
+                            </div>
+                        </div>
                     <% } else if (announcement.state === "Alert") { %>
-                        <div class="color-indicator color-state-alert"></div>
+                        <div class="color-indicator color-state-alert">
+                            <div>
+                                <button><i class="fas fa-question-circle"></i></button>
+                                <button><i class="fas fa-clock"></i></button>
+                            </div>
+                        </div>
                     <% } %>
                     <div class="announcement-right-column">
                         <div class="announcement-content">
