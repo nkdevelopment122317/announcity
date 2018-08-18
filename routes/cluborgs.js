@@ -31,9 +31,7 @@ router.get("/", function(req, res) {
                     if (err) {
                         console.log(err);
                     } else {
-                        presentations.forEach(function(presentation) {
-                            console.log(presentation.linkAllClubs);
-                        });
+                        
                         res.render("cluborgs/index", {cluborgs: allCluborgs, school_id: req.params.id, showAccountTypeMessage: showAccountTypeMessage, presentations: presentations});
                     }
             });
