@@ -63,21 +63,12 @@
             <% if (currentUser.isStudent) { %>
                 <div class="my-announcement-container">
                     <h3>My Announcements</h3>
-                    <hr>
-                    <% if (announcements.length !== 0) { %>
-                        <% announcements.forEach(function(announcement) { %>
-
-                            <div class="announcement-home">
-                                <a class="cluborg-link-home" href="/schools/<%= user.school._id %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a>
-                                <!-- <i class="favorite-announcement far fa-star"></i> --> <!-- add this in after test phase -->
-                                <h4><strong><%= announcement.title %></strong></h4>
-                                <p><%= announcement.text %></p>
-                            </div>
-                            <hr>
+                    
+                    <div class="user-cluborgs no-display">
+                        <% cluborgs.forEach(function(cluborg) { %>
+                            <h4><%= cluborg._id %></h4>
                         <% }); %>
-                    <% } else { %>
-                        <p id="none-for-now">None at this time</p>
-                    <% } %>
+                    </div>
                 </div>
             <% } %>
         <% } %>

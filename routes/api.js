@@ -120,9 +120,11 @@ router.put("/user/student/add-cluborgs/:codes", function(req, res) {
                 return false;
             } else {
                 req.user.cluborgs.push(cluborg);
-                res.send("success");
+                req.user.save();
             }
-        })
+        });
+
+        res.send("success");
     })
 });
 
