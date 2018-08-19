@@ -25,14 +25,23 @@
 
 <% }); %> -->
 
+<div class="cluborg-cart">
+    <i class="fas fa-times-circle dismiss"></i>
+    <h4 id="cart-header">Clubs I'm Interested In Joining</h4>
+    <div class="cluborg-list" id="cluborg-cart-list"></div>
+    <h5 class="no-cluborgs no-display">None</h5>
+    <a class="material-button" id="cluborg-cart-button" role="button">Join Clubs</a>
+</div>
+
 <% if (cluborgs.length !== 0) { %>
         <div class="row">
             <% cluborgs.forEach(function(cluborg) { %>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="thumbnail">
+                        <i class="fas fa-plus-circle add-cluborg"></i>
                         <img class="cluborg-image" src="<%= cluborg.image %>">
                         <div class="caption">
-                            <div class="caption-top">
+                            <div class="caption-top" data-code="<%= cluborg.id %>">
                                 <h3><%= cluborg.name %></h3>
                             </div>
 
@@ -42,20 +51,22 @@
                                 <a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>/edit" class="btn btn-default" role="button" title="Edit Club"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
                             </div>
 
-                            <% presentations.some(function(presentation) { %>
-                                <% if (presentation.cluborgs.find(function(club) {return club.name == cluborg.name}) != null) { %>
-                                    <% if (presentation.linkAllClubs) { %>
-                                        <p class="pres-cluborg-info" id="all-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">Master Presentation</a></p>
-                                        <% return; %>
-                                    <% } else { %>
-                                        <p class="pres-cluborg-info"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play"><%= presentation.name %></a></p>
+                            <% if (!currentUser.isStudent) { %>
+                                <% presentations.some(function(presentation) { %>
+                                    <% if (presentation.cluborgs.find(function(club) {return club.name == cluborg.name}) != null) { %>
+                                        <% if (presentation.linkAllClubs) { %>
+                                            <p class="pres-cluborg-info" id="all-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">Master Presentation</a></p>
+                                            <% return; %>
+                                        <% } else { %>
+                                            <p class="pres-cluborg-info"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play"><%= presentation.name %></a></p>
+                                            <% return; %>
+                                        <% } %>
+                                    <% } else if (presentation.linkAllClubs) { %>
+                                        <p class="pres-cluborg-info" id="no-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">No Presentation Linked</a></p>
                                         <% return; %>
                                     <% } %>
-                                <% } else if (presentation.linkAllClubs) { %>
-                                    <p class="pres-cluborg-info" id="no-cluborgs-message"><a href="/schools/<%= currentUser.school %>/presentations/<%= presentation._id %>/play">No Presentation Linked</a></p>
-                                    <% return; %>
-                                <% } %>
-                            <% }); %>
+                                <% }); %>
+                            <% } %>
 
                         </div>
                     </div>
@@ -65,5 +76,9 @@
 <% } else { %>
         <h2>You're not in any clubs!</h2>
 <% } %>
+
+<p class="whitespace"></p>
+
+<script type="text/javascript" src="/js/cluborgs-index.js"></script>
 
 <% include ../partials/footer %>

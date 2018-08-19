@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var router = express.Router({mergeParams: true});
 var middleware = require('../middleware');
 var School = require('../models/school');
@@ -106,6 +107,23 @@ router.get("/announcements/get", function(req, res) {
             res.send(announcements);
         }
     });
+});
+
+router.put("/user/student/add-cluborgs/:codes", function(req, res) {
+    var codes = req.params.codes.replace("_", "");
+    var codesArray = codes.split("-");
+
+    codesArray.forEach(function(code) {
+        Cluborg.findById(code, function(err, cluborg) {
+            if (err) {
+                req.flash("error", err);
+                return false;
+            } else {
+                req.user.cluborgs.push(cluborg);
+                res.send("success");
+            }
+        })
+    })
 });
 
 module.exports = router;
