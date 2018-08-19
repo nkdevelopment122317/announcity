@@ -170,35 +170,33 @@ function adjustButtonPadding() {
 }
 
 function fetchUserAnnouncements() {
-    var announcements = new Object();
+    var i = 0;
+    var announcements = {};
 
     $(".user-cluborgs").children().each(function() {
         $.ajax({
             url: "/api/cluborgs/" + $(this).text() + "/get",
             type: "GET",
             success: function(cluborg) {
-                var cluborgName = cluborg.name;
-                announcements[cluborgName] = cluborg.announcements;
+                i++;
+                announcements[cluborg.name] = cluborg.announcements;
+
+                if (i == $(".user-cluborgs").children().length) {
+                    populateHomepage(announcements);
+                }
             }
         });
-    });
-    // $.each(announcements, function(cluborgName, cluborgAnns) {
-        
-    //     $(".my-announcement-container").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body"></div></div>');
-    //     cluborgAnns.forEach(function(announcement) {
-    //         $(".panel-body:contains('" + cluborgName + "')").append("<h4>" + announcement.title + "</h4><hr>");
-    //     });
-    // });
-    var sortedKeys = Object.keys(announcements).sort();
-    console.log(announcements);
+    }); 
+}
 
-    for (var cluborgName in announcements) {
+function populateHomepage(announcements) {
+    Object.keys(announcements).forEach(function(cluborgName) {
         if (announcements.hasOwnProperty(cluborgName)) {
-            console.log("e");
-            $(".my-announcement-container").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body"></div></div>');
+            $(".my-announcement-container").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+            
             announcements[cluborgName].forEach(function(announcement) {
-                $(".panel-body:contains('" + cluborgName + "')").append("<h4>" + announcement.title + "</h4><hr>");
+                $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>" + announcement.title + "</h4><p>" + announcement.text + "</p><hr>");
             }); 
         }
-    }
+    });
 }
