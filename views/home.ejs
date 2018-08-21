@@ -63,6 +63,10 @@
             <% if (currentUser.isStudent) { %>
                 <div class="my-announcement-container">
                     <h3>My Announcements</h3>
+
+                    <div class="loader"></div>
+
+                    <div class="my-announcements no-display"></div>
                     
                     <div class="user-cluborgs no-display">
                         <% cluborgs.forEach(function(cluborg) { %>
@@ -192,7 +196,7 @@
                                     <p class="pres-description"><%= cluborg.description %></p>
 
                                     <div class="thumbnail-button-group">
-                                        <a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>/edit" class="btn btn-default" role="button" title="Edit Club"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
+                                        <a class="btn btn-default" role="button" title="New Announcement"><i class="fas fa-bullhorn"></i></a> <a href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>/edit" class="btn btn-default" role="button" title="Edit Club"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Presentation"><i class="fas fa-trash-alt"></i></button></form>
                                     </div>
 
                                     <% presentations.some(function(presentation) { %>

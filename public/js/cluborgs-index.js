@@ -70,7 +70,7 @@ $(".material-button").on("click", function() {
 	$.ajax({
 		url: "/api/user/student/add-cluborgs/" + stringToSend,
         type: "PUT",
-        success: function() {
+        success: function(response) {
         	$(".cluborg-list").empty();
 			cluborgCount = 0;
 

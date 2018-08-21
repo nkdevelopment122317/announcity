@@ -38,7 +38,9 @@
             <% cluborgs.forEach(function(cluborg) { %>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="thumbnail">
-                        <i class="fas fa-plus-circle add-cluborg"></i>
+                        <% if (currentUser.isStudent) { %>
+                            <i class="fas fa-plus-circle add-cluborg"></i>
+                        <% } %>
                         <img class="cluborg-image" src="<%= cluborg.image %>">
                         <div class="caption">
                             <div class="caption-top" data-code="<%= cluborg.id %>">

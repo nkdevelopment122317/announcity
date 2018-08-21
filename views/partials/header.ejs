@@ -36,6 +36,8 @@
                         <% } %>
                         <% if (currentUser.school == undefined) { %>
                             <li><a href="/schools">Schools</a></li>
+                        <% } else { %>
+                            <li><a href="/schools/<%= currentUser.school %>/cluborgs">Clubs and Activities</a></li>
                         <% } %>
                         <% if (currentUser.isAdmin) { %>
                             <li><a href="/schools/<%= currentUser.school %>/presentations">See All Presentations</a></li>

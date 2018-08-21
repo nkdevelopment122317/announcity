@@ -116,16 +116,15 @@ router.put("/user/student/add-cluborgs/:codes", function(req, res) {
     codesArray.forEach(function(code) {
         Cluborg.findById(code, function(err, cluborg) {
             if (err) {
-                req.flash("error", err);
+                res.send("failure");
                 return false;
             } else {
                 req.user.cluborgs.push(cluborg);
                 req.user.save();
             }
-        });
-
-        res.send("success");
-    })
+        });  
+    });
+    res.send("success");
 });
 
 module.exports = router;

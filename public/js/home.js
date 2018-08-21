@@ -4,6 +4,11 @@ $(document).ready(function() {
     adjustButtonPadding();
 
     fetchUserAnnouncements();
+
+    setTimeout(function() {
+        $(".loader").addClass("no-display");
+        $(".my-announcements").removeClass("no-display");
+    }, 750);
 });
 
 // function fixButtonHeight() {
@@ -180,7 +185,7 @@ function fetchUserAnnouncements() {
             success: function(cluborg) {
                 i++;
                 announcements[cluborg.name] = cluborg.announcements;
-
+                console.log("e");
                 if (i == $(".user-cluborgs").children().length) {
                     populateHomepage(announcements);
                 }
@@ -192,7 +197,7 @@ function fetchUserAnnouncements() {
 function populateHomepage(announcements) {
     Object.keys(announcements).forEach(function(cluborgName) {
         if (announcements.hasOwnProperty(cluborgName)) {
-            $(".my-announcement-container").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+            $(".my-announcements").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
             
             announcements[cluborgName].forEach(function(announcement) {
                 $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>" + announcement.title + "</h4><p>" + announcement.text + "</p><hr>");
