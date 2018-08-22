@@ -39,6 +39,8 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
                         announcement.cluborg.name = cluborg.name;
                         announcement.save();
 
+                        announcement.school = req.user.school;
+
                         cluborg.announcements.push(announcement);
                         cluborg.save();
 

@@ -85,6 +85,13 @@ router.get("/cluborgs/:id/get", function(req, res) {
         });
 });
 
+router.get("/cluborgs/:name/get", function(req, res) {
+    console.log("hi");
+    Cluborg.findOne({"name": toTitleCase(req.name.replace("_", " "))}).lean().exec(function(err, cluborg) {
+        return res.end(JSON.stringify(cluborg));
+    });
+});
+
 router.get("/presentations/:id/get", function(req, res) {
     Presentation.findById(req.params.id)
         .populate("cluborgs")
@@ -110,21 +117,29 @@ router.get("/announcements/get", function(req, res) {
 });
 
 router.put("/user/student/add-cluborgs/:codes", function(req, res) {
-    var codes = req.params.codes.replace("_", "");
+    var codes = req.params.codes.trim().replace("_", "");
     var codesArray = codes.split("-");
 
-    codesArray.forEach(function(code) {
-        Cluborg.findById(code, function(err, cluborg) {
+    for (var i in codesArray) {
+        console.log(codesArray[i]);
+        Cluborg.findById(mongoose.mongo.BSONPure.ObjectId(codesArray[i]), function(err, cluborg) {
             if (err) {
+                console.log(err);
                 res.send("failure");
-                return false;
+                return;
             } else {
                 req.user.cluborgs.push(cluborg);
                 req.user.save();
             }
         });  
-    });
+    }
     res.send("success");
 });
+
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
 
 module.exports = router;

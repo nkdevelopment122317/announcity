@@ -3,7 +3,8 @@ $(document).ready(function() {
     addEvents();
     adjustButtonPadding();
 
-    fetchUserAnnouncements();
+    fetchUserAnnouncements(); 
+    orderAnnouncements();
 
     setTimeout(function() {
         $(".loader").addClass("no-display");
@@ -37,12 +38,17 @@ function addEvents() {
         $("#profileTab").removeClass("clicked");
     });
 
-    $(".favorite").on("click", function() {
+    $(document).on("click", ".favorite", function() {
         $(this).toggleClass("far");
         $(this).toggleClass("fas");
         $(this).toggleClass("favorited");
 
-        updateStatus($(this).hasClass("favorited"), $(this).attr("data-pres-id"));
+        if ($(this).hasClass("favorite-cluborg")) {
+            
+            updateCluborgStatus($(this).hasClass("favorited"), $(this).attr("data-cluborg"));
+        } else {
+            updatePresentationStatus($(this).hasClass("favorited"), $(this).attr("data-pres-id"));
+        }
     });
 
     $("#yes-for-code").on("click", function() {
@@ -144,7 +150,7 @@ function confirmStudentAccount() {
     });
 }
 
-function updateStatus(favorited, id) {
+function updatePresentationStatus(favorited, id) {
     if (favorited) {
         $.ajax({
             url: "/api/presentations/" + id + "/updateStatus/favorite",
@@ -156,6 +162,26 @@ function updateStatus(favorited, id) {
     } else {
         $.ajax({
             url: "/api/presentations/" + id + "/updateStatus/unfavorite",
+            type: "PUT",
+            success: function(data) {
+
+            }
+        });
+    }
+}
+
+function updateCluborgStatus(favorited, id) {
+    if (favorited) {
+        $.ajax({
+            url: "/api/cluborgs/" + id + "/updateStatus/favorite",
+            type: "PUT",
+            success: function(data) {
+
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/api/cluborgs/" + id + "/updateStatus/unfavorite",
             type: "PUT",
             success: function(data) {
 
@@ -177,6 +203,8 @@ function adjustButtonPadding() {
 function fetchUserAnnouncements() {
     var i = 0;
     var announcements = {};
+    var cluborgIDs = {};
+    var schoolID = "";
 
     $(".user-cluborgs").children().each(function() {
         $.ajax({
@@ -185,23 +213,47 @@ function fetchUserAnnouncements() {
             success: function(cluborg) {
                 i++;
                 announcements[cluborg.name] = cluborg.announcements;
-                console.log("e");
+                cluborgIDs[cluborg.name] = cluborg._id;
+                schoolID = cluborg.school;
+
                 if (i == $(".user-cluborgs").children().length) {
-                    populateHomepage(announcements);
+                    populateHomepage(announcements, cluborgIDs, schoolID);
                 }
             }
         });
-    }); 
+    });
+
+    // console.log($(".panel-heading"));
+
+    // $(".panel-heading").each(function() {
+    //     if ($(this).children().text() != "No announcements") {
+    //         var cluborgName = $(this).children(".panel-title").text();
+    //         var cluborgID = $(this).parent().children(".panel-body").children("h4").data("id").split("+")[0];
+    //         var schoolID = $(this).parent().children(".panel-body").children("h4").data("id").split("+")[1];
+    //         $(this).append("<a href='/schools/" + schoolID + "/cluborgs/" + cluborgID + "'>@" + cluborgName.replace(" ", "").toLowerCase() + "</a>");
+    //     }
+    // });
 }
 
-function populateHomepage(announcements) {
+function populateHomepage(announcements, cluborgIDs, schoolID) {
+    var i = 0;
     Object.keys(announcements).forEach(function(cluborgName) {
+        i++;
+
         if (announcements.hasOwnProperty(cluborgName)) {
-            $(".my-announcements").append('<div class="panel panel-default"><div class="panel-heading"><h2 class="panel-title">' + cluborgName + '</h2></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
-            
-            announcements[cluborgName].forEach(function(announcement) {
-                $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>" + announcement.title + "</h4><p>" + announcement.text + "</p><hr>");
-            }); 
+            if (announcements[cluborgName].length === 0) {
+                $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + schoolID + '/cluborgs/' + cluborgIDs[cluborgName] + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>No announcements</h4>");
+            } else {
+                $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + announcements[cluborgName][0].school + '/cluborgs/' + announcements[cluborgName][0].cluborg.id + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                announcements[cluborgName].forEach(function(announcement) {
+                    $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4 data-id='" + announcement.cluborg.id + "+" + announcement.school + "'>" + announcement.title + "</h4><p>" + announcement.text + "</p><hr>");
+                });
+            }
         }
     });
+}
+
+function orderAnnouncements() {
+
 }

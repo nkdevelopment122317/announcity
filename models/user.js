@@ -17,6 +17,12 @@ var userSchema = new mongoose.Schema({
             ref: "Cluborg"
         }
     ],
+    favoriteCluborgs: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cluborg"
+        }
+    ],
     isSetup: {
         type: Boolean,
         default: false

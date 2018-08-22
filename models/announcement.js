@@ -9,6 +9,10 @@ var announcementSchema = new mongoose.Schema({
         },
         username: String
     },
+    school: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "School"
+    },
     date: {type: Date, default: Date.now},
     title: String,
     text: String,
