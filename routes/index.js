@@ -18,6 +18,7 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
         .populate("cluborgs")
         .populate("school")
         .populate("announcements")
+        .populate("favoriteCluborgs")
         .exec(function(err, user) {
             if (err) {
                 req.flash("error", "Something went wrong");

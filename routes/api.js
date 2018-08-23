@@ -65,6 +65,32 @@ router.put("/presentations/:id/updateStatus/:status", function(req, res) {
     });
 });
 
+router.put("/cluborgs/:id/updateStatus/:status", function(req, res) {
+    User.findById(req.user._id, function(err, user) {
+        if (err) {
+            res.send("failure");
+        } else {
+            Cluborg.findById(req.params.id, function(err, cluborg) {
+                if (err) {
+                    res.send("failure");
+                } else {
+                    if (req.params.status === "favorite") {
+                        user.favoriteCluborgs.push(cluborg);
+                        user.save();
+                    } else if (req.params.status === "unfavorite") {
+                        var i = user.favoriteCluborgs.indexOf(cluborg);
+
+                        while (i > -1) {
+                            user.favoriteCluborgs = user.favoriteCluborgs.splice(i, 1);
+                            i = user.favoriteCluborgs.indexOf(cluborg);
+                        }
+                    }
+                }
+            });
+        }
+    });
+});
+
 //returns all cluborg data at a school
 router.get("/cluborgs/get", function(req, res) {
     Cluborg.find({}, function(err, cluborgs) {
@@ -119,10 +145,10 @@ router.get("/announcements/get", function(req, res) {
 router.put("/user/student/add-cluborgs/:codes", function(req, res) {
     var codes = req.params.codes.trim().replace("_", "");
     var codesArray = codes.split("-");
+    codesArray = codesArray.splice(0, 1);
 
     for (var i in codesArray) {
-        console.log(codesArray[i]);
-        Cluborg.findById(mongoose.mongo.BSONPure.ObjectId(codesArray[i]), function(err, cluborg) {
+        Cluborg.find({"_id": codesArray[i].toString()}, function(err, cluborg) {
             if (err) {
                 console.log(err);
                 res.send("failure");

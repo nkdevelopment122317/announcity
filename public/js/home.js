@@ -2,13 +2,18 @@ $(document).ready(function() {
     // fixButtonHeight();
     addEvents();
     adjustButtonPadding();
-
     fetchUserAnnouncements(); 
+    highlightStars();
     orderAnnouncements();
 
     setTimeout(function() {
-        $(".loader").addClass("no-display");
-        $(".my-announcements").removeClass("no-display");
+        var checkForAnnouncements = setInterval(function() {
+            if ($(document).find(".my-announcements").children().length !== 0) {
+                $(".loader").addClass("no-display");
+                $(".my-announcements").removeClass("no-display");
+                clearInterval(checkForAnnouncements);
+            }
+        }, 10); 
     }, 750);
 });
 
@@ -251,6 +256,14 @@ function populateHomepage(announcements, cluborgIDs, schoolID) {
                 });
             }
         }
+    });
+}
+
+function highlightStars() {
+    $(document).find(".favorite").each(function() {
+        if ($(".favorite-cluborgs").children().each(function() {
+            $(this).data("cluborg"))
+        });
     });
 }
 
