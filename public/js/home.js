@@ -2,8 +2,8 @@ $(document).ready(function() {
     // fixButtonHeight();
     addEvents();
     adjustButtonPadding();
-    fetchUserAnnouncements(); 
-    highlightStars();
+    fetchUserAnnouncements();
+    // highlightStars(); 
     orderAnnouncements();
 
     setTimeout(function() {
@@ -247,10 +247,19 @@ function populateHomepage(announcements, cluborgIDs, schoolID) {
 
         if (announcements.hasOwnProperty(cluborgName)) {
             if (announcements[cluborgName].length === 0) {
-                $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + schoolID + '/cluborgs/' + cluborgIDs[cluborgName] + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
-                $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>No announcements</h4>");
+                if ($(document).find(".favorite-cluborgs").text().indexOf(cluborgIDs[cluborgName]) !== -1) {
+                    $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg favorited fas fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + schoolID + '/cluborgs/' + cluborgIDs[cluborgName] + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                    $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>No announcements</h4>");
+                } else {
+                    $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + schoolID + '/cluborgs/' + cluborgIDs[cluborgName] + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                    $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4>No announcements</h4>");
+                }
             } else {
-                $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + announcements[cluborgName][0].school + '/cluborgs/' + announcements[cluborgName][0].cluborg.id + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                if ($(document).find(".favorite-cluborgs").text().indexOf(cluborgIDs[cluborgName]) !== -1) {
+                    $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg favorited fas fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + announcements[cluborgName][0].school + '/cluborgs/' + announcements[cluborgName][0].cluborg.id + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                } else {
+                    $(".my-announcements").append('<div class="panel panel-default announcement-panel"><div class="panel-heading cluborg-panel"><i class="favorite favorite-cluborg far fa-star" data-cluborg="' + cluborgIDs[cluborgName] + '"></i><h2 class="panel-title">' + cluborgName + '</h2> <a class="shorthand-cluborg-link" href="/schools/' + announcements[cluborgName][0].school + '/cluborgs/' + announcements[cluborgName][0].cluborg.id + '">@' + cluborgName.replace(" ", "").toLowerCase() + '</a></div><div class="panel-body" data-cluborg="' + cluborgName + '"></div></div>');
+                }
                 announcements[cluborgName].forEach(function(announcement) {
                     $(".panel-body[data-cluborg='" + cluborgName + "'").append("<h4 data-id='" + announcement.cluborg.id + "+" + announcement.school + "'>" + announcement.title + "</h4><p>" + announcement.text + "</p><hr>");
                 });
@@ -260,10 +269,11 @@ function populateHomepage(announcements, cluborgIDs, schoolID) {
 }
 
 function highlightStars() {
-    $(document).find(".favorite").each(function() {
-        if ($(".favorite-cluborgs").children().each(function() {
-            $(this).data("cluborg"))
-        });
+    $(".favorite-cluborgs").children().each(function() {
+        console.log(".favorite[data-cluborg='" + $(this).text() + "']");
+        $(document).find(".favorite[data-cluborg='" + $(this).text() + "']").toggleClass("far");
+        $(document).find(".favorite[data-cluborg='" + $(this).text() + "']").toggleClass("fas");
+        $(document).find(".favorite[data-cluborg='" + $(this).text() + "']").toggleClass("favorited");
     });
 }
 

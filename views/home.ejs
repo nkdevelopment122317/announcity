@@ -64,6 +64,12 @@
                 <div class="my-announcement-container">
                     <h3>My Announcements</h3>
 
+                    <div class="favorite-cluborgs no-display">
+                        <% user.favoriteCluborgs.forEach(function(cluborg) { %>
+                            <%= cluborg._id %>
+                        <% }); %>
+                    </div>
+
                     <div class="loader"></div>
 
                     <div class="my-announcements no-display"></div>
