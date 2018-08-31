@@ -6,15 +6,13 @@ $(document).ready(function() {
     // highlightStars(); 
     orderAnnouncements();
 
-    setTimeout(function() {
-        var checkForAnnouncements = setInterval(function() {
-            if ($(document).find(".my-announcements").children().length !== 0) {
-                $(".loader").addClass("no-display");
-                $(".my-announcements").removeClass("no-display");
-                clearInterval(checkForAnnouncements);
-            }
-        }, 10); 
-    }, 750);
+    var checkForAnnouncements = setInterval(function() {
+        if ($(document).find(".my-announcements").children().length !== 0) {
+            $(".loader").addClass("no-display");
+            $(".my-announcements").removeClass("no-display");
+            clearInterval(checkForAnnouncements);
+        }
+    }, 10); 
 });
 
 // function fixButtonHeight() {

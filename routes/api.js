@@ -146,6 +146,7 @@ router.put("/user/student/add-cluborgs/:codes", function(req, res) {
     var codes = req.params.codes.trim().replace("_", "");
     var codesArray = codes.split("-");
     codesArray = codesArray.splice(0, 1);
+    console.log(codesArray);
 
     for (var i in codesArray) {
         Cluborg.find({"_id": codesArray[i].toString()}, function(err, cluborg) {
