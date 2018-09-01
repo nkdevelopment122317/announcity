@@ -47,7 +47,7 @@ $("body").on("click", ".far.fa-times-circle", function() {
 	$(this).parent().remove();
 
 	if ($(".cluborg-list").children().length === 0) {
-		$(".no-cluborgs").removeClass("no-display");
+		$(".cluborg-cart").css("bottom", "-50%");
 	}
 });
 
@@ -57,11 +57,13 @@ $("body").on("click", ".fas.fa-times-circle", function() {
 	cluborgCount = 0;
 
 	$(".fas.fa-check").each(function() {
-		$(this).removeClass("fas fa-check").removeAttr("id", "green-check").addClass("fas fa-plus-circle add-cluborg");
+		if ($(this).data("remove") == 1) {
+			$(this).removeClass("fas fa-check").removeAttr("id", "green-check").addClass("fas fa-plus-circle add-cluborg");
+		}
 	});
 });
 
-$(".material-button").on("click", function() {
+$("#cluborg-cart-button").on("click", function() {
 	var stringToSend = "_";
 	$(".cluborg-list").children().each(function() {
 		stringToSend += $(this).data("code") + "-";
@@ -90,4 +92,36 @@ $(".material-button").on("click", function() {
 			}, 1750);
         }
 	});
+});
+
+$(".danger").on("click", function() {
+	$(".modal").css("display", "block");
+	var cluborgName = $(this).parent().parent().parent().parent().children(".caption-top").children("h3").text();
+	$(".modal-message").html("Are you sure you want to leave <span data-code='" + $(this).parent().parent().parent().parent().children(".caption-top").data("code") + "'><strong>" + cluborgName + "</strong></span>?");
+});
+
+$(".close").on("click", function() {
+	$(".modal").css("display", "none");
+});
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('myModal')) {
+        $(".modal").css("display", "none");
+    }
+}
+
+$("#modal-button.red-button").on("click", function() {
+	var codeToSend = $(this).parent().parent().children(".modal-message").children("span").data("code");
+
+	$.ajax({
+		url: "/api/user/student/remove-cluborg/" + codeToSend,
+		type: "PUT",
+		success: function(response) {
+			window.location.href = "/home";
+		}
+	});
+});
+
+$("#modal-button.green-button").on("click", function() {
+	$(".modal").css("display", "none");
 });

@@ -24,6 +24,16 @@
     <hr>
 
 <% }); %> -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p class="modal-message"></p>
+        <div class="modal-buttons">
+            <a class="material-button red-button" id="modal-button" role="button">Yes, I'm Sure</a>
+            <a class="material-button green-button" id="modal-button" role="button">No, I'm Not</a>
+        </div>
+    </div>
+</div>
 
 <div class="cluborg-cart">
     <i class="fas fa-times-circle dismiss"></i>
@@ -39,7 +49,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="thumbnail">
                         <% if (currentUser.isStudent) { %>
-                            <i class="fas fa-plus-circle add-cluborg"></i>
+                            <% if (currentUser.cluborgs.indexOf(cluborg._id) !== -1) { %> 
+                                <i class="fas fa-check" id="green-check" data-remove="0"></i>
+                            <% } else { %>
+                                <i class="fas fa-plus-circle add-cluborg" data-remove="1"></i>
+                            <% } %>
                         <% } %>
                         <img class="cluborg-image" src="<%= cluborg.image %>">
                         <div class="caption">
@@ -60,6 +74,8 @@
                             <div class="caption-top" data-code="<%= cluborg.id %>">
                                 <h3><%= cluborg.name %></h3>
                             </div>
+
+                            <a class="shorthand-cluborg-link" href="/schools/<%= currentUser.school %>/cluborgs/<%= cluborg._id %>">@<%=cluborg.name.replace(" ", "").toLowerCase()%></a>
 
                             <p class="pres-description"><%= cluborg.description %></p>
 

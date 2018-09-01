@@ -12,7 +12,7 @@ $(document).ready(function() {
             $(".my-announcements").removeClass("no-display");
             clearInterval(checkForAnnouncements);
         }
-    }, 10); 
+    }, 30); 
 });
 
 // function fixButtonHeight() {
@@ -218,6 +218,9 @@ function fetchUserAnnouncements() {
                 announcements[cluborg.name] = cluborg.announcements;
                 cluborgIDs[cluborg.name] = cluborg._id;
                 schoolID = cluborg.school;
+
+                // Object.keys(announcements).sort();
+                // Object.keys(cluborgIDs).sort();
 
                 if (i == $(".user-cluborgs").children().length) {
                     populateHomepage(announcements, cluborgIDs, schoolID);

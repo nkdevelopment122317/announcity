@@ -78,11 +78,12 @@ router.put("/cluborgs/:id/updateStatus/:status", function(req, res) {
                         user.favoriteCluborgs.push(cluborg);
                         user.save();
                     } else if (req.params.status === "unfavorite") {
-                        var i = user.favoriteCluborgs.indexOf(cluborg);
+                        var i = user.favoriteCluborgs.indexOf(cluborg._id);
 
                         while (i > -1) {
-                            user.favoriteCluborgs = user.favoriteCluborgs.splice(i, 1);
-                            i = user.favoriteCluborgs.indexOf(cluborg);
+                            user.favoriteCluborgs.splice(i, 1);
+                            user.save();
+                            i = user.favoriteCluborgs.indexOf(cluborg._id);
                         }
                     }
                 }
@@ -145,8 +146,7 @@ router.get("/announcements/get", function(req, res) {
 router.put("/user/student/add-cluborgs/:codes", function(req, res) {
     var codes = req.params.codes.trim().replace("_", "");
     var codesArray = codes.split("-");
-    codesArray = codesArray.splice(0, 1);
-    console.log(codesArray);
+    codesArray.splice(codesArray.length - 1, 1);
 
     for (var i in codesArray) {
         Cluborg.find({"_id": codesArray[i].toString()}, function(err, cluborg) {
@@ -155,12 +155,32 @@ router.put("/user/student/add-cluborgs/:codes", function(req, res) {
                 res.send("failure");
                 return;
             } else {
-                req.user.cluborgs.push(cluborg);
+                console.log(cluborg);
+                req.user.cluborgs.push(cluborg[0]);
                 req.user.save();
             }
         });  
     }
     res.send("success");
+});
+
+router.put("/user/student/remove-cluborg/:code", function(req, res) {
+    User.findById(req.user._id, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.send("failure");
+        } else {
+            user.cluborgs.splice(user.cluborgs.indexOf(req.params.code), 1);
+            user.save();
+
+            if (user.favoriteCluborgs.indexOf(req.params.code) !== -1) {
+                user.favoriteCluborgs.splice(user.favoriteCluborgs.indexOf(req.params.code), 1);
+                user.save();
+            }
+
+            res.send("success");
+        }
+    });
 });
 
 function toTitleCase(str) {
