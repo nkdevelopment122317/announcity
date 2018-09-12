@@ -4,7 +4,7 @@ $(document).ready(function() {
     adjustButtonPadding();
     fetchUserAnnouncements();
     // highlightStars(); 
-    orderAnnouncements();
+    
 
     var checkForAnnouncements = setInterval(function() {
         if ($(document).find(".my-announcements").children().length !== 0) {
@@ -13,6 +13,8 @@ $(document).ready(function() {
             clearInterval(checkForAnnouncements);
         }
     }, 30); 
+
+    orderAnnouncements();
 });
 
 // function fixButtonHeight() {
@@ -219,9 +221,6 @@ function fetchUserAnnouncements() {
                 cluborgIDs[cluborg.name] = cluborg._id;
                 schoolID = cluborg.school;
 
-                // Object.keys(announcements).sort();
-                // Object.keys(cluborgIDs).sort();
-
                 if (i == $(".user-cluborgs").children().length) {
                     populateHomepage(announcements, cluborgIDs, schoolID);
                 }
@@ -279,5 +278,13 @@ function highlightStars() {
 }
 
 function orderAnnouncements() {
-
+    var cluborgs = $(".panel");
+    var newOrder = {};
+    // insertAfter
+    cluborgs.each(function() {
+        var cluborgName = $(this).children(".panel-heading").children(".panel-title").text();
+        var favorited = $(this).children(".panel-heading").children(".favorite").hasClass("favorited");
+        newOrder[cluborgName] = favorited;
+        console.log(newOrder);
+    });
 }

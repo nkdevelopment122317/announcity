@@ -1,10 +1,46 @@
 <% include ../partials/header %>
 
-<h1>CLUBORG SHOW</h1>
+<div id="myModal" class="modal" data-code="<%= cluborg._id %>">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p class="modal-message"></p>
+        <div class="modal-buttons">
+            <a class="material-button red-button" id="modal-button" role="button">Yes, I'm Sure</a>
+            <a class="material-button green-button" id="modal-button" role="button">No, I'm Not</a>
+        </div>
+    </div>
+</div>
 
-<p><%= cluborg.name %></p>
-<p><%= cluborg.description %></p>
-<img src="<%= cluborg.image %>">
+<div style="background-image: url('<%= cluborg.image %>')" class="cluborg-banner">
+    <h1><%= cluborg.name %></h1>
+    <% if (currentUser.cluborgs.indexOf(cluborg._id) !== -1) { %>
+        <% if (currentUser.favoriteCluborgs.indexOf(cluborg._id) !== -1) { %>
+            <i id="favorite-cluborg-star" class="favorite-cluborg favorite favorited fas fa-star" data-cluborg-id="<%= cluborg._id %>"></i>
+        <% } else { %>
+            <i id="favorite-cluborg-star" class="favorite far fa-star" data-cluborg-id="<%= cluborg._id %>"></i>
+        <% } %>
+    <% } %>
+
+    <% if (currentUser.cluborgs.indexOf(cluborg._id) !== -1) { %>
+        <div class="more-options dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="glyphicon glyphicon-option-vertical"></i></span></button>
+
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a class="danger" href="#">Leave</a></li>
+            </ul>
+        </div>
+    <% } %>
+
+    <% if ((currentUser && (!ownsClub)) && (currentUser && (!isInClub)) && !currentUser.isAdmin) { %>
+        <form class="join-club" action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
+            <input type="submit" value="Join">
+       </form>
+    <% } %>
+</div>
 
 <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
     <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/edit" method="GET">
@@ -15,43 +51,63 @@
     </form>
 <% } %>
 
-<% if ((currentUser && (!ownsClub)) && (currentUser && (!isInClub))) { %>
-    <form class="join-club" action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/join?_method=PUT" method="POST">
-        <input type="submit" value="Join">
-   </form>
-<% } %>
+<ul class="nav nav-tabs nav-justified dashboard-tabs full-width-tabs">
+    <li role="presentation" class="active" data-tab="announcements"><a href="#">Announcements</a></li>
+    <li role="presentation" data-tab="about"><a href="#">About</a></li>
+</ul>
 
-<hr>
-
-<h3>Announcements</h3>
-
-<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+<div class="tab-content" data-tab="announcements">
+    <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
        <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/new">New Announcement</a>
        <hr>
-<% } %>
+    <% } %>
 
-<% if (cluborg.announcements.length === 0) { %>
-        <p>No announcements</p>
-<% } else { %>
+    <% if (cluborg.announcements.length === 0) { %>
+            <p>No announcements</p>
+    <% } else { %>
         <% cluborg.announcements.forEach(function(announcement) { %>
-        <p><%= announcement.title %></p>
-        <p><%= announcement.text %></p>
-        <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title"><%= announcement.title %></h2>
+                    <% if ((currentUser && cluborg.author.id.equals(currentUser._id)) || currentUser.isAdmin) { %>
+                        <div class="more-options dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="glyphicon glyphicon-option-vertical"></i></span></button>
 
-        <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
-            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
-                <input type="submit" value="Edit">
-            </form>
-            <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
-                <input type="submit" value="Delete">
-            </form>
-        <% } %>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+                                <li><a class="announcement-edit" href="#">Edit</a></li>
+                                <!-- <li><a href="#">Something</a></li> -->
+                                <!-- <li><a href="#">Something else here</a></li> -->
+                                <li role="separator" class="divider"></li>
+                                <li><a class="announcement-danger" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    <% } %>
+                </div>
+                <div data-code="<%= announcement._id %>" class="panel-body">
+                    <h4><%= announcement.text %></h4>
+                    <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
+                    <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+                        <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
+                            <input type="submit" value="Edit">
+                        </form>
+                        <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
+                            <input type="submit" value="Delete">
+                        </form>
+                    <% } %>
+                    <hr>
+                </div>
+            </div>
+    <% }); %>
+</div>
 
-        <hr>
-<% }); %>
+<div class="tab-content no-display" data-tab="about">
+    <h3>h</h3>
+</div>
+
+
 
 <% } %>
 
-<script type="text/javascript" src="/js/events.js"></script>
+<script type="text/javascript" src="/js/cluborg-show.js"></script>
 
 <% include ../partials/footer %>

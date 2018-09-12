@@ -409,6 +409,9 @@ hr {
     border: 1px solid #bfbfbf;
     padding: 2em;
     background: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
 }
 
 .standard-form > h1 {
@@ -1175,6 +1178,131 @@ p.pres-cluborg-info a {
 .caption > .shorthand-cluborg-link {
     margin-top: 0;
     margin-bottom: 0.5em;
+}
+
+.cluborg-banner {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.cluborg-banner > h1 {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #444;
+    text-shadow: 1px 0px 1px #ccc, 0px 1px 1px #eee, 
+    2px 1px 1px #ccc, 1px 2px 1px #eee,
+    3px 2px 1px #ccc, 2px 3px 1px #eee,
+    4px 3px 1px #ccc, 3px 4px 1px #eee,
+    5px 4px 1px #ccc, 4px 5px 1px #eee,
+    6px 5px 1px #ccc, 5px 6px 1px #eee,
+    7px 6px 1px #ccc;
+}
+
+#favorite-cluborg-star {
+    left: 0;
+    font-size: 3em;
+    padding: 0.75em;
+    display: inline-block;
+}
+
+.cluborg-banner .more-options {
+    color: #ffffff;
+    top: 0;
+    right: 0;
+    position: absolute;
+    margin-right: 31.5px;
+    margin-top: 31.5px;
+    transition: 0.1s ease-out all;
+    -moz-transition: 0.1s ease-out all;
+    -webkit-transition: 0.1s ease-out all;
+}
+
+.cluborg-banner > .dropdown-menu {
+    
+
+}
+
+.cluborg-banner > .favorite {
+    width: 0px;
+}
+
+.cluborg-banner > .more-options:hover {
+    color: #ffffff;
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+}
+
+.join-club > input {
+    font-family: "Roboto Mono", sans-serif;
+    color: #ffffff;
+    background: #2abc16;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    border-radius: 5px;
+    margin-right: 0.1em;
+    margin-bottom: 0.4em;
+    transition: 0.1s ease-out all;
+    -moz-transition: 0.1s ease-out all;
+    -webkit-transition: 0.1s ease-out all;
+    border: none;
+    font-size: 1.75em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 31.5px;
+    margin-right: 31.5px;
+}
+
+.join-club > input:hover {
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.4);
+    transform: translateY(-3px);
+}
+
+.full-width-tabs {
+    width: 100%;
+    padding: 0;
+    margin-top: 1em;
+}
+
+.tab-content[data-tab="about"] {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.panel-body a {
+    display: inline-block;
+    margin-bottom: 1em;
+}
+
+.panel-heading {
+    position: relative;
+}
+
+.panel-heading > .dropdown {
+    top: 0;
+    right: 1.5%;
+
+}
+
+.dropdown-menu>li>.announcement-danger {
+    color: #f44242
+}
+
+.dropdown-menu>li>.announcement-danger:hover {
+    color: #f44242
 }
 
 /*desktop*/

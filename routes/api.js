@@ -149,16 +149,22 @@ router.put("/user/student/add-cluborgs/:codes", function(req, res) {
     codesArray.splice(codesArray.length - 1, 1);
 
     for (var i in codesArray) {
-        Cluborg.find({"_id": codesArray[i].toString()}, function(err, cluborg) {
-            if (err) {
-                console.log(err);
-                res.send("failure");
-                return;
-            } else {
-                console.log(cluborg);
-                req.user.cluborgs.push(cluborg[0]);
-                req.user.save();
-            }
+        Cluborg.find({"_id": codesArray[i].toString()})
+            .populate("members")
+            .exec(function(err, cluborg) {
+                if (err) {
+                    console.log(err);
+                    res.send("failure");
+                    return;
+                } else {
+                    if (req.user.cluborgs.indexOf(cluborg[0]._id) === -1) {
+                        req.user.cluborgs.push(cluborg[0]);
+                        req.user.save();
+
+                        cluborg[0].members.push(req.user);
+                        cluborg[0].save();
+                    }
+                }
         });  
     }
     res.send("success");
@@ -182,6 +188,56 @@ router.put("/user/student/remove-cluborg/:code", function(req, res) {
         }
     });
 });
+
+router.delete("/announcement/:ann_id/delete", function(req, res) {
+    Announcement.findById(req.params.ann_id, function(err, announcement) {
+        if (err) {
+            res.send("failure");
+        } else {
+            Cluborg.find({})
+                .populate("announcements")
+                .exec(function(err, cluborgs) {
+                    if (err) {
+                        res.send("failure");
+                    } else {
+                        cluborgs.forEach(function(cluborg) {
+                            if (cluborg.announcements.indexOf(announcement) !== -1) {
+                                var i = cluborg.announcements.indexOf(announcement);
+                                cluborg.announcements.splice(i, 1);
+                                cluborg.save();
+
+                                Presentation.find({})
+                                    .populate("announcements")
+                                    .exec(function(err, presentations) {
+                                        if (err) {
+                                            res.send("failure");
+                                        } else {
+                                            presentations.forEach(function(presentation) {
+                                                if (presentation.announcements.indexOf(announcement) !== -1) {
+                                                    var i = presentation.announcements.indexOf(announcement);
+                                                    presentation.announcements.splice(i, 1);
+                                                    presentation.save();
+
+                                                    Announcement.findByIdAndRemove(req.params.ann_id, function(err) {
+                                                        if (err) {
+                                                            res.redirect("failure");
+                                                        } else {
+                                                            res.send("success");
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                            }
+                        });
+                    }
+            });
+        }
+    });
+});
+
+//////////////////////////////////////////////////////////////////////////////
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){
