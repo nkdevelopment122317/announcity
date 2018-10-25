@@ -42,15 +42,6 @@
     <% } %>
 </div>
 
-<% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
-    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/edit" method="GET">
-        <input type="submit" value="Edit">
-    </form>
-    <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/?_method=DELETE" method="POST">
-        <input type="submit" value="Delete">
-    </form>
-<% } %>
-
 <ul class="nav nav-tabs nav-justified dashboard-tabs full-width-tabs">
     <li role="presentation" class="active" data-tab="announcements"><a href="#">Announcements</a></li>
     <li role="presentation" data-tab="about"><a href="#">About</a></li>
@@ -86,14 +77,14 @@
                 <div data-code="<%= announcement._id %>" class="panel-body">
                     <h4><%= announcement.text %></h4>
                     <a href="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>">More Info</a>
-                    <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+                    <!-- <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
                         <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
                             <input type="submit" value="Edit">
                         </form>
                         <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
                             <input type="submit" value="Delete">
                         </form>
-                    <% } %>
+                    <% } %> -->
                     <hr>
                 </div>
             </div>

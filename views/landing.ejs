@@ -5,29 +5,41 @@
         <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700" rel="stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-localScroll/2.0.0/jquery.localScroll.min.js"></script>
     </head>
     <body class="landing-body">
-        <h1 id="landing-name">Announcity</h1>  
+        <!-- <h2 id="logo">@</h2> -->
+        <h1 id="landing-name"><!-- <span id="logo">@</span> -->Announcity</h1> 
+
+        <!-- <div class="tilted-rectangle" id="top"></div>  -->
+
         
-        <img id="demo" class="ui huge rounded image" src="https://speedkills.io/wp-content/uploads/2016/11/copper-loader-1.gif">
         
-        <div class="content-wrapper">
-            <h3 id="message">Join the website that efficiently handles announcements for your school.</h3>
-            
-            <div class="container">
-                <a id="student-button" href="/login" class="ui green button"><span>Login</span></a>
-                <a id="faculty-button" href="/register" class="ui green button"><span>Sign Up</span></a>
-            </div>
+        
+        
+        <h3 id="message">Join the website that efficiently handles announcements for your school.</h3>
+        
+        <div class="container">
+            <a id="signup-button" href="/register" class="">Sign Up</a>
+            <a id="login-button" href="/login" class="">Login</a>
+        </div>
+
+        <p class="call-to-action" onclick="location.href='/register';">Join Now</p>
+
+        <div class="bottom-container">
+            <h2 id="spread-the-word">Spread the Word about</h2>
+            <p id="giant-at">@football</p>
+            <!-- <div class="tilted-rectangle" id="bottom"></div>  -->
         </div>
         
-        <a href="#bottom-wrapper" class="circular ui icon button"><i id="show-more" class="arrow down icon show"></i></a>
+        <!-- <a href="#bottom-wrapper" class="circular ui icon button"><i id="show-more" class="arrow down icon show"></i></a>
         
         <div id="bottom-wrapper">
             <h2 id="boi">Hi Miles</h2>
-        </div>
+        </div> -->
         
         <script type="text/javascript" src="/js/landing.js"></script>
 <% include ./partials/footer %>

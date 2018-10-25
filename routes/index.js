@@ -59,21 +59,24 @@ router.get("/home", middleware.isLoggedIn, function(req, res) {
                                         req.flash("error", err);
                                         res.redirect("back");
                                     } else {
-                                        Announcement.find({}, function(err, announcements) {
-                                            if (err) {
-                                                req.flash("error", err);
-                                                res.redirect("back");
-                                            } else {
-                                                Cluborg.find({}, function(err, cluborgs) {
-                                                    if (err) {
-                                                        req.flash("error", err);
-                                                        res.redirect("back");
-                                                    } else {
-                                                        res.render("home", {user: user, cluborgs: cluborgs, schools: schools, announcements: announcements, presentations: presentations});
-                                                    }
-                                                });
-                                            }
-                                        })
+                                        Announcement.find({})
+                                            .populate("cluborg")
+                                            .exec(function(err, announcements) {
+                                                if (err) {
+                                                    req.flash("error", err);
+                                                    console.log(err);
+                                                    res.redirect("back");
+                                                } else {
+                                                    Cluborg.find({}, function(err, cluborgs) {
+                                                        if (err) {
+                                                            req.flash("error", err);
+                                                            res.redirect("back");
+                                                        } else {
+                                                            res.render("home", {user: user, cluborgs: cluborgs, schools: schools, announcements: announcements, presentations: presentations});
+                                                        }
+                                                    });
+                                                }
+                                        });
                                     }
                                 });
                         } else {

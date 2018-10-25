@@ -146,16 +146,16 @@
         </div>
 
         <div class="tab-content no-display" data-tab="announcements">
-            <div class="color-key">
+            <!-- <div class="color-key">
                 <div class="color-group" id="color-group-blue" title="No Approval Needed">Ready</div>
                 <div class="color-group" id="color-group-green" title="Currently Showing in Presentation">Active</div>
                 <div class="color-group" id="color-group-red" title="Requires Approval">Alert</div>
-            </div>
+            </div> -->
 
             <div class="announcement-container">
                 <% announcements.forEach(function(announcement) { %>
                 <div class="announcement">
-                    <% if (announcement.state === "Normal") { %>
+                    <!-- <% if (announcement.state === "Normal") { %>
                         <div class="color-indicator color-state-normal">
                             <div>
                                 <button><i class="fas fa-question-circle"></i></button>
@@ -176,14 +176,29 @@
                                 <button><i class="fas fa-clock"></i></button>
                             </div>
                         </div>
-                    <% } %>
+                    <% } %> -->
                     <div class="announcement-right-column">
-                        <div class="announcement-content">
-                            <h3><%= announcement.title %> <p class="pres-cluborg-info inline-pill orange-pill"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a></p></h3>
+                        <!-- <div class="announcement-content">
+                            <h3><%= announcement.title %> <p class="pres-cluborg-info inline-pill"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a></p></h3>
                             <h4><%= announcement.text %></h4>
                             <div class="thumbnail-button-group action-bar">
-                                <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>" title="Info" class="btn btn-default" role="button"><i class="fas fa-info-circle"></i></a> <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>/edit" class="btn btn-default" role="button" title="Edit Announcement"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Announcement"><i class="fas fa-trash-alt"></i></button></form>
+                                <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>/edit" class="btn btn-default" role="button" title="Edit Announcement"><i class="fas fa-edit"></i></a> <form class="delete-icon" action="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>?_method=DELETE" method="POST"> <button type="submit" class="btn btn-default" role="button" title="Delete Announcement"><i class="fas fa-trash-alt"></i></button></form>
                             </div>
+                        </div> -->
+
+                        <div data-code="<%= announcement._id %>" class="panel-body">
+                            <h4><%= announcement.text %></h4>
+                            <a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>/announcements/<%= announcement._id %>">More Info</a>
+                            <!-- <% if (currentUser && cluborg.author.id.equals(currentUser._id)) { %>
+                                <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id%>/announcements/<%= announcement._id %>/edit" method="GET">
+                                    <input type="submit" value="Edit">
+                                </form>
+                                <form action="/schools/<%= school_id %>/cluborgs/<%= cluborg._id %>/announcements/<%= announcement._id %>/?_method=DELETE" method="POST">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            <% } %> -->
+                            <hr>
+                            <p class="pres-cluborg-info inline-pill"><a href="/schools/<%= currentUser.school %>/cluborgs/<%= announcement.cluborg.id %>"><%= announcement.cluborg.name %></a></p>
                         </div>
                     </div>
                 </div>
@@ -230,7 +245,7 @@
                     <% }); %>
                 </div>
             <% } else { %>
-                    <h2>There aren't clubs online, why don't you change that?</h2>
+                    <h2>Ahhhhhhh there aren't any clubs! </h2>
             <% } %>
         </div>
     <% } %>
