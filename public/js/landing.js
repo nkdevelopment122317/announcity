@@ -13,10 +13,8 @@ var animation = setInterval(function() {
   if (removing) {
     if (text.length !== 0) {
       removeChar(text);
-      console.log(text);
     } else {
       removing = false;
-      console.log(text);
     }
   } else {
     if (text.length !== clubs[index].length) {
